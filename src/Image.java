@@ -28,9 +28,8 @@ public class Image {
 	}
 
 	public Image(String filename) {
-		BufferedImage bi;
 		try {
-			bi = ImageIO.read(new File(filename));
+			BufferedImage bi = ImageIO.read(new File(filename));
 			actualWidth = bi.getWidth();
 			actualHeight = bi.getHeight();
 
@@ -43,16 +42,17 @@ public class Image {
 					pixels.put((byte)((pixel >> 16) & 0xFF));   //RED
 					pixels.put((byte)((pixel >>  8) & 0xFF));   //GREEN
 					pixels.put((byte)((pixel      ) & 0xFF));   //BLUE
-					//pixels.put((byte)((pixel >> 24) & 0xFF));   //ALPHA
-					pixels.put((byte)0);   //ALPHA
+					pixels.put((byte)((pixel >> 24) & 0xFF));   //ALPHA
 				}
 			}
 			pixels.flip();
 
 			id = glGenTextures();
-			glBindTexture(GL_TEXTURE_2D, id);
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			bind();
+			//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+			//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, actualWidth, actualHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 		} catch (IOException e) {
 			e.printStackTrace();

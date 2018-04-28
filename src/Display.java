@@ -13,7 +13,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class Display {
-	Pandemic Game;
+	TTL Game;
 
 	private int windowWidth = 640;
 	private int windowHeight = 640;
@@ -30,7 +30,7 @@ public class Display {
 	private boolean rightMouse;
 	private DoubleBuffer xpos, ypos;
 
-	public Display(Pandemic game) {
+	public Display(TTL game) {
 		Game = game;
 		init();
 		images = new HashMap<>();
@@ -65,7 +65,7 @@ public class Display {
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will be resizable
 
 		// Create the window
-		window = glfwCreateWindow(windowWidth, windowHeight, "Pandemic", NULL, NULL);
+		window = glfwCreateWindow(windowWidth, windowHeight, "Technial TeL3Metry", NULL, NULL);
 		glfwSetWindowAspectRatio(window, 16, 9);
 		if (window == NULL)
 			throw new RuntimeException("Failed to create the GLFW window");
@@ -113,6 +113,10 @@ public class Display {
 		// Set the clear color
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glEnable(GL_TEXTURE_2D);
+
+		// Enable transparency
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 		// Run the rendering loop until the user has attempted to close
 		// the window or has pressed the ESCAPE key.
