@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.FileNotFoundException;
 
 public class TTL {
@@ -5,19 +6,18 @@ public class TTL {
 
 	public Display GameWindow;
 
-	private Image circle;
+	private Level currentLevel;
+	private Image player;
 
-	public TTL(int numPlayers, int numEpidemics) throws FileNotFoundException{
+	public TTL() throws FileNotFoundException{
 
 		GameWindow = new Display(this);
-		GameWindow.addImage(new Image("./res/pandemicmap.png", 0, 0, 1016, 720));
+		GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gear.png", "./res/levels/title.png", Color.white));
+		GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_blue.png", "./res/levels/title.png", Color.black));
 
-		Image playerImage1 = new Image("./res/1.png", 320, 180, 32, 32);
-		GameWindow.addImage(playerImage1);
-
-		circle = new Image("./res/circle.png", 0, 0, 18, 18);
-		GameWindow.addImage(circle);
-		circle.visible = false;
+		player = new Image("./res/spr_char_standing_0.png", 32, 320, 32, 32);
+		GameWindow.addImage(player);
+		//player.visible = false;
 
 		GameWindow.run();
 	}
@@ -64,5 +64,8 @@ public class TTL {
 //		}
 	}
 
+	public static void main(String[] args) throws FileNotFoundException{
+		TTL.instance = new TTL();
+	}
 
 }
