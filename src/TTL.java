@@ -10,12 +10,12 @@ public class TTL {
 	private Image player;
 
 	public TTL() throws FileNotFoundException{
-
+		TTL.instance = this;
 		GameWindow = new Display(this);
-		GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gear.png", "./res/levels/title.png", Color.white));
-		GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_blue.png", "./res/levels/title.png", Color.black));
+		Level currentLevel = new LevelTitle();
+		currentLevel.Load();
 
-		player = new Image("./res/spr_char_standing_0.png", 32, 320, 32, 32);
+		player = new Image("./res/spr_char_standing_0.png", 32, 32, 32, 320);
 		GameWindow.addImage(player);
 		//player.visible = false;
 
@@ -65,7 +65,7 @@ public class TTL {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException{
-		TTL.instance = new TTL();
+		new TTL();
 	}
 
 }
