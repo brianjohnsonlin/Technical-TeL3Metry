@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 public class BackgroundImage extends Image {
-    private final int mapToImageScale = 32;
+    private final static int mapToImageScale = 32;
 
     protected int[][] LevelMap;
 
@@ -20,7 +20,7 @@ public class BackgroundImage extends Image {
         Init();
         this.width = actualWidth;
         this.height = actualHeight;
-        x = y = 0;
+        position = new Vector2(0, 0);
     }
 
     protected void Init() {
@@ -28,8 +28,8 @@ public class BackgroundImage extends Image {
             BufferedImage bi = ImageIO.read(new File(filename));
             actualWidth = bi.getWidth();
             actualHeight = bi.getHeight();
-            ByteBuffer pixels = createPixelBufferWithMap(bi, LevelMap);
-            applyPixels(pixels);
+            pixelBuffer = createPixelBufferWithMap(bi, LevelMap);
+            applyPixels(pixelBuffer);
         } catch (IOException e) {
             e.printStackTrace();
         }

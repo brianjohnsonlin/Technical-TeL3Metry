@@ -1,5 +1,3 @@
-import org.lwjgl.BufferUtils;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,27 +7,31 @@ import java.util.*;
 public class Level {
     protected Vector2 startingPoint;
     protected int[][] LevelMap;
-    protected ArrayList<GameObject> gameObjects;
+    protected ArrayList<GameObjectData> gameObjectData;
 
-    public Level() {}
+    public Level() {
+        gameObjectData = new ArrayList<GameObjectData>();
+    }
 
     public void Load() {
         // create backgrounds
-        TTL.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gray.png", LevelMap, 2), 0);
-        TTL.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gear.png", LevelMap, 0), 0);
-        TTL.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_blue.png", LevelMap, 1), 0);
-        //TTL.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_green.png", LevelMap, 0), 0);
-        //TTL.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_digital.png", LevelMap, 1), 0);
+        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gray.png", LevelMap, 2), 0);
+        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gear.png", LevelMap, 0), 0);
+        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_blue.png", LevelMap, 1), 0);
+        //Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_green.png", LevelMap, 0), 0);
+        //Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_digital.png", LevelMap, 1), 0);
 
         // load all game objects
-        for (GameObject g : gameObjects) {
-            TTL.instance.GameWindow.addImage(g.GetSprite(), 1);
+        for (GameObjectData data : gameObjectData) {
+            Game.instance.AddGameObject(new GameObject(data));
         }
 
         // place player at starting position
+        // Game.instance.Player.position.replaceWith(startingPoint);
     }
 
     public void UnLoad() {
+        // delete background images
         // delete all GameObjects
     }
 
@@ -47,7 +49,7 @@ public class Level {
                         LevelMap[y][x] = 0;
                     } else if (level_map[y * width + x] == 0xFF000000) { // BLACK
                         LevelMap[y][x] = 1;
-                    } else {                                             // GRAY
+                    } else {                                             // GRAY and everything else
                         LevelMap[y][x] = 2;
                     }
                 }

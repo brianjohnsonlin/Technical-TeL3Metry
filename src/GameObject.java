@@ -1,15 +1,48 @@
+class GameObjectData {
+    public Vector2 InitialPosition = null;
+    public Vector2 CollisionBoxCornerA = null;
+    public Vector2 CollisionBoxCornerB = null;
+    public ImageData SpriteData = null;
+    public Vector2 SpriteOffset = null;
+}
+
 public class GameObject {
-    protected Image Sprite;
+    private GameObjectData data;
 
-    public GameObject(String ImageFilename, int width, int height, int x, int y) {
-        Sprite = new Image(ImageFilename, width, height, x, y);
-    }
+    protected Vector2 position;
+    protected Vector2 collisionBoxCornerA; // these are relative to position
+    protected Vector2 collisionBoxCornerB;
+    protected Image sprite;
+    protected Vector2 spriteOffset;
 
-    public GameObject(String ImageFilename, int x, int y) {
-        Sprite = new Image(ImageFilename, x, y);
+    public GameObject(GameObjectData data) {
+        this.data = data;
+
+        position = data.InitialPosition != null ? data.InitialPosition.clone() : new Vector2();
+        collisionBoxCornerA = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerA.clone() : null;
+        collisionBoxCornerB = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerB.clone() : null;
+        spriteOffset = data.SpriteOffset != null ? data.SpriteOffset.clone() : new Vector2();
+
+        // create sprite
+        sprite = new Image(data.SpriteData);
+        sprite.position = position.add(spriteOffset);
     }
 
     public Image GetSprite() {
-        return Sprite;
+        return sprite;
+    }
+
+    public void Reset() {
+        if (data != null) {
+            position = data.InitialPosition != null ? data.InitialPosition.clone() : new Vector2();
+            collisionBoxCornerA = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerA.clone() : null;
+            collisionBoxCornerB = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerB.clone() : null;
+            spriteOffset = data.SpriteOffset != null ? data.SpriteOffset.clone() : new Vector2();
+            sprite.currentFrame = 0;
+        }
+    }
+
+    public void Destroy() {
+        Game.instance.DestroyGameObject(this);
     }
 }

@@ -13,7 +13,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class Display {
-	TTL Game;
+	Game Game;
 
 	private int windowWidth = 640;
 	private int windowHeight = 640;
@@ -30,7 +30,7 @@ public class Display {
 	private boolean rightMouse;
 	private DoubleBuffer xpos, ypos;
 
-	public Display(TTL game) {
+	public Display(Game game) {
 		Game = game;
 		init();
 		images = new HashMap<>();
@@ -175,8 +175,8 @@ public class Display {
 	}
 
     public boolean GetMouseOver(Image image) {
-        return GetMouseX() >= image.x && GetMouseY() >= image.y &&
-               GetMouseX() <= image.x + image.width && GetMouseY() <= image.y + image.height;
+        return GetMouseX() >= image.position.x && GetMouseY() >= image.position.y &&
+               GetMouseX() <= image.position.x + image.width && GetMouseY() <= image.position.y + image.height;
     }
 
     public boolean GetMouseOver(double x, double y, double radius) {
@@ -228,23 +228,31 @@ public class Display {
 		    if (layer == null) continue;
 			for (Image img : layer) {
 			    if (!img.visible) continue;
-				img.bind();
+				img.Bind();
 				glBegin(GL_QUADS);
 				{
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex2f((img.x / windowWidth * 2) - 1, -(img.y / windowHeight * 2) + 1);
+					glTexCoord2f(img.GetLeftSpriteCoord(), img.GetTopSpriteCoord());
+					glVertex2f((img.position.x / windowWidth * 2) - 1, -(img.position.y / windowHeight * 2) + 1);
 
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex2f((img.x / windowWidth * 2) - 1, -((img.y + img.height) / windowHeight * 2) + 1);
+					glTexCoord2f(img.GetLeftSpriteCoord(), img.GetBottomSpriteCoord());
+					glVertex2f((img.position.x / windowWidth * 2) - 1, -((img.position.y + img.height) / windowHeight * 2) + 1);
 
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex2f(((img.x + img.width) / windowWidth * 2) - 1, -((img.y + img.height)/windowHeight*2) + 1);
+					glTexCoord2f(img.GetRightSpriteCoord(), img.GetBottomSpriteCoord());
+					glVertex2f(((img.position.x + img.width) / windowWidth * 2) - 1, -((img.position.y + img.height)/windowHeight*2) + 1);
 
-					glTexCoord2f(1.0f, 0.00f);
-					glVertex2f(((img.x + img.width) / windowWidth * 2) - 1, -(img.y / windowHeight * 2) + 1);
+					glTexCoord2f(img.GetRightSpriteCoord(), img.GetTopSpriteCoord());
+					glVertex2f(((img.position.x + img.width) / windowWidth * 2) - 1, -(img.position.y / windowHeight * 2) + 1);
 				}
 				glEnd();
 			}
 		}
+	}
+
+	public void setIcon(Image icon) {
+		GLFWImage image = GLFWImage.malloc();
+		image.set((int)icon.width, (int)icon.height, icon.GetPixelBuffer());
+		GLFWImage.Buffer images = GLFWImage.malloc(1);
+		images.put(0, image);
+		glfwSetWindowIcon(window, images);
 	}
 }
