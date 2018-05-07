@@ -8,14 +8,16 @@ public class Game {
 	public HashMap<String, Level> Levels;
 
 	private Level currentLevel;
-	//private Player player;
+	private Player player;
 	private ArrayList<GameObject> gameObjects; // does NOT include the Player GameObject
 
-	public Game() throws FileNotFoundException{
+	public Game() throws FileNotFoundException {
 		Game.instance = this;
 		GameWindow = new Display(this);
 		GameWindow.setIcon(new Image(new ImageData("./res/icon.png")));
+		gameObjects = new ArrayList<GameObject>();
 
+		// create levels
 		Levels = new HashMap<String, Level>();
 		Levels.put("title", new LevelTitle());
 //		Levels.put("levelselect", new LevelSelect());
@@ -36,14 +38,13 @@ public class Game {
 //		Levels.put("3-5", new Level3x5());
 //		Levels.put("credits", new LevelCredits());
 
-		gameObjects = new ArrayList<GameObject>();
+		//setup player
+		player = new Player();
+		GameWindow.addImage(player.GetSprite());
+
+		//load in first level
 		currentLevel = Levels.get("title");
 		currentLevel.Load();
-
-		//setup player
-		//player = new Player(new Image("./res/spr_char_standing_0.png"), new Vector2(32, 320));
-		//GameWindow.addImage(player);
-		//player.visible = false;
 
 		GameWindow.run();
 	}
@@ -53,6 +54,11 @@ public class Game {
 	}
 
 	public void Update() {
+		player.Update();
+		for (GameObject gameObject: gameObjects) {
+			gameObject.Update();
+		}
+
 		// selecting image to drag
 		if (GameWindow.GetLeftMouseDown()) {
 //			for (Image img : selectables) {
@@ -96,7 +102,7 @@ public class Game {
 
 	public void AddGameObject(GameObject gameObject) {
 		gameObjects.add(gameObject);
-		GameWindow.addImage(gameObject.GetSprite(), 1);
+		GameWindow.addImage(gameObject.GetSprite());
 	}
 
 	public void DestroyGameObject(GameObject gameObject) {
@@ -109,6 +115,10 @@ public class Game {
 			GameWindow.removeImage(gameObject.GetSprite());
 		}
 		gameObjects.clear();
+	}
+
+	public Player GetPlayer() {
+		return player;
 	}
 
 }

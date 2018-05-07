@@ -21,6 +21,7 @@ public class BackgroundImage extends Image {
         this.width = actualWidth;
         this.height = actualHeight;
         position = new Vector2(0, 0);
+        layer = 0;
     }
 
     protected void Init() {

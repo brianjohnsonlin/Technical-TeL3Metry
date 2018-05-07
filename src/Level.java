@@ -15,9 +15,9 @@ public class Level {
 
     public void Load() {
         // create backgrounds
-        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gray.png", LevelMap, 2), 0);
-        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gear.png", LevelMap, 0), 0);
-        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_blue.png", LevelMap, 1), 0);
+        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gray.png", LevelMap, 2));
+        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gear.png", LevelMap, 0));
+        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_blue.png", LevelMap, 1));
         //Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_green.png", LevelMap, 0), 0);
         //Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_digital.png", LevelMap, 1), 0);
 
@@ -27,7 +27,7 @@ public class Level {
         }
 
         // place player at starting position
-        // Game.instance.Player.position.replaceWith(startingPoint);
+        Game.instance.GetPlayer().position.replaceWith(startingPoint);
     }
 
     public void UnLoad() {

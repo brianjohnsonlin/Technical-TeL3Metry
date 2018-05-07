@@ -12,6 +12,7 @@ class ImageData {
 	public float Height = -1;
 	public int NumFrames = 1;
 	public int NumSSColumns = 1; // number of sprite sheet columns (don't really need to know the number of rows)
+	public int Layer = 0;
 
 	public ImageData(String filename) {
 		Filename = filename;
@@ -30,13 +31,14 @@ public class Image {
 	protected int actualWidth;
 	protected int actualHeight;
 	protected ByteBuffer pixelBuffer;
+	protected int layer;
 
 	// private ImageData data; // no need to keep data
 	private int id;
 	private int numFrames = 1;
 	private int numSSColumns = 1;
 
-	public Image() {}
+	protected Image() {}
 
 	public Image(ImageData data) {
 		// this.data = data; // no need to keep data
@@ -53,6 +55,7 @@ public class Image {
 		this.numFrames = data.NumFrames;
 		this.numSSColumns = data.NumSSColumns;
 		position = new Vector2();
+		layer = data.Layer;
 	}
 
 	protected void Init() {
@@ -86,9 +89,7 @@ public class Image {
 	protected void applyPixels(ByteBuffer pixels) {
 		id = glGenTextures();
 		Bind();
-		//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		//glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, actualWidth, actualHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	}
@@ -103,6 +104,10 @@ public class Image {
 
 	public int GetNumFrames() {
 		return numFrames;
+	}
+
+	public int GetLayer() {
+		return layer;
 	}
 
 	public float GetLeftSpriteCoord() {

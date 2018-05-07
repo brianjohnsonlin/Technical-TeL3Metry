@@ -184,22 +184,18 @@ public class Display {
     }
 
 	public boolean addImage(Image image) {
-	    return addImage(image, 0);
-	}
-
-	public boolean addImage(Image image, int layer) {
 		// abort if image is null or it's already marked as added to display
-	    if (image == null || image.addedToDisplay || layer < 0) {
+	    if (image == null || image.addedToDisplay || image.GetLayer() < 0) {
 			return false;
 		}
 
 		// if layer doesn't exist, create it
-		ArrayList<Image> list = images.get(layer);
+		ArrayList<Image> list = images.get(image.GetLayer());
 		if (list == null) {
 		    list = new ArrayList<>();
-		    images.put(layer, list);
-		    if (layer + 1 > numLayers) {
-		        numLayers = layer + 1;
+		    images.put(image.GetLayer(), list);
+		    if (image.GetLayer() + 1 > numLayers) {
+		        numLayers = image.GetLayer() + 1;
             }
         }
 
