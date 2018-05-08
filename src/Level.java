@@ -8,6 +8,11 @@ public class Level {
     protected Vector2 startingPoint;
     protected int[][] LevelMap;
     protected ArrayList<GameObjectData> gameObjectData;
+    protected BackgroundImage bkgGray;
+    protected BackgroundImage bkgGear;
+    protected BackgroundImage bkgBlue;
+    protected BackgroundImage bkgGreen;
+    protected BackgroundImage bkgDigital;
 
     public Level() {
         gameObjectData = new ArrayList<>();
@@ -15,11 +20,17 @@ public class Level {
 
     public void Load() {
         // create backgrounds
-        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gray.png", LevelMap, 2));
-        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_gear.png", LevelMap, 0));
-        Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_blue.png", LevelMap, 1));
-        //Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_green.png", LevelMap, 0), 0);
-        //Game.instance.GameWindow.addImage(new BackgroundImage("./res/backgrounds/bkg_digital.png", LevelMap, 1), 0);
+        bkgGray = new BackgroundImage("./res/backgrounds/bkg_gray.png", LevelMap, 2);
+        bkgGear = new BackgroundImage("./res/backgrounds/bkg_gear.png", LevelMap, 0);
+        bkgBlue = new BackgroundImage("./res/backgrounds/bkg_blue.png", LevelMap, 1);
+        bkgGreen = new BackgroundImage("./res/backgrounds/bkg_green.png", LevelMap, 0);
+        bkgDigital = new BackgroundImage("./res/backgrounds/bkg_digital.png", LevelMap, 1);
+        Game.instance.GameWindow.addImage(bkgGray);
+        Game.instance.GameWindow.addImage(bkgGear);
+        Game.instance.GameWindow.addImage(bkgBlue);
+        Game.instance.GameWindow.addImage(bkgGreen);
+        Game.instance.GameWindow.addImage(bkgDigital);
+        bkgGreen.visible = bkgDigital.visible = false;
 
         // load all game objects
         for (GameObjectData data : gameObjectData) {
@@ -31,8 +42,8 @@ public class Level {
     }
 
     public void UnLoad() {
-        // delete background images
-        // delete all GameObjects
+        Game.instance.GameWindow.clearLayer(0); // Delete Background
+        Game.instance.DestroyAllGameObjects();
     }
 
     protected void ImportLevelMap(String filename) {
@@ -45,9 +56,9 @@ public class Level {
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
                     int pixel = level_map[y * width + x];
-                    if (level_map[y * width + x] == 0xFFFFFFFF) {        // WHITE
+                    if (pixel == 0xFFFFFFFF) {        // WHITE
                         LevelMap[y][x] = 0;
-                    } else if (level_map[y * width + x] == 0xFF000000) { // BLACK
+                    } else if (pixel == 0xFF000000) { // BLACK
                         LevelMap[y][x] = 1;
                     } else {                                             // GRAY and everything else
                         LevelMap[y][x] = 2;

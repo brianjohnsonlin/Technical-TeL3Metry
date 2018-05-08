@@ -234,6 +234,12 @@ public class Display {
         return false;
 	}
 
+	// returns number of images removed
+	public int clearLayer(int layer) {
+		ArrayList<Image> removedLayer = images.remove(layer);
+		return removedLayer == null ? 0 : removedLayer.size();
+	}
+
 	private void renderImages() {
 		for (int i = 0, len = numLayers; i < len; i++) {
 		    ArrayList<Image> layer = images.get(i);

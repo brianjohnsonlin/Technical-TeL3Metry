@@ -1,5 +1,3 @@
-import java.util.*;
-
 public class LevelTitle extends Level {
     public LevelTitle() {
         super();

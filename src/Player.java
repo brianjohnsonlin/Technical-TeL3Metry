@@ -1,5 +1,7 @@
+import static org.lwjgl.glfw.GLFW.*;
+
 public class Player extends GameObject {
-    public boolean flipped;
+    // public boolean flipped;
 
     public Player() {
         data = new GameObjectData(); {
@@ -19,6 +21,13 @@ public class Player extends GameObject {
 
     public void Update() {
         // move based on key presses
+        if (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT)) {
+            position.x -= 2;
+        }
+        if (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT)) {
+            position.x += 2;
+        }
+
         super.Update();
     }
 }
