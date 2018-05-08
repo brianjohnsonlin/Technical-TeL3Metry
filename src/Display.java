@@ -24,16 +24,34 @@ public class Display {
 	private long window;
 
 	//Input Variables
-	private boolean leftMousePrev;
-	private boolean rightMousePrev;
-	private boolean leftMouse;
-	private boolean rightMouse;
 	private DoubleBuffer xpos, ypos;
+	private HashMap<Integer, Boolean> mousePrev;
+	private HashMap<Integer, Boolean> mouse;
+	private HashMap<Integer, Boolean> keysPrev;
+	private HashMap<Integer, Boolean> keys;
+	private int[] trackedKeys = {
+			GLFW_KEY_D,
+			GLFW_KEY_F,
+			GLFW_KEY_S,
+			GLFW_KEY_R,
+			GLFW_KEY_M,
+			GLFW_KEY_SPACE,
+			GLFW_KEY_LEFT,
+			GLFW_KEY_RIGHT
+	};
+	private int[] trackedMouse = {
+			// GLFW_MOUSE_BUTTON_LEFT,
+			// GLFW_MOUSE_BUTTON_RIGHT
+	};
 
 	public Display(Game game) {
 		Game = game;
 		init();
 		images = new HashMap<>();
+		keysPrev = new HashMap<>();
+		keys = new HashMap<>();
+		mousePrev = new HashMap<>();
+		mouse = new HashMap<>();
 		xpos = BufferUtils.createDoubleBuffer(1);
 		ypos = BufferUtils.createDoubleBuffer(1);
 	}
@@ -135,53 +153,51 @@ public class Display {
 	}
 
 	private void setInputVariables() {
-		leftMousePrev = leftMouse;
-		rightMousePrev = rightMouse;
-		leftMouse = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT) == GLFW_TRUE;
-		rightMouse = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_TRUE;
 		glfwGetCursorPos(window, xpos, ypos);
+		for (int i : trackedMouse) {
+			mousePrev.put(i, mouse.put(i, glfwGetMouseButton(window, i) == GLFW_TRUE));
+		}
+		for (int i : trackedKeys) {
+			keysPrev.put(i, keys.put(i, glfwGetKey(window, i) == GLFW_TRUE));
+		}
 	}
 
-	public boolean GetLeftMouseHeld() {
-		return leftMouse;
+	public boolean GetKeyHeld(int key) {
+		return keys.get(key);
 	}
 
-	public boolean GetRightMouseHeld() {
-		return rightMouse;
+	public boolean GetKeyDown(int key) {
+		return keys.get(key) && !keysPrev.get(key);
 	}
 
-	public boolean GetLeftMouseDown() {
-		return leftMouse && !leftMousePrev;
+	public boolean GetKeyUp(int key) {
+		return !keys.get(key) && keysPrev.get(key);
 	}
 
-	public boolean GetRightMouseDown() {
-		return rightMouse && !rightMousePrev;
+	public boolean GetMouseHeld(int mouseButton) {
+		return mouse.get(mouseButton);
 	}
 
-	public boolean GetLeftMouseUp() {
-		return !leftMouse && leftMousePrev;
+	public boolean GetMouseDown(int mouseButton) {
+		return mouse.get(mouseButton) && !mousePrev.get(mouseButton);
 	}
 
-	public boolean GetRightMouseUp() {
-		return !rightMouse && rightMousePrev;
+	public boolean GetMouseUp(int mouseButton) {
+		return !mouse.get(mouseButton) && mousePrev.get(mouseButton);
 	}
 
-	public double GetMouseX() {
-		return xpos.get(0);
+	public Vector2 GetMousePosition() {
+		return new Vector2((float)xpos.get(0), (float)ypos.get(0));
 	}
 
-	public double GetMouseY() {
-		return ypos.get(0);
-	}
-
-    public boolean GetMouseOver(Image image) {
-        return GetMouseX() >= image.position.x && GetMouseY() >= image.position.y &&
-               GetMouseX() <= image.position.x + image.width && GetMouseY() <= image.position.y + image.height;
-    }
-
-    public boolean GetMouseOver(double x, double y, double radius) {
-        return radius >= Math.sqrt(Math.pow(GetMouseX() - x, 2) + Math.pow(GetMouseY() - y, 2));
-    }
+//    public boolean GetMouseOver(Image image) {
+//        return GetMouseX() >= image.position.x && GetMouseY() >= image.position.y &&
+//               GetMouseX() <= image.position.x + image.width && GetMouseY() <= image.position.y + image.height;
+//    }
+//
+//    public boolean GetMouseOver(double x, double y, double radius) {
+//        return radius >= Math.sqrt(Math.pow(GetMouseX() - x, 2) + Math.pow(GetMouseY() - y, 2));
+//    }
 
 	public boolean addImage(Image image) {
 		// abort if image is null or it's already marked as added to display

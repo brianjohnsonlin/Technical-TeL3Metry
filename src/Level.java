@@ -10,7 +10,7 @@ public class Level {
     protected ArrayList<GameObjectData> gameObjectData;
 
     public Level() {
-        gameObjectData = new ArrayList<GameObjectData>();
+        gameObjectData = new ArrayList<>();
     }
 
     public void Load() {

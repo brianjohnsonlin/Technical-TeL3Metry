@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 import java.util.*;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
+
 public class Game {
 	public static Game instance;
 
@@ -15,10 +17,10 @@ public class Game {
 		Game.instance = this;
 		GameWindow = new Display(this);
 		GameWindow.setIcon(new Image(new ImageData("./res/icon.png")));
-		gameObjects = new ArrayList<GameObject>();
+		gameObjects = new ArrayList<>();
 
 		// create levels
-		Levels = new HashMap<String, Level>();
+		Levels = new HashMap<>();
 		Levels.put("title", new LevelTitle());
 //		Levels.put("levelselect", new LevelSelect());
 //		Levels.put("1-1", new Level1x1());
@@ -58,46 +60,6 @@ public class Game {
 		for (GameObject gameObject: gameObjects) {
 			gameObject.Update();
 		}
-
-		// selecting image to drag
-		if (GameWindow.GetLeftMouseDown()) {
-//			for (Image img : selectables) {
-//				if (GameWindow.GetMouseOver(img)) {
-//					selectedObject = img;
-//					selectedObjectOffsetX = (float)GameWindow.GetMouseX() - selectedObject.x;
-//					selectedObjectOffsetY = (float)GameWindow.GetMouseY() - selectedObject.y;
-//					break;
-//				}
-//			}
-		}
-
-		// unselecting image
-		if (GameWindow.GetLeftMouseUp()) {
-			//selectedObject = null;
-		}
-
-		// dragging image
-//		if (GameWindow.GetLeftMouseHeld() && selectedObject != null) {
-//			selectedObject.x = (float)GameWindow.GetMouseX() - selectedObjectOffsetX;
-//			selectedObject.y = (float)GameWindow.GetMouseY() - selectedObjectOffsetY;
-//		}
-
-		// hovering cities
-//		boolean overCity = false;
-//		ArrayList<City> cities = getCities();
-//		for (City city : cities) {
-//			if (GameWindow.GetMouseOver(city.getX() * 72/85, city.getY() * 72/85, 9)) {
-//				circle.visible = true;
-//				circle.x = city.getX() * 72/85 - 9;
-//				circle.y = city.getY() * 72/85 - 9;
-//				overCity = true;
-//				break;
-//			}
-//		}
-//
-//		if (!overCity) {
-//			circle.visible = false;
-//		}
 	}
 
 	public void AddGameObject(GameObject gameObject) {
