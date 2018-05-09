@@ -27,13 +27,13 @@ public class Player extends GameObject {
     public void Update() {
         if (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT)) {
             position.x -= MOVEMENTSPEED;
-            while (!Game.instance.GetCurrentLevel().IsEmptySpace(position.add(collisionBoxCornerA))) {
+            while (!currentLevel().IsEmptySpace(colBoxTopLeftPos()) || !currentLevel().IsEmptySpace(colBoxBottomLeftPos())) {
                 position.x += 1;
             }
         }
         if (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT)) {
             position.x += MOVEMENTSPEED;
-            while (!Game.instance.GetCurrentLevel().IsEmptySpace(position.add(collisionBoxCornerB))) {
+            while (!currentLevel().IsEmptySpace(colBoxTopRightPos()) || !currentLevel().IsEmptySpace(colBoxBottomRightPos())) {
                 position.x -= 1;
             }
         }
@@ -48,15 +48,13 @@ public class Player extends GameObject {
 
         if (verticalVelocity > 0) {
             position.y += verticalVelocity;
-            while (!Game.instance.GetCurrentLevel().IsEmptySpace(position.add(collisionBoxCornerB)) ||
-                   !Game.instance.GetCurrentLevel().IsEmptySpace(position.add(new Vector2(collisionBoxCornerA.x, collisionBoxCornerB.y)))) {
+            while (!currentLevel().IsEmptySpace(colBoxBottomLeftPos()) || !currentLevel().IsEmptySpace(colBoxBottomRightPos())) {
                 position.y -= 1;
                 verticalVelocity = 0;
             }
         } else if (verticalVelocity < 0) {
             position.y += verticalVelocity;
-            while (!Game.instance.GetCurrentLevel().IsEmptySpace(position.add(collisionBoxCornerA)) ||
-                   !Game.instance.GetCurrentLevel().IsEmptySpace(position.add(new Vector2(collisionBoxCornerB.x, collisionBoxCornerA.y)))) {
+            while (!currentLevel().IsEmptySpace(colBoxTopLeftPos()) || !currentLevel().IsEmptySpace(colBoxTopRightPos())) {
                 position.y += 1;
                 verticalVelocity = 0;
             }
@@ -67,10 +65,30 @@ public class Player extends GameObject {
 
     // only checks bottom corners because nothing is thinner than L3M
     public boolean IsGrounded() {
-        if (!Game.instance.GetCurrentLevel().IsEmptySpace(new Vector2(collisionBoxCornerA.x, collisionBoxCornerB.y + 1).add(position)) ||
-            !Game.instance.GetCurrentLevel().IsEmptySpace(new Vector2(collisionBoxCornerB.x, collisionBoxCornerB.y + 1).add(position))) {
+        if (!currentLevel().IsEmptySpace(colBoxBottomLeftPos().add(new Vector2(0,1))) ||
+            !currentLevel().IsEmptySpace(colBoxBottomRightPos().add(new Vector2(0,1)))) {
             return true;
         }
         return false;
+    }
+
+    private Vector2 colBoxTopLeftPos() {
+        return position.add(collisionBoxCornerA);
+    }
+
+    private Vector2 colBoxTopRightPos() {
+        return position.add(new Vector2(collisionBoxCornerB.x, collisionBoxCornerA.y));
+    }
+
+    private Vector2 colBoxBottomLeftPos() {
+        return position.add(new Vector2(collisionBoxCornerA.x, collisionBoxCornerB.y));
+    }
+
+    private Vector2 colBoxBottomRightPos() {
+        return position.add(collisionBoxCornerB);
+    }
+
+    private Level currentLevel() {
+        return Game.instance.GetCurrentLevel();
     }
 }
