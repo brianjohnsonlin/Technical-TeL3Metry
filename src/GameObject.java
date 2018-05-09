@@ -10,7 +10,7 @@ public class GameObject {
     protected GameObjectData data;
     protected Vector2 position;
     protected Vector2 collisionBoxCornerA; // these are relative to position
-    protected Vector2 collisionBoxCornerB;
+    protected Vector2 collisionBoxCornerB; // inclusive
     protected Image sprite;
     protected Vector2 spriteOffset;
 

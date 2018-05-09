@@ -1,7 +1,7 @@
 public class LevelTitle extends Level {
     public LevelTitle() {
         super();
-        startingPoint = new Vector2(48, 352);
+        startingPoint = new Vector2(32, 320);
         ImportLevelMap("./res/levels/title.png");
 
         { // Title

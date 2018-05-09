@@ -30,14 +30,14 @@ public class Display {
 	private HashMap<Integer, Boolean> keysPrev;
 	private HashMap<Integer, Boolean> keys;
 	private int[] trackedKeys = {
-			GLFW_KEY_D,
-			GLFW_KEY_F,
-			GLFW_KEY_S,
-			GLFW_KEY_R,
-			GLFW_KEY_M,
-			GLFW_KEY_SPACE,
-			GLFW_KEY_LEFT,
-			GLFW_KEY_RIGHT
+			GLFW_KEY_D, // Duplicate Ability
+			GLFW_KEY_F, // Flip Ability
+			GLFW_KEY_L, // Level Select
+			GLFW_KEY_R, // Restart
+			GLFW_KEY_M, // Music Toggle
+			GLFW_KEY_SPACE, // Jump
+			GLFW_KEY_LEFT,  // Move Left
+			GLFW_KEY_RIGHT  // Move Right
 	};
 	private int[] trackedMouse = {
 			// GLFW_MOUSE_BUTTON_LEFT,

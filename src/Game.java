@@ -1,8 +1,6 @@
 import java.io.FileNotFoundException;
 import java.util.*;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_D;
-
 public class Game {
 	public static Game instance;
 
@@ -12,12 +10,14 @@ public class Game {
 	private Level currentLevel;
 	private Player player;
 	private ArrayList<GameObject> gameObjects; // does NOT include the Player GameObject
+	private boolean inverted;
 
 	public Game() throws FileNotFoundException {
 		Game.instance = this;
 		GameWindow = new Display(this);
 		GameWindow.setIcon(new Image(new ImageData("./res/icon.png")));
 		gameObjects = new ArrayList<>();
+		inverted = false;
 
 		// create levels
 		Levels = new HashMap<>();
@@ -81,6 +81,18 @@ public class Game {
 
 	public Player GetPlayer() {
 		return player;
+	}
+
+	public Level GetCurrentLevel() {
+		return currentLevel;
+	}
+
+	public boolean GetInverted() {
+		return inverted;
+	}
+
+	private void resetLevel() {
+		inverted = true;
 	}
 
 }

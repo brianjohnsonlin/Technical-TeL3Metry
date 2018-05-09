@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.*;
 
 public class Level {
+    public final static int MAPTOIMAGESCALE = 32;
+
     protected Vector2 startingPoint;
     protected int[][] LevelMap;
     protected ArrayList<GameObjectData> gameObjectData;
@@ -41,11 +43,6 @@ public class Level {
         Game.instance.GetPlayer().position.replaceWith(startingPoint);
     }
 
-    public void UnLoad() {
-        Game.instance.GameWindow.clearLayer(0); // Delete Background
-        Game.instance.DestroyAllGameObjects();
-    }
-
     protected void ImportLevelMap(String filename) {
         try {
             BufferedImage levelMapBI = ImageIO.read(new File(filename));
@@ -60,7 +57,7 @@ public class Level {
                         LevelMap[y][x] = 0;
                     } else if (pixel == 0xFF000000) { // BLACK
                         LevelMap[y][x] = 1;
-                    } else {                                             // GRAY and everything else
+                    } else {                          // GRAY and everything else
                         LevelMap[y][x] = 2;
                     }
                 }
@@ -68,5 +65,24 @@ public class Level {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void UnLoad() {
+        Game.instance.GameWindow.clearLayer(0); // Delete Background
+        Game.instance.DestroyAllGameObjects();
+    }
+
+    public boolean IsEmptySpace(Vector2 coord) {
+        // out of bounds
+        if (coord.x < 0 || coord.x >= LevelMap[0].length*MAPTOIMAGESCALE || coord.y < 0 || coord.x >= LevelMap.length*MAPTOIMAGESCALE) {
+            return false;
+        }
+
+        // space is not air
+        if (LevelMap[(int)coord.y/MAPTOIMAGESCALE][(int)coord.x/MAPTOIMAGESCALE] != (Game.instance.GetInverted() ? 1 : 0)) {
+            return false;
+        }
+
+        return true;
     }
 }

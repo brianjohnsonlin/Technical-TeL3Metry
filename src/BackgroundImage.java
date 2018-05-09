@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 public class BackgroundImage extends Image {
-    private final static int mapToImageScale = 32;
-
     protected int[][] LevelMap;
 
     private int key;
@@ -45,7 +43,7 @@ public class BackgroundImage extends Image {
                 pixels.put((byte)((pixel >> 16) & 0xFF));   //RED
                 pixels.put((byte)((pixel >>  8) & 0xFF));   //GREEN
                 pixels.put((byte)((pixel      ) & 0xFF));   //BLUE
-                if (levelMap[y/mapToImageScale][x/mapToImageScale] == key) { //ALPHA
+                if (levelMap[y/Level.MAPTOIMAGESCALE][x/Level.MAPTOIMAGESCALE] == key) { //ALPHA
                     pixels.put((byte)((pixel >> 24) & 0xFF));
                 } else {
                     pixels.put((byte)0);
