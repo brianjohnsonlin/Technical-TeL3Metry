@@ -74,7 +74,7 @@ public class Level {
 
     public boolean IsEmptySpace(Vector2 coord) {
         // out of bounds
-        if (coord.x < 0 || coord.x >= LevelMap[0].length*MAPTOIMAGESCALE || coord.y < 0 || coord.x >= LevelMap.length*MAPTOIMAGESCALE) {
+        if (coord.x < 0 || coord.x >= LevelMap[0].length*MAPTOIMAGESCALE || coord.y < 0 || coord.y >= LevelMap.length*MAPTOIMAGESCALE) {
             return false;
         }
 
@@ -84,5 +84,12 @@ public class Level {
         }
 
         return true;
+    }
+
+    public void Invert(boolean inverted) {
+        bkgDigital.visible = inverted;
+        bkgGreen.visible = inverted;
+        bkgGear.visible = !inverted;
+        bkgBlue.visible = !inverted;
     }
 }

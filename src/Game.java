@@ -1,6 +1,8 @@
 import java.io.FileNotFoundException;
 import java.util.*;
 
+import static org.lwjgl.glfw.GLFW.*;
+
 public class Game {
 	public static Game instance;
 
@@ -56,6 +58,11 @@ public class Game {
 	}
 
 	public void Update() {
+		if (GameWindow.GetKeyDown(GLFW_KEY_F) && player.IsGrounded()) {
+			inverted = !inverted;
+			player.Invert(inverted);
+			currentLevel.Invert(inverted);
+		}
 		player.Update();
 		for (GameObject gameObject: gameObjects) {
 			gameObject.Update();
@@ -92,7 +99,12 @@ public class Game {
 	}
 
 	private void resetLevel() {
-		inverted = true;
+		inverted = false;
+		player.Invert(inverted);
+		currentLevel.Invert(inverted);
+		// reset player position
+		// delete temp GameObjects
+		// reset rest of GameObjects
 	}
 
 }
