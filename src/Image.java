@@ -31,6 +31,8 @@ public class Image {
 	public float height;
 	public Vector2 position;
 	public int currentFrame = 0;
+	public boolean verticalMirror = false;
+	public boolean horizontalMiror = false;
 
 	protected String filename;
 	protected int actualWidth;
@@ -38,7 +40,7 @@ public class Image {
 	protected ByteBuffer pixelBuffer;
 	protected int layer;
 
-	// private ImageData data; // no need to keep data
+	private ImageData data;
 	private int id;
 	private int numFrames = 1;
 	private int numSSColumns = 1;
@@ -46,7 +48,7 @@ public class Image {
 	protected Image() {}
 
 	public Image(ImageData data) {
-		// this.data = data; // no need to keep data
+		this.data = data;
 		filename = data.Filename;
 		Init();
 		width = data.Width;
@@ -129,6 +131,14 @@ public class Image {
 
 	public float GetBottomSpriteCoord() {
 		return (float)(currentFrame / numSSColumns + 1) / numSSRows();
+	}
+
+	public void Reset() {
+		width = data.Width;
+		height = data.Height;
+		currentFrame = 0;
+		horizontalMiror = false;
+		verticalMirror = false;
 	}
 
 	private int numSSRows() {

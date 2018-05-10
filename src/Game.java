@@ -12,14 +12,12 @@ public class Game {
 	private Level currentLevel;
 	private Player player;
 	private ArrayList<GameObject> gameObjects; // does NOT include the Player GameObject
-	private boolean inverted;
 
 	public Game() throws FileNotFoundException {
 		Game.instance = this;
 		GameWindow = new Display(this);
 		GameWindow.setIcon(new Image(new ImageData("./res/icon.png")));
 		gameObjects = new ArrayList<>();
-		inverted = false;
 
 		// create levels
 		Levels = new HashMap<>();
@@ -58,11 +56,11 @@ public class Game {
 	}
 
 	public void Update() {
-		if (GameWindow.GetKeyDown(GLFW_KEY_F) && player.IsGrounded()) {
-			inverted = !inverted;
-			player.Invert(inverted);
-			currentLevel.Invert(inverted);
+		if (GameWindow.GetKeyDown(GLFW_KEY_R)) {
+			resetLevel();
+			return;
 		}
+
 		player.Update();
 		for (GameObject gameObject: gameObjects) {
 			gameObject.Update();
@@ -94,15 +92,9 @@ public class Game {
 		return currentLevel;
 	}
 
-	public boolean GetInverted() {
-		return inverted;
-	}
-
 	private void resetLevel() {
-		inverted = false;
-		player.Invert(inverted);
-		currentLevel.Invert(inverted);
-		// reset player position
+		player.Invert(false);
+		player.position.replaceWith(currentLevel.startingPoint);
 		// delete temp GameObjects
 		// reset rest of GameObjects
 	}

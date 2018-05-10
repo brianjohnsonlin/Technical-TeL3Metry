@@ -12,11 +12,11 @@ public class Player extends GameObject {
     private float verticalVelocity;
 
     public Player() {
-        ImageData sprite = new ImageData("./res/spr_char_standing_0.png"); {
+        ImageData sprite = new ImageData("./res/spr_char_0.png"); {
             sprite.Width = 32;
             sprite.Height = 32;
-            sprite.NumFrames = 1;
-            sprite.NumSSColumns = 1;
+            sprite.NumFrames = 16;
+            sprite.NumSSColumns = 4;
             sprite.Layer = 2;
         }
 
@@ -41,8 +41,14 @@ public class Player extends GameObject {
     }
 
     public void Update() {
+        if (Game.instance.GameWindow.GetKeyDown(GLFW_KEY_F) && canFlip()) {
+            Invert(!inverted);
+        }
         move();
+
         // update animation
+        sprite.currentFrame = frameOffset;
+
         super.Update();
     }
 
@@ -53,30 +59,29 @@ public class Player extends GameObject {
                 float increment = (i == (int)MOVEMENTSPEED) ? (MOVEMENTSPEED - (int)MOVEMENTSPEED) : 1;
                 increment *= Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT) ? -1 : 1;
                 position.x += increment;
-                if ((Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT) && (!currentLevel().IsEmptySpace(colBoxTopLeftPos()) || !currentLevel().IsEmptySpace(colBoxBottomLeftPos())))
-                 || (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT) && (!currentLevel().IsEmptySpace(colBoxTopRightPos()) || !currentLevel().IsEmptySpace(colBoxBottomRightPos())))) {
+                if ((Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT) && (!isEmptySpace(colBoxTopLeftPos()) || !isEmptySpace(colBoxBottomLeftPos())))
+                 || (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT) && (!isEmptySpace(colBoxTopRightPos()) || !isEmptySpace(colBoxBottomRightPos())))) {
                     position.x -= increment;
                     break;
                 }
             }
         }
 
-        // still have to do inverted values
         // jumping / falling
-        if (IsGrounded()) {
+        if (isGrounded()) {
             if (Game.instance.GameWindow.GetKeyDown(GLFW_KEY_SPACE)) {
-                verticalVelocity -= JUMPVELOCITY;
+                verticalVelocity -= JUMPVELOCITY * (inverted ? -1 : 1);
             }
         } else {
-            verticalVelocity += DOWNWARDACCELERATION;
+            verticalVelocity += DOWNWARDACCELERATION * (inverted ? -1 : 1);
         }
 
         for (int i = 0; i < Math.abs(verticalVelocity); i++) { // no iterations will run if verticalVelocity is 0
             float increment = (i == (int)verticalVelocity) ? (verticalVelocity - (int)verticalVelocity) : 1;
             increment *= (verticalVelocity < 0) ? -1 : 1;
             position.y += increment;
-            if ((verticalVelocity > 0 && (!currentLevel().IsEmptySpace(colBoxBottomLeftPos()) || !currentLevel().IsEmptySpace(colBoxBottomRightPos())))
-             || (verticalVelocity < 0 && (!currentLevel().IsEmptySpace(colBoxTopLeftPos()) || !currentLevel().IsEmptySpace(colBoxTopRightPos())))) {
+            if ((verticalVelocity > 0 && (!isEmptySpace(colBoxBottomLeftPos()) || !isEmptySpace(colBoxBottomRightPos())))
+             || (verticalVelocity < 0 && (!isEmptySpace(colBoxTopLeftPos()) || !isEmptySpace(colBoxTopRightPos())))) {
                 position.y -= increment;
                 verticalVelocity = 0;
                 break;
@@ -84,14 +89,28 @@ public class Player extends GameObject {
         }
     }
 
+    private boolean isEmptySpace(Vector2 coord) {
+        return currentLevel().GetSpaceType(coord) == (inverted ? Level.SPACE_BLACK : Level.SPACE_WHITE);
+    }
+
     // only checks bottom corners because nothing is thinner than L3M
-    public boolean IsGrounded() {
+    private boolean isGrounded() {
         if (!inverted) {
-            return !currentLevel().IsEmptySpace(colBoxBottomLeftPos().add(new Vector2(0, 1))) ||
-                   !currentLevel().IsEmptySpace(colBoxBottomRightPos().add(new Vector2(0, 1)));
+            return currentLevel().GetSpaceType(colBoxBottomLeftPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE ||
+                   currentLevel().GetSpaceType(colBoxBottomRightPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE;
         } else {
-            return !currentLevel().IsEmptySpace(colBoxTopLeftPos().add(new Vector2(0, -1))) ||
-                   !currentLevel().IsEmptySpace(colBoxTopRightPos().add(new Vector2(0, -1)));
+            return currentLevel().GetSpaceType(colBoxTopLeftPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK ||
+                   currentLevel().GetSpaceType(colBoxTopRightPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK;
+        }
+    }
+
+    private boolean canFlip() {
+        if (!inverted) {
+            return currentLevel().GetSpaceType(colBoxBottomLeftPos().add(new Vector2(0, 1))) == Level.SPACE_BLACK &&
+                   currentLevel().GetSpaceType(colBoxBottomRightPos().add(new Vector2(0, 1))) == Level.SPACE_BLACK;
+        } else {
+            return currentLevel().GetSpaceType(colBoxTopLeftPos().add(new Vector2(0, -1))) == Level.SPACE_WHITE &&
+                   currentLevel().GetSpaceType(colBoxTopRightPos().add(new Vector2(0, -1))) == Level.SPACE_WHITE;
         }
     }
 
@@ -105,12 +124,13 @@ public class Player extends GameObject {
             position.y -= 32;
         } else {
             data = invertedData;
-            frameOffset = 0; // change this
+            frameOffset = 8;
             position.y += 32;
         }
         collisionBoxCornerA = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerA.clone() : null;
         collisionBoxCornerB = data.CollisionBoxCornerB != null ? data.CollisionBoxCornerB.clone() : null;
         spriteOffset = data.SpriteOffset != null ? data.SpriteOffset.clone() : new Vector2();
+        currentLevel().Invert(inverted);
     }
 
     public void Reset() {

@@ -14,7 +14,7 @@ public class LevelTitle extends Level {
 
         { // Exit Gate
             GameObjectData data = new GameObjectData();
-            data.SpriteData = new ImageData("./res/spr_exit_0.png"); {
+            data.SpriteData = new ImageData("./res/spr_gate_0.png"); {
                 data.SpriteData.Layer = 1;
             }
             data.InitialPosition = new Vector2(608, 416);

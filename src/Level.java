@@ -6,6 +6,10 @@ import java.util.*;
 
 public class Level {
     public final static int MAPTOIMAGESCALE = 32;
+    public final static int SPACE_WHITE = 0;
+    public final static int SPACE_BLACK = 1;
+    public final static int SPACE_GRAY = 2;
+    public final static int SPACE_INVALID = -1;
 
     protected Vector2 startingPoint;
     protected int[][] LevelMap;
@@ -22,11 +26,11 @@ public class Level {
 
     public void Load() {
         // create backgrounds
-        bkgGray = new BackgroundImage("./res/backgrounds/bkg_gray.png", LevelMap, 2);
-        bkgGear = new BackgroundImage("./res/backgrounds/bkg_gear.png", LevelMap, 0);
-        bkgBlue = new BackgroundImage("./res/backgrounds/bkg_blue.png", LevelMap, 1);
-        bkgGreen = new BackgroundImage("./res/backgrounds/bkg_green.png", LevelMap, 0);
-        bkgDigital = new BackgroundImage("./res/backgrounds/bkg_digital.png", LevelMap, 1);
+        bkgGray = new BackgroundImage("./res/bkg_gray.png", LevelMap, SPACE_GRAY);
+        bkgGear = new BackgroundImage("./res/bkg_gear.png", LevelMap, SPACE_WHITE);
+        bkgBlue = new BackgroundImage("./res/bkg_blue.png", LevelMap, SPACE_BLACK);
+        bkgGreen = new BackgroundImage("./res/bkg_green.png", LevelMap, SPACE_WHITE);
+        bkgDigital = new BackgroundImage("./res/bkg_digital.png", LevelMap, SPACE_BLACK);
         Game.instance.GameWindow.addImage(bkgGray);
         Game.instance.GameWindow.addImage(bkgGear);
         Game.instance.GameWindow.addImage(bkgBlue);
@@ -54,11 +58,11 @@ public class Level {
                 for (int x = 0; x < width; x++) {
                     int pixel = level_map[y * width + x];
                     if (pixel == 0xFFFFFFFF) {        // WHITE
-                        LevelMap[y][x] = 0;
+                        LevelMap[y][x] = SPACE_WHITE;
                     } else if (pixel == 0xFF000000) { // BLACK
-                        LevelMap[y][x] = 1;
+                        LevelMap[y][x] = SPACE_BLACK;
                     } else {                          // GRAY and everything else
-                        LevelMap[y][x] = 2;
+                        LevelMap[y][x] = SPACE_GRAY;
                     }
                 }
             }
@@ -72,18 +76,13 @@ public class Level {
         Game.instance.DestroyAllGameObjects();
     }
 
-    public boolean IsEmptySpace(Vector2 coord) {
+    public int GetSpaceType(Vector2 coord) {
         // out of bounds
         if (coord.x < 0 || coord.x >= LevelMap[0].length*MAPTOIMAGESCALE || coord.y < 0 || coord.y >= LevelMap.length*MAPTOIMAGESCALE) {
-            return false;
+            return SPACE_INVALID;
         }
 
-        // space is not air
-        if (LevelMap[(int)coord.y/MAPTOIMAGESCALE][(int)coord.x/MAPTOIMAGESCALE] != (Game.instance.GetInverted() ? 1 : 0)) {
-            return false;
-        }
-
-        return true;
+        return LevelMap[(int)coord.y/MAPTOIMAGESCALE][(int)coord.x/MAPTOIMAGESCALE];
     }
 
     public void Invert(boolean inverted) {
