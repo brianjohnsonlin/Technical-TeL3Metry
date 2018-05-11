@@ -42,7 +42,7 @@ public class Player extends GameObject {
 
     public void Update() {
         if (Game.instance.GameWindow.GetKeyDown(GLFW_KEY_F) && canFlip()) {
-            Invert(!inverted);
+            Invert();
         }
         move();
 
@@ -133,9 +133,15 @@ public class Player extends GameObject {
         currentLevel().Invert(inverted);
     }
 
+    public void Invert() {
+        Invert(!inverted);
+    }
+
     public void Reset() {
+        verticalVelocity = 0;
         Invert(false);
         super.Reset();
+        position.replaceWith(currentLevel().startingPoint);
     }
 
     private Vector2 colBoxTopLeftPos() {

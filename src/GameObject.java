@@ -28,12 +28,16 @@ public class GameObject {
         spriteOffset = data.SpriteOffset != null ? data.SpriteOffset.clone() : new Vector2();
 
         // create sprite
-        sprite = new Image(data.SpriteData);
-        sprite.position = position.add(spriteOffset);
+        if (data.SpriteData != null) {
+            sprite = new Image(data.SpriteData);
+            sprite.position = position.add(spriteOffset);
+        }
     }
 
     public void Update() {
-        sprite.position = position.add(spriteOffset);
+        if (sprite != null) {
+            sprite.position = position.add(spriteOffset);
+        }
     }
 
     public Image GetSprite() {
@@ -42,11 +46,13 @@ public class GameObject {
 
     public void Reset() {
         if (data != null) {
-            position = data.InitialPosition != null ? data.InitialPosition.clone() : new Vector2();
+            position.replaceWith(data.InitialPosition != null ? data.InitialPosition : new Vector2());
             collisionBoxCornerA = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerA.clone() : null;
             collisionBoxCornerB = data.CollisionBoxCornerB != null ? data.CollisionBoxCornerB.clone() : null;
-            spriteOffset = data.SpriteOffset != null ? data.SpriteOffset.clone() : new Vector2();
-            sprite.currentFrame = 0;
+            spriteOffset.replaceWith(data.SpriteOffset != null ? data.SpriteOffset : new Vector2());
+        }
+        if (sprite != null) {
+            sprite.Reset();
         }
     }
 

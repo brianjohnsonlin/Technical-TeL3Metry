@@ -93,8 +93,7 @@ public class Game {
 	}
 
 	private void resetLevel() {
-		player.Invert(false);
-		player.position.replaceWith(currentLevel.startingPoint);
+		player.Reset();
 		// delete temp GameObjects
 		// reset rest of GameObjects
 	}

@@ -134,8 +134,10 @@ public class Image {
 	}
 
 	public void Reset() {
-		width = data.Width;
-		height = data.Height;
+		if (data != null) {
+			width = data.Width;
+			height = data.Height;
+		}
 		currentFrame = 0;
 		horizontalMiror = false;
 		verticalMirror = false;
