@@ -118,19 +118,19 @@ public class Image {
 	}
 
 	public float GetLeftSpriteCoord() {
-		return (float)(currentFrame % numSSColumns) / numSSColumns;
+		return (float)(currentFrame % numSSColumns + (horizontalMiror ? 1 : 0)) / numSSColumns;
 	}
 
 	public float GetRightSpriteCoord() {
-		return (float)(currentFrame % numSSColumns + 1) / numSSColumns;
+		return (float)(currentFrame % numSSColumns + (horizontalMiror ? 0 : 1)) / numSSColumns;
 	}
 
 	public float GetTopSpriteCoord() {
-		return (float)(currentFrame / numSSColumns) / numSSRows();
+		return (float)(currentFrame / numSSColumns + (verticalMirror ? 1 : 0)) / numSSRows();
 	}
 
 	public float GetBottomSpriteCoord() {
-		return (float)(currentFrame / numSSColumns + 1) / numSSRows();
+		return (float)(currentFrame / numSSColumns + (verticalMirror ? 0 : 1)) / numSSRows();
 	}
 
 	public void Reset() {

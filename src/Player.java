@@ -1,13 +1,15 @@
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Player extends GameObject {
-    private final float MOVEMENTSPEED = 2;
-    private final float JUMPVELOCITY = 7.5f;
-    private final float DOWNWARDACCELERATION = 0.5f;
+    private final float MOVEMENTSPEED = 5;
+    private final float JUMPVELOCITY = 9f;
+    private final float DOWNWARDACCELERATION = 1f;
+    private final float FRAMESPEED = 0.25f;
 
     private GameObjectData defaultData;
     private GameObjectData invertedData;
     private boolean inverted;
+    private float currentFrame;
     private int frameOffset;
     private float verticalVelocity;
 
@@ -36,6 +38,7 @@ public class Player extends GameObject {
         Init();
 
         inverted = false;
+        currentFrame = 0;
         frameOffset = 0;
         verticalVelocity = 0;
     }
@@ -46,8 +49,8 @@ public class Player extends GameObject {
         }
         move();
 
-        // update animation
-        sprite.currentFrame = frameOffset;
+        // if stuck, change to stuck frame
+        sprite.currentFrame = (int)currentFrame + frameOffset;
 
         super.Update();
     }
@@ -65,6 +68,12 @@ public class Player extends GameObject {
                     break;
                 }
             }
+
+            sprite.horizontalMiror = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT);
+            currentFrame += FRAMESPEED;
+            currentFrame %= 6;
+        } else {
+            currentFrame = 0;
         }
 
         // jumping / falling
@@ -74,6 +83,7 @@ public class Player extends GameObject {
             }
         } else {
             verticalVelocity += DOWNWARDACCELERATION * (inverted ? -1 : 1);
+            currentFrame = 6;
         }
 
         for (int i = 0; i < Math.abs(verticalVelocity); i++) { // no iterations will run if verticalVelocity is 0
@@ -140,6 +150,7 @@ public class Player extends GameObject {
     public void Reset() {
         verticalVelocity = 0;
         Invert(false);
+        currentFrame = 0;
         super.Reset();
         position.replaceWith(currentLevel().startingPoint);
     }

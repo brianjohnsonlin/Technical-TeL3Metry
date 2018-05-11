@@ -112,7 +112,7 @@ public class Display {
 		// Make the OpenGL context current
 		glfwMakeContextCurrent(window);
 		// Enable v-sync
-		glfwSwapInterval(1);
+		glfwSwapInterval(2); // 30 fps
 
 		// Make the window visible
 		glfwShowWindow(window);
