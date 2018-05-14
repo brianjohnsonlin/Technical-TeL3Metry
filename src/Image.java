@@ -25,14 +25,14 @@ class ImageData {
 }
 
 public class Image {
-	public boolean visible = true;
-	public boolean addedToDisplay = false;
-	public float width;
+	public boolean Visible = true;
+	public boolean AddedToDisplay = false;
+	public float Width;
 	public float height;
-	public Vector2 position;
-	public int currentFrame = 0;
-	public boolean verticalMirror = false;
-	public boolean horizontalMiror = false;
+	public Vector2 Position;
+	public int CurrentFrame = 0;
+	public boolean VerticalMirror = false;
+	public boolean HorizontalMirror = false;
 
 	protected String filename;
 	protected int actualWidth;
@@ -51,9 +51,9 @@ public class Image {
 		this.data = data;
 		filename = data.Filename;
 		Init();
-		width = data.Width;
-		if (width == -1) {
-			width = actualWidth / numSSColumns;
+		Width = data.Width;
+		if (Width == -1) {
+			Width = actualWidth / numSSColumns;
 		}
 		height = data.Height;
 		if (height == -1) {
@@ -61,7 +61,7 @@ public class Image {
 		}
 		this.numFrames = data.NumFrames;
 		this.numSSColumns = data.NumSSColumns;
-		position = new Vector2();
+		Position = new Vector2();
 		layer = data.Layer;
 	}
 
@@ -118,29 +118,29 @@ public class Image {
 	}
 
 	public float GetLeftSpriteCoord() {
-		return (float)(currentFrame % numSSColumns + (horizontalMiror ? 1 : 0)) / numSSColumns;
+		return (float)(CurrentFrame % numSSColumns + (HorizontalMirror ? 1 : 0)) / numSSColumns;
 	}
 
 	public float GetRightSpriteCoord() {
-		return (float)(currentFrame % numSSColumns + (horizontalMiror ? 0 : 1)) / numSSColumns;
+		return (float)(CurrentFrame % numSSColumns + (HorizontalMirror ? 0 : 1)) / numSSColumns;
 	}
 
 	public float GetTopSpriteCoord() {
-		return (float)(currentFrame / numSSColumns + (verticalMirror ? 1 : 0)) / numSSRows();
+		return (float)(CurrentFrame / numSSColumns + (VerticalMirror ? 1 : 0)) / numSSRows();
 	}
 
 	public float GetBottomSpriteCoord() {
-		return (float)(currentFrame / numSSColumns + (verticalMirror ? 0 : 1)) / numSSRows();
+		return (float)(CurrentFrame / numSSColumns + (VerticalMirror ? 0 : 1)) / numSSRows();
 	}
 
 	public void Reset() {
 		if (data != null) {
-			width = data.Width;
+			Width = data.Width;
 			height = data.Height;
 		}
-		currentFrame = 0;
-		horizontalMiror = false;
-		verticalMirror = false;
+		CurrentFrame = 0;
+		HorizontalMirror = false;
+		VerticalMirror = false;
 	}
 
 	private int numSSRows() {

@@ -50,7 +50,7 @@ public class Player extends GameObject {
         move();
 
         // if stuck, change to stuck frame
-        sprite.currentFrame = (int)currentFrame + frameOffset;
+        sprite.CurrentFrame = (int)currentFrame + frameOffset;
 
         super.Update();
     }
@@ -61,15 +61,16 @@ public class Player extends GameObject {
             for (int i = 0; i < MOVEMENTSPEED; i++) {
                 float increment = (i == (int)MOVEMENTSPEED) ? (MOVEMENTSPEED - (int)MOVEMENTSPEED) : 1;
                 increment *= Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT) ? -1 : 1;
-                position.x += increment;
-                if ((Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT) && (!isEmptySpace(colBoxTopLeftPos()) || !isEmptySpace(colBoxBottomLeftPos())))
-                 || (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT) && (!isEmptySpace(colBoxTopRightPos()) || !isEmptySpace(colBoxBottomRightPos())))) {
-                    position.x -= increment;
+                Position.x += increment;
+                if ((Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT) && (!isEmptySpace(ColBoxTopLeftPos()) || !isEmptySpace(ColBoxBottomLeftPos())))
+                 || (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT) && (!isEmptySpace(ColBoxTopRightPos()) || !isEmptySpace(ColBoxBottomRightPos())))) {
+                    Position.x -= increment;
+                    currentFrame = 0;
                     break;
                 }
             }
 
-            sprite.horizontalMiror = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT);
+            sprite.HorizontalMirror = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT);
             currentFrame += FRAMESPEED;
             currentFrame %= 6;
         } else {
@@ -89,10 +90,10 @@ public class Player extends GameObject {
         for (int i = 0; i < Math.abs(verticalVelocity); i++) { // no iterations will run if verticalVelocity is 0
             float increment = (i == (int)verticalVelocity) ? (verticalVelocity - (int)verticalVelocity) : 1;
             increment *= (verticalVelocity < 0) ? -1 : 1;
-            position.y += increment;
-            if ((verticalVelocity > 0 && (!isEmptySpace(colBoxBottomLeftPos()) || !isEmptySpace(colBoxBottomRightPos())))
-             || (verticalVelocity < 0 && (!isEmptySpace(colBoxTopLeftPos()) || !isEmptySpace(colBoxTopRightPos())))) {
-                position.y -= increment;
+            Position.y += increment;
+            if ((verticalVelocity > 0 && (!isEmptySpace(ColBoxBottomLeftPos()) || !isEmptySpace(ColBoxBottomRightPos())))
+             || (verticalVelocity < 0 && (!isEmptySpace(ColBoxTopLeftPos()) || !isEmptySpace(ColBoxTopRightPos())))) {
+                Position.y -= increment;
                 verticalVelocity = 0;
                 break;
             }
@@ -106,21 +107,21 @@ public class Player extends GameObject {
     // only checks bottom corners because nothing is thinner than L3M
     private boolean isGrounded() {
         if (!inverted) {
-            return currentLevel().GetSpaceType(colBoxBottomLeftPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE ||
-                   currentLevel().GetSpaceType(colBoxBottomRightPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE;
+            return currentLevel().GetSpaceType(ColBoxBottomLeftPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE ||
+                   currentLevel().GetSpaceType(ColBoxBottomRightPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE;
         } else {
-            return currentLevel().GetSpaceType(colBoxTopLeftPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK ||
-                   currentLevel().GetSpaceType(colBoxTopRightPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK;
+            return currentLevel().GetSpaceType(ColBoxTopLeftPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK ||
+                   currentLevel().GetSpaceType(ColBoxTopRightPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK;
         }
     }
 
     private boolean canFlip() {
         if (!inverted) {
-            return currentLevel().GetSpaceType(colBoxBottomLeftPos().add(new Vector2(0, 1))) == Level.SPACE_BLACK &&
-                   currentLevel().GetSpaceType(colBoxBottomRightPos().add(new Vector2(0, 1))) == Level.SPACE_BLACK;
+            return currentLevel().GetSpaceType(ColBoxBottomLeftPos().add(new Vector2(0, 1))) == Level.SPACE_BLACK &&
+                   currentLevel().GetSpaceType(ColBoxBottomRightPos().add(new Vector2(0, 1))) == Level.SPACE_BLACK;
         } else {
-            return currentLevel().GetSpaceType(colBoxTopLeftPos().add(new Vector2(0, -1))) == Level.SPACE_WHITE &&
-                   currentLevel().GetSpaceType(colBoxTopRightPos().add(new Vector2(0, -1))) == Level.SPACE_WHITE;
+            return currentLevel().GetSpaceType(ColBoxTopLeftPos().add(new Vector2(0, -1))) == Level.SPACE_WHITE &&
+                   currentLevel().GetSpaceType(ColBoxTopRightPos().add(new Vector2(0, -1))) == Level.SPACE_WHITE;
         }
     }
 
@@ -131,11 +132,11 @@ public class Player extends GameObject {
         if (!inverted) {
             data = defaultData;
             frameOffset = 0;
-            position.y -= 32;
+            Position.y -= 32;
         } else {
             data = invertedData;
             frameOffset = 8;
-            position.y += 32;
+            Position.y += 32;
         }
         collisionBoxCornerA = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerA.clone() : null;
         collisionBoxCornerB = data.CollisionBoxCornerB != null ? data.CollisionBoxCornerB.clone() : null;
@@ -152,23 +153,7 @@ public class Player extends GameObject {
         Invert(false);
         currentFrame = 0;
         super.Reset();
-        position.replaceWith(currentLevel().startingPoint);
-    }
-
-    private Vector2 colBoxTopLeftPos() {
-        return position.add(collisionBoxCornerA);
-    }
-
-    private Vector2 colBoxTopRightPos() {
-        return position.add(new Vector2(collisionBoxCornerB.x, collisionBoxCornerA.y));
-    }
-
-    private Vector2 colBoxBottomLeftPos() {
-        return position.add(new Vector2(collisionBoxCornerA.x, collisionBoxCornerB.y));
-    }
-
-    private Vector2 colBoxBottomRightPos() {
-        return position.add(collisionBoxCornerB);
+        Position.replaceWith(currentLevel().startingPoint);
     }
 
     private Level currentLevel() {

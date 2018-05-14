@@ -191,8 +191,8 @@ public class Display {
 	}
 
 //    public boolean GetMouseOver(Image image) {
-//        return GetMouseX() >= image.position.x && GetMouseY() >= image.position.y &&
-//               GetMouseX() <= image.position.x + image.width && GetMouseY() <= image.position.y + image.height;
+//        return GetMouseX() >= image.Position.x && GetMouseY() >= image.Position.y &&
+//               GetMouseX() <= image.Position.x + image.Width && GetMouseY() <= image.Position.y + image.height;
 //    }
 //
 //    public boolean GetMouseOver(double x, double y, double radius) {
@@ -201,7 +201,7 @@ public class Display {
 
 	public boolean addImage(Image image) {
 		// abort if image is null or it's already marked as added to display
-	    if (image == null || image.addedToDisplay || image.GetLayer() < 0) {
+	    if (image == null || image.AddedToDisplay || image.GetLayer() < 0) {
 			return false;
 		}
 
@@ -217,21 +217,17 @@ public class Display {
 
         // add image
         list.add(image);
-        image.addedToDisplay = true;
+        image.AddedToDisplay = true;
         return true;
 	}
 
 	public boolean removeImage(Image image) {
-	    if (!image.addedToDisplay) {
+	    if (!image.AddedToDisplay) {
 	        return false;
         }
-		for (ArrayList<Image> list : images.values()) {
-	        for (int i = 0, len = list.size(); i < len; i++) {
-	            if (list.get(i) == image) list.remove(i);
-	            return true;
-            }
-        }
-        return false;
+        images.get(image.GetLayer()).remove(image);
+	    image.AddedToDisplay = false;
+        return true;
 	}
 
 	// returns number of images removed
@@ -245,21 +241,21 @@ public class Display {
 		    ArrayList<Image> layer = images.get(i);
 		    if (layer == null) continue;
 			for (Image img : layer) {
-			    if (!img.visible) continue;
+			    if (!img.Visible) continue;
 				img.Bind();
 				glBegin(GL_QUADS);
 				{
 					glTexCoord2f(img.GetLeftSpriteCoord(), img.GetTopSpriteCoord());
-					glVertex2f((img.position.x / windowWidth * 2) - 1, -(img.position.y / windowHeight * 2) + 1);
+					glVertex2f((img.Position.x / windowWidth * 2) - 1, -(img.Position.y / windowHeight * 2) + 1);
 
 					glTexCoord2f(img.GetLeftSpriteCoord(), img.GetBottomSpriteCoord());
-					glVertex2f((img.position.x / windowWidth * 2) - 1, -((img.position.y + img.height) / windowHeight * 2) + 1);
+					glVertex2f((img.Position.x / windowWidth * 2) - 1, -((img.Position.y + img.height) / windowHeight * 2) + 1);
 
 					glTexCoord2f(img.GetRightSpriteCoord(), img.GetBottomSpriteCoord());
-					glVertex2f(((img.position.x + img.width) / windowWidth * 2) - 1, -((img.position.y + img.height)/windowHeight*2) + 1);
+					glVertex2f(((img.Position.x + img.Width) / windowWidth * 2) - 1, -((img.Position.y + img.height)/windowHeight*2) + 1);
 
 					glTexCoord2f(img.GetRightSpriteCoord(), img.GetTopSpriteCoord());
-					glVertex2f(((img.position.x + img.width) / windowWidth * 2) - 1, -(img.position.y / windowHeight * 2) + 1);
+					glVertex2f(((img.Position.x + img.Width) / windowWidth * 2) - 1, -(img.Position.y / windowHeight * 2) + 1);
 				}
 				glEnd();
 			}
@@ -268,7 +264,7 @@ public class Display {
 
 	public void setIcon(Image icon) {
 		GLFWImage image = GLFWImage.malloc();
-		image.set((int)icon.width, (int)icon.height, icon.GetPixelBuffer());
+		image.set((int)icon.Width, (int)icon.height, icon.GetPixelBuffer());
 		GLFWImage.Buffer images = GLFWImage.malloc(1);
 		images.put(0, image);
 		glfwSetWindowIcon(window, images);

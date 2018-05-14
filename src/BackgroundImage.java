@@ -16,9 +16,9 @@ public class BackgroundImage extends Image {
         this.LevelMap = LevelMap;
         this.key = key;
         Init();
-        this.width = actualWidth;
+        this.Width = actualWidth;
         this.height = actualHeight;
-        position = new Vector2(0, 0);
+        Position = new Vector2(0, 0);
         layer = 0;
     }
 

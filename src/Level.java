@@ -36,15 +36,27 @@ public class Level {
         Game.instance.GameWindow.addImage(bkgBlue);
         Game.instance.GameWindow.addImage(bkgGreen);
         Game.instance.GameWindow.addImage(bkgDigital);
-        bkgGreen.visible = bkgDigital.visible = false;
+        bkgGreen.Visible = bkgDigital.Visible = false;
 
         // load all game objects
         for (GameObjectData data : gameObjectData) {
-            Game.instance.AddGameObject(new GameObject(data));
+            if (data.DeviceType == GameObject.DEVICENONE) {
+                Game.instance.AddGameObject(new GameObject(data));
+            } else if (data.DeviceType == GameObject.DEVICEGATE) {
+                Game.instance.AddGameObject(new DeviceGate(data));
+            } else if (data.DeviceType == GameObject.DEVICEBUTTON) {
+                Game.instance.AddGameObject(new DeviceButton(data));
+            } else if (data.DeviceType == GameObject.DEVICESTONE) {
+                Game.instance.AddGameObject(new DeviceStone(data));
+            } else if (data.DeviceType == GameObject.DEVICEFORCEFIELD) {
+                Game.instance.AddGameObject(new DeviceForcefield(data));
+            } else if (data.DeviceType == GameObject.DEVICETEXT) {
+                Game.instance.AddGameObject(new DeviceText(data));
+            }
         }
 
-        // place player at starting position
-        Game.instance.GetPlayer().position.replaceWith(startingPoint);
+        // place player at starting Position
+        Game.instance.GetPlayer().Position.replaceWith(startingPoint);
     }
 
     protected void ImportLevelMap(String filename) {
@@ -71,11 +83,6 @@ public class Level {
         }
     }
 
-    public void UnLoad() {
-        Game.instance.GameWindow.clearLayer(0); // Delete Background
-        Game.instance.DestroyAllGameObjects();
-    }
-
     public int GetSpaceType(Vector2 coord) {
         // out of bounds
         if (coord.x < 0 || coord.x >= LevelMap[0].length*MAPTOIMAGESCALE || coord.y < 0 || coord.y >= LevelMap.length*MAPTOIMAGESCALE) {
@@ -86,9 +93,9 @@ public class Level {
     }
 
     public void Invert(boolean inverted) {
-        bkgDigital.visible = inverted;
-        bkgGreen.visible = inverted;
-        bkgGear.visible = !inverted;
-        bkgBlue.visible = !inverted;
+        bkgDigital.Visible = inverted;
+        bkgGreen.Visible = inverted;
+        bkgGear.Visible = !inverted;
+        bkgBlue.Visible = !inverted;
     }
 }
