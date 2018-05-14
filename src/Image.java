@@ -28,7 +28,7 @@ public class Image {
 	public boolean Visible = true;
 	public boolean AddedToDisplay = false;
 	public float Width;
-	public float height;
+	public float Height;
 	public Vector2 Position;
 	public int CurrentFrame = 0;
 	public boolean VerticalMirror = false;
@@ -51,14 +51,8 @@ public class Image {
 		this.data = data;
 		filename = data.Filename;
 		Init();
-		Width = data.Width;
-		if (Width == -1) {
-			Width = actualWidth / numSSColumns;
-		}
-		height = data.Height;
-		if (height == -1) {
-			height = actualHeight / numSSRows();
-		}
+		Width = (data.Width == -1) ? (actualWidth / numSSColumns) : data.Width;
+		Height = (data.Height == -1) ? (actualHeight / numSSRows()) : data.Height;
 		this.numFrames = data.NumFrames;
 		this.numSSColumns = data.NumSSColumns;
 		Position = new Vector2();
@@ -135,8 +129,8 @@ public class Image {
 
 	public void Reset() {
 		if (data != null) {
-			Width = data.Width;
-			height = data.Height;
+			Width = (data.Width == -1) ? (actualWidth / numSSColumns) : data.Width;
+			Height = (data.Height == -1) ? (actualHeight / numSSRows()) : data.Height;
 		}
 		CurrentFrame = 0;
 		HorizontalMirror = false;

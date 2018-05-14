@@ -56,7 +56,7 @@ public class GameObject {
         return sprite;
     }
 
-    public void Reset() {
+    public void Reset() { // for subclasses of temp gameobjects (such as projectiles, override Reset to delete itself
         if (data != null) {
             Position.replaceWith(data.InitialPosition != null ? data.InitialPosition : new Vector2());
             collisionBoxCornerA = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerA.clone() : null;

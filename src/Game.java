@@ -58,11 +58,19 @@ public class Game {
 	}
 
 	public void Update() {
+		// change level if one is slated to be loaded
+		if (nextLevel != null) {
+			loadLevel(nextLevel);
+			nextLevel = null;
+		}
+
+		// if R is pressed, reset the level
 		if (GameWindow.GetKeyDown(GLFW_KEY_R)) {
 			resetLevel();
 			return;
 		}
 
+		// update player and GameObjects
 		player.Update();
 		for (GameObject gameObject: gameObjects) {
 			gameObject.Update();
@@ -76,22 +84,6 @@ public class Game {
 				GameWindow.removeImage(gobj.GetSprite());
 				i--;
 			}
-		}
-
-		// change level if one is slated to be loaded
-		if (nextLevel != null) {
-			Level level = Levels.get(nextLevel);
-			if (nextLevel != null) {
-				player.Invert(false);
-				Game.instance.GameWindow.clearLayer(0); // Delete Background
-				for (GameObject gameObject : gameObjects) {
-					GameWindow.removeImage(gameObject.GetSprite());
-				}
-				gameObjects.clear();
-				currentLevel = level;
-				currentLevel.Load();
-			}
-			nextLevel = null;
 		}
 	}
 
@@ -108,14 +100,29 @@ public class Game {
 		return currentLevel;
 	}
 
-	private void resetLevel() {
-		player.Reset();
-		// delete temp GameObjects
-		// reset rest of GameObjects
-	}
-
 	public void ChangeLevel(String level) {
 		nextLevel = level;
+	}
+
+	private void resetLevel() {
+		player.Reset();
+		for (GameObject gameObject : gameObjects) {
+			gameObject.Reset();
+		}
+	}
+
+	private void loadLevel(String levelname) {
+		Level level = Levels.get(levelname);
+		if (level != null) {
+			player.Invert(false);
+			Game.instance.GameWindow.clearLayer(0); // Delete Background
+			for (GameObject gameObject : gameObjects) {
+				GameWindow.removeImage(gameObject.GetSprite());
+			}
+			gameObjects.clear();
+			currentLevel = level;
+			currentLevel.Load();
+		}
 	}
 
 }

@@ -98,4 +98,8 @@ public class Level {
         bkgGear.Visible = !inverted;
         bkgBlue.Visible = !inverted;
     }
+
+    public Vector2 GetStartingPoint() {
+        return startingPoint;
+    }
 }

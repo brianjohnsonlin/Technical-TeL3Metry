@@ -153,7 +153,8 @@ public class Player extends GameObject {
         Invert(false);
         currentFrame = 0;
         super.Reset();
-        Position.replaceWith(currentLevel().startingPoint);
+        Position.replaceWith(currentLevel().GetStartingPoint());
+        sprite.Reset();
     }
 
     private Level currentLevel() {

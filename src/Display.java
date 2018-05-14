@@ -192,7 +192,7 @@ public class Display {
 
 //    public boolean GetMouseOver(Image image) {
 //        return GetMouseX() >= image.Position.x && GetMouseY() >= image.Position.y &&
-//               GetMouseX() <= image.Position.x + image.Width && GetMouseY() <= image.Position.y + image.height;
+//               GetMouseX() <= image.Position.x + image.Width && GetMouseY() <= image.Position.y + image.Height;
 //    }
 //
 //    public boolean GetMouseOver(double x, double y, double radius) {
@@ -249,10 +249,10 @@ public class Display {
 					glVertex2f((img.Position.x / windowWidth * 2) - 1, -(img.Position.y / windowHeight * 2) + 1);
 
 					glTexCoord2f(img.GetLeftSpriteCoord(), img.GetBottomSpriteCoord());
-					glVertex2f((img.Position.x / windowWidth * 2) - 1, -((img.Position.y + img.height) / windowHeight * 2) + 1);
+					glVertex2f((img.Position.x / windowWidth * 2) - 1, -((img.Position.y + img.Height) / windowHeight * 2) + 1);
 
 					glTexCoord2f(img.GetRightSpriteCoord(), img.GetBottomSpriteCoord());
-					glVertex2f(((img.Position.x + img.Width) / windowWidth * 2) - 1, -((img.Position.y + img.height)/windowHeight*2) + 1);
+					glVertex2f(((img.Position.x + img.Width) / windowWidth * 2) - 1, -((img.Position.y + img.Height)/windowHeight*2) + 1);
 
 					glTexCoord2f(img.GetRightSpriteCoord(), img.GetTopSpriteCoord());
 					glVertex2f(((img.Position.x + img.Width) / windowWidth * 2) - 1, -(img.Position.y / windowHeight * 2) + 1);
@@ -264,7 +264,7 @@ public class Display {
 
 	public void setIcon(Image icon) {
 		GLFWImage image = GLFWImage.malloc();
-		image.set((int)icon.Width, (int)icon.height, icon.GetPixelBuffer());
+		image.set((int)icon.Width, (int)icon.Height, icon.GetPixelBuffer());
 		GLFWImage.Buffer images = GLFWImage.malloc(1);
 		images.put(0, image);
 		glfwSetWindowIcon(window, images);
