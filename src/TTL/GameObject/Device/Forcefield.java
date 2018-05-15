@@ -1,5 +1,9 @@
-public class DeviceText extends Device {
-    public DeviceText(GameObjectData data) {
+package TTL.GameObject.Device;
+
+import TTL.GameObject.*;
+
+public class Forcefield extends Device {
+    public Forcefield(GameObjectData data) {
         super(data);
     }
 

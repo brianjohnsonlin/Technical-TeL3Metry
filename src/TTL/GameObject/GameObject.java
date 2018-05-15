@@ -1,12 +1,7 @@
-class GameObjectData {
-    public Vector2 InitialPosition = null;
-    public Vector2 CollisionBoxCornerA = null;
-    public Vector2 CollisionBoxCornerB = null;
-    public ImageData SpriteData = null;
-    public Vector2 SpriteOffset = null;
-    public int DeviceType = GameObject.DEVICENONE;
-    public String Value = ""; // stores anything to be used by children of Device
-}
+package TTL.GameObject;
+
+import TTL.Image;
+import TTL.Vector2;
 
 public class GameObject {
     public static final int DEVICENONE = 0;
@@ -14,7 +9,7 @@ public class GameObject {
     public static final int DEVICEBUTTON = 2;
     public static final int DEVICESTONE = 3;
     public static final int DEVICEFORCEFIELD = 4;
-    public static final int DEVICETEXT = 5;
+    public static final int DEVICETYPINGTEXT = 5;
 
     public boolean SlatedForDestruction;
     public Vector2 Position;

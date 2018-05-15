@@ -1,5 +1,10 @@
+package TTL;
+
 import java.io.FileNotFoundException;
 import java.util.*;
+
+import TTL.GameObject.*;
+import TTL.Level.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 

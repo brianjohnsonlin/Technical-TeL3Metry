@@ -1,3 +1,6 @@
+package TTL;
+
+import TTL.Level.Level;
 import org.lwjgl.BufferUtils;
 
 import javax.imageio.ImageIO;
@@ -43,7 +46,7 @@ public class BackgroundImage extends Image {
                 pixels.put((byte)((pixel >> 16) & 0xFF));   //RED
                 pixels.put((byte)((pixel >>  8) & 0xFF));   //GREEN
                 pixels.put((byte)((pixel      ) & 0xFF));   //BLUE
-                if (levelMap[y/Level.MAPTOIMAGESCALE][x/Level.MAPTOIMAGESCALE] == key) { //ALPHA
+                if (levelMap[y/ Level.MAPTOIMAGESCALE][x/Level.MAPTOIMAGESCALE] == key) { //ALPHA
                     pixels.put((byte)((pixel >> 24) & 0xFF));
                 } else {
                     pixels.put((byte)0);

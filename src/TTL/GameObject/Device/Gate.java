@@ -1,5 +1,10 @@
-public class DeviceGate extends Device {
-    public DeviceGate(GameObjectData data) {
+package TTL.GameObject.Device;
+
+import TTL.*;
+import TTL.GameObject.*;
+
+public class Gate extends Device {
+    public Gate(GameObjectData data) {
         super(data);
     }
 

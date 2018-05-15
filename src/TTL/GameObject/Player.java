@@ -1,3 +1,8 @@
+package TTL.GameObject;
+
+import TTL.*;
+import TTL.Level.Level;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Player extends GameObject {

@@ -1,3 +1,9 @@
+package TTL.Level;
+
+import TTL.*;
+import TTL.GameObject.GameObject;
+import TTL.GameObject.GameObjectData;
+
 public class LevelTitle extends Level {
     public LevelTitle() {
         super();

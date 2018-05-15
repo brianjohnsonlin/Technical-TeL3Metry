@@ -1,3 +1,5 @@
+package TTL;
+
 import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
@@ -5,24 +7,6 @@ import java.nio.*;
 import org.lwjgl.*;
 
 import static org.lwjgl.opengl.GL11.*;
-
-class ImageData {
-	public String Filename;
-	public float Width = -1; // -1 will use actual resolution
-	public float Height = -1;
-	public int NumFrames = 1;
-	public int NumSSColumns = 1; // number of sprite sheet columns (don't really need to know the number of rows)
-	public int Layer = 0;
-	// Layers:
-	// 0 Background
-	// 1 Devices
-	// 2 Player
-	// 3 Title, Text, Foreground
-
-	public ImageData(String filename) {
-		Filename = filename;
-	}
-}
 
 public class Image {
 	public boolean Visible = true;

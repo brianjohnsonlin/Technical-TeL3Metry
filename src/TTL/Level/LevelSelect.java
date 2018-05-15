@@ -1,3 +1,9 @@
+package TTL.Level;
+
+import TTL.*;
+import TTL.GameObject.GameObject;
+import TTL.GameObject.GameObjectData;
+
 public class LevelSelect extends Level {
     public LevelSelect() {
         super();

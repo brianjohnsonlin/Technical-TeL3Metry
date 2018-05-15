@@ -1,3 +1,9 @@
+package TTL.Level;
+
+import TTL.*;
+import TTL.GameObject.*;
+import TTL.GameObject.Device.*;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -43,15 +49,15 @@ public class Level {
             if (data.DeviceType == GameObject.DEVICENONE) {
                 Game.instance.AddGameObject(new GameObject(data));
             } else if (data.DeviceType == GameObject.DEVICEGATE) {
-                Game.instance.AddGameObject(new DeviceGate(data));
+                Game.instance.AddGameObject(new Gate(data));
             } else if (data.DeviceType == GameObject.DEVICEBUTTON) {
-                Game.instance.AddGameObject(new DeviceButton(data));
+                Game.instance.AddGameObject(new Button(data));
             } else if (data.DeviceType == GameObject.DEVICESTONE) {
-                Game.instance.AddGameObject(new DeviceStone(data));
+                Game.instance.AddGameObject(new Stone(data));
             } else if (data.DeviceType == GameObject.DEVICEFORCEFIELD) {
-                Game.instance.AddGameObject(new DeviceForcefield(data));
-            } else if (data.DeviceType == GameObject.DEVICETEXT) {
-                Game.instance.AddGameObject(new DeviceText(data));
+                Game.instance.AddGameObject(new Forcefield(data));
+            } else if (data.DeviceType == GameObject.DEVICETYPINGTEXT) {
+                Game.instance.AddGameObject(new TypingText(data));
             }
         }
 

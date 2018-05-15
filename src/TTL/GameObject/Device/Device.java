@@ -1,3 +1,7 @@
+package TTL.GameObject.Device;
+
+import TTL.GameObject.*;
+
 public abstract class Device extends GameObject {
     protected boolean activated;
 

@@ -1,3 +1,5 @@
+package TTL;
+
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
@@ -268,5 +270,13 @@ public class Display {
 		GLFWImage.Buffer images = GLFWImage.malloc(1);
 		images.put(0, image);
 		glfwSetWindowIcon(window, images);
+	}
+
+	public int GetWidth() {
+		return windowWidth;
+	}
+
+	public int GetHeight() {
+		return windowHeight;
 	}
 }

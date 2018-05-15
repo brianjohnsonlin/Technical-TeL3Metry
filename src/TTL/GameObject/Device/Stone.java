@@ -1,5 +1,9 @@
-public class DeviceStone extends Device {
-    public DeviceStone(GameObjectData data) {
+package TTL.GameObject.Device;
+
+import TTL.GameObject.*;
+
+public class Stone extends Device {
+    public Stone(GameObjectData data) {
         super(data);
     }
 
