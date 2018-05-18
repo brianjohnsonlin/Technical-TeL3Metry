@@ -226,20 +226,20 @@ public class Display {
         return true;
 	}
 
-	public boolean removeSprite(Sprite image) {
-	    if (!image.AddedToDisplay) {
+	public boolean removeSprite(Sprite sprite) {
+	    if (!sprite.AddedToDisplay) {
 	        return false;
         }
-		sprites.get(image.GetLayer()).remove(image);
-	    image.AddedToDisplay = false;
+		sprites.get(sprite.GetLayer()).remove(sprite);
+		sprite.AddedToDisplay = false;
         return true;
 	}
 
 	// returns number of images removed
-	public int clearLayer(int layer) {
-		ArrayList<Sprite> removedLayer = sprites.remove(layer);
-		return removedLayer == null ? 0 : removedLayer.size();
-	}
+	//	public int clearLayer(int layer) {
+	//		ArrayList<Sprite> removedLayer = sprites.remove(layer);
+	//		return removedLayer == null ? 0 : removedLayer.size();
+	//	}
 
 	private void renderSprites() {
 		for (int i = 0, len = numLayers; i < len; i++) {

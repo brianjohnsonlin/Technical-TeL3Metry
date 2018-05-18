@@ -128,12 +128,7 @@ public class Game {
 	private void loadLevel(String levelname) {
 		Level level = Levels.get(levelname);
 		if (level != null) {
-			player.Invert(false);
-			Game.instance.GameWindow.clearLayer(0); // Delete Background
-			for (GameObject gameObject : gameObjects) {
-				GameWindow.removeSprite(gameObject.GetSprite());
-			}
-			gameObjects.clear();
+			currentLevel.Unload();
 			currentLevel = level;
 			currentLevel.Load();
 		}
@@ -141,6 +136,13 @@ public class Game {
 
 	public FontType GetFont(String fontName) {
 		return fonts.get(fontName);
+	}
+
+	public void DestroyAllGameObjects() {
+		for (GameObject gameObject : gameObjects) {
+			GameWindow.removeSprite(gameObject.GetSprite());
+		}
+		gameObjects.clear();
 	}
 
 }

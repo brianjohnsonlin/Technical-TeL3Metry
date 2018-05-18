@@ -24,6 +24,7 @@ public class Text extends Sprite{
 		this.color = data.Color;
 		this.lineMaxSize = data.MaxLineLength;
 		this.centerText = data.Centered;
+		this.layer = data.Layer;
 	}
 
 	public int getNumberOfLines() {

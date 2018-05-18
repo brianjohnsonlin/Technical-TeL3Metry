@@ -18,6 +18,7 @@ public class Level {
     public final static int SPACE_INVALID = -1;
 
     protected Vector2 startingPoint;
+    protected boolean startInverted;
     protected int[][] LevelMap;
     protected ArrayList<GameObjectData> gameObjectData;
     protected BackgroundImage bkgGray;
@@ -28,6 +29,7 @@ public class Level {
 
     public Level() {
         gameObjectData = new ArrayList<>();
+        startInverted = false;
     }
 
     public void Load() {
@@ -42,7 +44,8 @@ public class Level {
         Game.instance.GameWindow.addSprite(bkgBlue);
         Game.instance.GameWindow.addSprite(bkgGreen);
         Game.instance.GameWindow.addSprite(bkgDigital);
-        bkgGreen.Visible = bkgDigital.Visible = false;
+        bkgGreen.Visible = bkgDigital.Visible = startInverted;
+        bkgBlue.Visible = bkgGear.Visible = !startInverted;
 
         // load all game objects
         for (GameObjectData data : gameObjectData) {
@@ -61,8 +64,8 @@ public class Level {
             }
         }
 
-        // place player at starting Position
-        Game.instance.GetPlayer().Position.replaceWith(startingPoint);
+        Game.instance.GetPlayer().Invert(startInverted);                // set player inversion
+        Game.instance.GetPlayer().Position.replaceWith(startingPoint);  // place player at starting Position
     }
 
     protected void ImportLevelMap(String filename) {
@@ -107,5 +110,14 @@ public class Level {
 
     public Vector2 GetStartingPoint() {
         return startingPoint;
+    }
+
+    public void Unload() {
+        Game.instance.GameWindow.removeSprite(bkgGray);
+        Game.instance.GameWindow.removeSprite(bkgGear);
+        Game.instance.GameWindow.removeSprite(bkgBlue);
+        Game.instance.GameWindow.removeSprite(bkgGreen);
+        Game.instance.GameWindow.removeSprite(bkgDigital);
+        Game.instance.DestroyAllGameObjects();
     }
 }
