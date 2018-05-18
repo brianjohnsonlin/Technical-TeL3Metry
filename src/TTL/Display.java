@@ -22,7 +22,7 @@ public class Display {
 
 	private int windowWidth = 640;
 	private int windowHeight = 640;
-	private HashMap<Integer, ArrayList<Image>> images;
+	private HashMap<Integer, ArrayList<Sprite>> sprites;
 	private int numLayers = 0;
 
 	// The window handle
@@ -52,7 +52,7 @@ public class Display {
 	public Display(Game game) {
 		Game = game;
 		init();
-		images = new HashMap<>();
+		sprites = new HashMap<>();
 		keysPrev = new HashMap<>();
 		keys = new HashMap<>();
 		mousePrev = new HashMap<>();
@@ -148,7 +148,7 @@ public class Display {
 			Game.Update();
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
-			renderImages();
+			renderSprites();
 			glfwSwapBuffers(window); // swap the color buffers
 
 			// Poll for window events. The key callback above will only be
@@ -204,65 +204,49 @@ public class Display {
 //        return radius >= Math.sqrt(Math.pow(GetMouseX() - x, 2) + Math.pow(GetMouseY() - y, 2));
 //    }
 
-	public boolean addImage(Image image) {
-		// abort if image is null or it's already marked as added to display
-	    if (image == null || image.AddedToDisplay || image.GetLayer() < 0) {
+	public boolean addSprite(Sprite sprite) {
+		// abort if image is already marked as added to display
+		if (sprite.AddedToDisplay || sprite.GetLayer() < 0) {
 			return false;
 		}
 
 		// if layer doesn't exist, create it
-		ArrayList<Image> list = images.get(image.GetLayer());
+		ArrayList<Sprite> list = sprites.get(sprite.GetLayer());
 		if (list == null) {
 		    list = new ArrayList<>();
-		    images.put(image.GetLayer(), list);
-		    if (image.GetLayer() + 1 > numLayers) {
-		        numLayers = image.GetLayer() + 1;
+			sprites.put(sprite.GetLayer(), list);
+		    if (sprite.GetLayer() + 1 > numLayers) {
+		        numLayers = sprite.GetLayer() + 1;
             }
         }
 
         // add image
-        list.add(image);
-        image.AddedToDisplay = true;
+        list.add(sprite);
+		sprite.AddedToDisplay = true;
         return true;
 	}
 
-	public boolean removeImage(Image image) {
+	public boolean removeSprite(Sprite image) {
 	    if (!image.AddedToDisplay) {
 	        return false;
         }
-        images.get(image.GetLayer()).remove(image);
+		sprites.get(image.GetLayer()).remove(image);
 	    image.AddedToDisplay = false;
         return true;
 	}
 
 	// returns number of images removed
 	public int clearLayer(int layer) {
-		ArrayList<Image> removedLayer = images.remove(layer);
+		ArrayList<Sprite> removedLayer = sprites.remove(layer);
 		return removedLayer == null ? 0 : removedLayer.size();
 	}
 
-	private void renderImages() {
+	private void renderSprites() {
 		for (int i = 0, len = numLayers; i < len; i++) {
-		    ArrayList<Image> layer = images.get(i);
+		    ArrayList<Sprite> layer = sprites.get(i);
 		    if (layer == null) continue;
-			for (Image img : layer) {
-			    if (!img.Visible) continue;
-				img.Bind();
-				glBegin(GL_QUADS);
-				{
-					glTexCoord2f(img.GetLeftSpriteCoord(), img.GetTopSpriteCoord());
-					glVertex2f((img.Position.x / windowWidth * 2) - 1, -(img.Position.y / windowHeight * 2) + 1);
-
-					glTexCoord2f(img.GetLeftSpriteCoord(), img.GetBottomSpriteCoord());
-					glVertex2f((img.Position.x / windowWidth * 2) - 1, -((img.Position.y + img.Height) / windowHeight * 2) + 1);
-
-					glTexCoord2f(img.GetRightSpriteCoord(), img.GetBottomSpriteCoord());
-					glVertex2f(((img.Position.x + img.Width) / windowWidth * 2) - 1, -((img.Position.y + img.Height)/windowHeight*2) + 1);
-
-					glTexCoord2f(img.GetRightSpriteCoord(), img.GetTopSpriteCoord());
-					glVertex2f(((img.Position.x + img.Width) / windowWidth * 2) - 1, -(img.Position.y / windowHeight * 2) + 1);
-				}
-				glEnd();
+			for (Sprite spr : layer) {
+				spr.Render();
 			}
 		}
 	}

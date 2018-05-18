@@ -54,8 +54,8 @@ public class Player extends GameObject {
         }
         move();
 
-        // if stuck, change to stuck frame
-        sprite.CurrentFrame = (int)currentFrame + frameOffset;
+        // TODO: if stuck, change to stuck frame
+        ((Image)sprite).CurrentFrame = (int)currentFrame + frameOffset; // TODO: find a way to do this without typecasting
 
         super.Update();
     }
@@ -75,7 +75,7 @@ public class Player extends GameObject {
                 }
             }
 
-            sprite.HorizontalMirror = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT);
+            ((Image)sprite).HorizontalMirror = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT); // TODO: find a way to do this without typecasting
             currentFrame += FRAMESPEED;
             currentFrame %= 6;
         } else {

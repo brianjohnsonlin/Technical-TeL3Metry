@@ -37,11 +37,11 @@ public class Level {
         bkgBlue = new BackgroundImage("./res/bkg_blue.png", LevelMap, SPACE_BLACK);
         bkgGreen = new BackgroundImage("./res/bkg_green.png", LevelMap, SPACE_WHITE);
         bkgDigital = new BackgroundImage("./res/bkg_digital.png", LevelMap, SPACE_BLACK);
-        Game.instance.GameWindow.addImage(bkgGray);
-        Game.instance.GameWindow.addImage(bkgGear);
-        Game.instance.GameWindow.addImage(bkgBlue);
-        Game.instance.GameWindow.addImage(bkgGreen);
-        Game.instance.GameWindow.addImage(bkgDigital);
+        Game.instance.GameWindow.addSprite(bkgGray);
+        Game.instance.GameWindow.addSprite(bkgGear);
+        Game.instance.GameWindow.addSprite(bkgBlue);
+        Game.instance.GameWindow.addSprite(bkgGreen);
+        Game.instance.GameWindow.addSprite(bkgDigital);
         bkgGreen.Visible = bkgDigital.Visible = false;
 
         // load all game objects

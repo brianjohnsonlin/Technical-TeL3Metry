@@ -8,19 +8,15 @@ import org.lwjgl.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Image {
-	public boolean Visible = true;
-	public boolean AddedToDisplay = false;
+public class Image extends Sprite {
 	public float Width;
 	public float Height;
-	public Vector2 Position;
 	public int CurrentFrame = 0;
 	public boolean VerticalMirror = false;
 	public boolean HorizontalMirror = false;
 
 	protected int actualWidth;
 	protected int actualHeight;
-	protected int layer;
 
 	private ImageData data;
 	private int id;
@@ -36,7 +32,6 @@ public class Image {
 		Height = (data.Height == -1) ? (actualHeight / numSSRows()) : data.Height;
 		this.numFrames = data.NumFrames;
 		this.numSSColumns = data.NumSSColumns;
-		Position = new Vector2();
 		layer = data.Layer;
 	}
 
@@ -70,38 +65,44 @@ public class Image {
 
 	protected void applyPixels(ByteBuffer pixels) {
 		id = glGenTextures();
-		Bind();
+		glBindTexture(GL_TEXTURE_2D, id);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, actualWidth, actualHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	}
 
-	public void Bind() {
+	public void Render() {
+		if (!Visible) return;
+
+		int windowWidth = Game.instance.GameWindow.GetWidth();
+		int windowHeight = Game.instance.GameWindow.GetHeight();
+		float texLeft = (float)(CurrentFrame % numSSColumns + (HorizontalMirror ? 1 : 0)) / numSSColumns;
+		float texRight = (float)(CurrentFrame % numSSColumns + (HorizontalMirror ? 0 : 1)) / numSSColumns;
+		float texTop = (float)(CurrentFrame / numSSColumns + (VerticalMirror ? 1 : 0)) / numSSRows();
+		float texBot = (float)(CurrentFrame / numSSColumns + (VerticalMirror ? 0 : 1)) / numSSRows();
+		float vertLeft = (Position.x / windowWidth * 2) - 1;
+		float vertRight = ((Position.x + Width) / windowWidth * 2) - 1;
+		float vertTop = -(Position.y / windowHeight * 2) + 1;
+		float vertBot = -((Position.y + Height) / windowHeight * 2) + 1;
+
+
 		glBindTexture(GL_TEXTURE_2D, id);
+		glBegin(GL_QUADS);
+		{
+			glTexCoord2f(texLeft, texTop);
+			glVertex2f(vertLeft, vertTop);
+			glTexCoord2f(texLeft, texBot);
+			glVertex2f(vertLeft, vertBot);
+			glTexCoord2f(texRight, texBot);
+			glVertex2f(vertRight, vertBot);
+			glTexCoord2f(texRight, texTop);
+			glVertex2f(vertRight, vertTop);
+		}
+		glEnd();
 	}
 
 	public int GetNumFrames() {
 		return numFrames;
-	}
-
-	public int GetLayer() {
-		return layer;
-	}
-
-	public float GetLeftSpriteCoord() {
-		return (float)(CurrentFrame % numSSColumns + (HorizontalMirror ? 1 : 0)) / numSSColumns;
-	}
-
-	public float GetRightSpriteCoord() {
-		return (float)(CurrentFrame % numSSColumns + (HorizontalMirror ? 0 : 1)) / numSSColumns;
-	}
-
-	public float GetTopSpriteCoord() {
-		return (float)(CurrentFrame / numSSColumns + (VerticalMirror ? 1 : 0)) / numSSRows();
-	}
-
-	public float GetBottomSpriteCoord() {
-		return (float)(CurrentFrame / numSSColumns + (VerticalMirror ? 0 : 1)) / numSSRows();
 	}
 
 	public void Reset() {

@@ -12,17 +12,26 @@ public class LevelTitle extends Level {
 
         { // Title
             GameObjectData data = new GameObjectData();
-            data.SpriteData = new ImageData("./res/spr_title_0.png"); {
-                data.SpriteData.Layer = 3;
-            }
+            ImageData sprite = new ImageData("./res/spr_title_0.png"); {
+                sprite.Layer = 3;
+            } data.SpriteData = sprite;
+            gameObjectData.add(data);
+        }
+
+        { // Hello Text
+            GameObjectData data = new GameObjectData();
+    		TextData sprite = new TextData("Hello there, Unit L3M. Let's begin testing.");{
+                sprite.Layer = 3;
+            } data.SpriteData = sprite;
+            data.InitialPosition = new Vector2(2, 14).scale(Level.MAPTOIMAGESCALE);
             gameObjectData.add(data);
         }
 
         { // Exit Gate
             GameObjectData data = new GameObjectData();
-            data.SpriteData = new ImageData("./res/spr_gate_0.png"); {
-                data.SpriteData.Layer = 1;
-            }
+            ImageData sprite = new ImageData("./res/spr_gate_0.png"); {
+                sprite.Layer = 1;
+            } data.SpriteData = sprite;
             data.InitialPosition = new Vector2(19, 13).scale(Level.MAPTOIMAGESCALE);
             data.CollisionBoxCornerA = new Vector2();
             data.CollisionBoxCornerB = new Vector2(31, 31);

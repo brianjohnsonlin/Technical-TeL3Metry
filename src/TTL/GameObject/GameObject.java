@@ -1,7 +1,6 @@
 package TTL.GameObject;
 
-import TTL.Image;
-import TTL.Vector2;
+import TTL.*;
 
 public class GameObject {
     public static final int DEVICENONE = 0;
@@ -17,7 +16,7 @@ public class GameObject {
     protected GameObjectData data;
     protected Vector2 collisionBoxCornerA; // these are relative to position
     protected Vector2 collisionBoxCornerB; // inclusive
-    protected Image sprite;
+    protected Sprite sprite;
     protected Vector2 spriteOffset;
 
     protected GameObject() {}
@@ -36,7 +35,7 @@ public class GameObject {
 
         // create sprite
         if (data.SpriteData != null) {
-            sprite = new Image(data.SpriteData);
+            sprite = data.SpriteData.Instantiate();
             sprite.Position = Position.add(spriteOffset);
         }
     }
@@ -47,11 +46,11 @@ public class GameObject {
         }
     }
 
-    public Image GetSprite() {
+    public Sprite GetSprite() {
         return sprite;
     }
 
-    public void Reset() { // for subclasses of temp gameobjects (such as projectiles, override Reset to delete itself
+    public void Reset() { // for subclasses of temp gameobjects (such as projectiles), override Reset to delete itself
         if (data != null) {
             Position.replaceWith(data.InitialPosition != null ? data.InitialPosition : new Vector2());
             collisionBoxCornerA = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerA.clone() : null;

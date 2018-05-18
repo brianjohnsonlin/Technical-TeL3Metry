@@ -23,6 +23,6 @@ public abstract class Device extends GameObject {
 
     protected abstract boolean activateCondition();
     protected abstract boolean deactivateCondition();
-    protected abstract void activate();
+    protected abstract void activate(); // TODO: going to have to figure out how to change frame with that sprite abstract class
     protected abstract void deactivate();
 }

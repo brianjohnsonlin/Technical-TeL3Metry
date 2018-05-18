@@ -1,10 +1,11 @@
 package TTL;
 
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.*;
 
 import TTL.GameObject.*;
 import TTL.Level.*;
+import fontMeshCreator.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -18,6 +19,7 @@ public class Game {
 	private Player player;
 	private ArrayList<GameObject> gameObjects; // does NOT include the Player GameObject
 	private String nextLevel;
+	private HashMap<String, FontType> fonts;
 
 	public Game() {
 		Game.instance = this;
@@ -25,6 +27,9 @@ public class Game {
 		GameWindow.SetIcon("./res/icon.png");
 		gameObjects = new ArrayList<>();
 		nextLevel = null;
+
+		fonts = new HashMap<>();
+		fonts.put("Opificio", new FontType(new File("./res/Opificio.png"), new File("./res/Opificio.fnt")));
 
 		// create levels
 		Levels = new HashMap<>();
@@ -49,7 +54,7 @@ public class Game {
 
 		//setup player
 		player = new Player();
-		GameWindow.addImage(player.GetSprite());
+		GameWindow.addSprite(player.GetSprite());
 
 		//load in first level
 		currentLevel = Levels.get("title");
@@ -86,7 +91,9 @@ public class Game {
 			GameObject gobj = gameObjects.get(i);
 			if (gobj.SlatedForDestruction) {
 				gameObjects.remove(i);
-				GameWindow.removeImage(gobj.GetSprite());
+				if (gobj.GetSprite() != null) {
+					GameWindow.removeSprite(gobj.GetSprite());
+				}
 				i--;
 			}
 		}
@@ -94,7 +101,9 @@ public class Game {
 
 	public void AddGameObject(GameObject gameObject) {
 		gameObjects.add(gameObject);
-		GameWindow.addImage(gameObject.GetSprite());
+		if (gameObject.GetSprite() != null) {
+			GameWindow.addSprite(gameObject.GetSprite());
+		}
 	}
 
 	public Player GetPlayer() {
@@ -122,12 +131,16 @@ public class Game {
 			player.Invert(false);
 			Game.instance.GameWindow.clearLayer(0); // Delete Background
 			for (GameObject gameObject : gameObjects) {
-				GameWindow.removeImage(gameObject.GetSprite());
+				GameWindow.removeSprite(gameObject.GetSprite());
 			}
 			gameObjects.clear();
 			currentLevel = level;
 			currentLevel.Load();
 		}
+	}
+
+	public FontType GetFont(String fontName) {
+		return fonts.get(fontName);
 	}
 
 }
