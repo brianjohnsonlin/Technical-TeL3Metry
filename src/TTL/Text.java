@@ -56,6 +56,14 @@ public class Text extends Sprite{
 		meshData = null;
 	}
 
+	public void SetState(String state) {
+		setTextString(state);
+	}
+
+	public String GetState() {
+		return textString;
+	}
+
 	public void Render() {
 		// generate meshData if it's null
 		if (meshData == null) {

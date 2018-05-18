@@ -17,6 +17,7 @@ public class Player extends GameObject {
     private float currentFrame;
     private int frameOffset;
     private float verticalVelocity;
+    private boolean facingLeft;
 
     public Player() {
         ImageData sprite = new ImageData("./res/spr_char_0.png"); {
@@ -46,6 +47,7 @@ public class Player extends GameObject {
         currentFrame = 0;
         frameOffset = 0;
         verticalVelocity = 0;
+        facingLeft = false;
     }
 
     public void Update() {
@@ -55,7 +57,7 @@ public class Player extends GameObject {
         move();
 
         // TODO: if stuck, change to stuck frame
-        ((Image)sprite).CurrentFrame = (int)currentFrame + frameOffset; // TODO: find a way to do this without typecasting
+        sprite.SetState("" + (facingLeft ? '-' : '+') + '+' + ((int)currentFrame + frameOffset));
 
         super.Update();
     }
@@ -75,7 +77,7 @@ public class Player extends GameObject {
                 }
             }
 
-            ((Image)sprite).HorizontalMirror = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT); // TODO: find a way to do this without typecasting
+            facingLeft = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT);
             currentFrame += FRAMESPEED;
             currentFrame %= 6;
         } else {

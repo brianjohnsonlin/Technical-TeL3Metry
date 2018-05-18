@@ -105,6 +105,16 @@ public class Image extends Sprite {
 		return numFrames;
 	}
 
+	public void SetState(String state) {
+		HorizontalMirror = state.charAt(0) == '-'; // ideally I would put + for false, but anything else actually works
+		VerticalMirror = state.charAt(1) == '-';
+		CurrentFrame = Integer.parseInt(state.substring(2));
+	}
+
+	public String GetState() {
+		return "" + (HorizontalMirror ? '-' : '+') + (VerticalMirror ? '-' : '+') + CurrentFrame;
+	}
+
 	public void Reset() {
 		if (data != null) {
 			Width = (data.Width == -1) ? (actualWidth / numSSColumns) : data.Width;

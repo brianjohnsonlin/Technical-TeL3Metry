@@ -8,7 +8,8 @@ public abstract class Sprite {
 
     public abstract void Render();
     public abstract void Reset();
-    // TODO: advance state method for advancing frames or typing letters?
+    public abstract void SetState(String state);
+    public abstract String GetState();
 
     public int GetLayer() {
         return layer;
