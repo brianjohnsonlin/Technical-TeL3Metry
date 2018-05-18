@@ -18,10 +18,8 @@ public class Image {
 	public boolean VerticalMirror = false;
 	public boolean HorizontalMirror = false;
 
-	protected String filename;
 	protected int actualWidth;
 	protected int actualHeight;
-	protected ByteBuffer pixelBuffer;
 	protected int layer;
 
 	private ImageData data;
@@ -33,7 +31,6 @@ public class Image {
 
 	public Image(ImageData data) {
 		this.data = data;
-		filename = data.Filename;
 		Init();
 		Width = (data.Width == -1) ? (actualWidth / numSSColumns) : data.Width;
 		Height = (data.Height == -1) ? (actualHeight / numSSRows()) : data.Height;
@@ -45,22 +42,22 @@ public class Image {
 
 	protected void Init() {
 		try {
-			BufferedImage bi = ImageIO.read(new File(filename));
+			BufferedImage bi = ImageIO.read(new File(data.Filename));
 			actualWidth = bi.getWidth();
 			actualHeight = bi.getHeight();
-			pixelBuffer = createPixelBuffer(bi);
-			applyPixels(pixelBuffer);
+			applyPixels(createPixelBuffer(bi));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	protected ByteBuffer createPixelBuffer(BufferedImage bi) {
-		int[] pixels_raw = bi.getRGB(0, 0, actualWidth, actualHeight, null, 0, actualWidth);
-		ByteBuffer pixels = BufferUtils.createByteBuffer(actualWidth * actualHeight * 4);
-		for (int y = 0; y < actualHeight; y++) {
-			for (int x = 0; x < actualWidth; x++) {
-				int pixel = pixels_raw[y * actualWidth + x];
+	public static ByteBuffer createPixelBuffer(BufferedImage bi) {
+		int w = bi.getWidth(), h = bi.getHeight();
+		int[] pixels_raw = bi.getRGB(0, 0, w, h, null, 0, w);
+		ByteBuffer pixels = BufferUtils.createByteBuffer(w * h * 4);
+		for (int y = 0; y < h; y++) {
+			for (int x = 0; x < w; x++) {
+				int pixel = pixels_raw[y * w + x];
 				pixels.put((byte)((pixel >> 16) & 0xFF));   //RED
 				pixels.put((byte)((pixel >>  8) & 0xFF));   //GREEN
 				pixels.put((byte)((pixel      ) & 0xFF));   //BLUE
@@ -81,10 +78,6 @@ public class Image {
 
 	public void Bind() {
 		glBindTexture(GL_TEXTURE_2D, id);
-	}
-
-	public ByteBuffer GetPixelBuffer() {
-		return pixelBuffer;
 	}
 
 	public int GetNumFrames() {

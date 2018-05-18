@@ -19,10 +19,10 @@ public class Game {
 	private ArrayList<GameObject> gameObjects; // does NOT include the Player GameObject
 	private String nextLevel;
 
-	public Game() throws FileNotFoundException {
+	public Game() {
 		Game.instance = this;
 		GameWindow = new Display(this);
-		GameWindow.setIcon(new Image(new ImageData("./res/icon.png")));
+		GameWindow.SetIcon("./res/icon.png");
 		gameObjects = new ArrayList<>();
 		nextLevel = null;
 

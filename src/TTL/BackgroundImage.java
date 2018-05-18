@@ -13,6 +13,7 @@ public class BackgroundImage extends Image {
     protected int[][] LevelMap;
 
     private int key;
+    private String filename;
 
     public BackgroundImage(String filename, int[][] LevelMap, int key) {
         this.filename = filename;
@@ -30,19 +31,19 @@ public class BackgroundImage extends Image {
             BufferedImage bi = ImageIO.read(new File(filename));
             actualWidth = bi.getWidth();
             actualHeight = bi.getHeight();
-            pixelBuffer = createPixelBufferWithMap(bi, LevelMap);
-            applyPixels(pixelBuffer);
+            applyPixels(createPixelBufferWithMap(bi, LevelMap, key));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    protected ByteBuffer createPixelBufferWithMap(BufferedImage bi, int[][] levelMap) {
-        int[] pixels_raw = bi.getRGB(0, 0, actualWidth, actualHeight, null, 0, actualWidth);
-        ByteBuffer pixels = BufferUtils.createByteBuffer(actualWidth * actualHeight * 4);
-        for (int y = 0; y < actualHeight; y++) {
-            for (int x = 0; x < actualWidth; x++) {
-                int pixel = pixels_raw[y * actualWidth + x];
+    protected static ByteBuffer createPixelBufferWithMap(BufferedImage bi, int[][] levelMap, int key) {
+        int w = bi.getWidth(), h = bi.getHeight();
+        int[] pixels_raw = bi.getRGB(0, 0, w, h, null, 0, w);
+        ByteBuffer pixels = BufferUtils.createByteBuffer(w * h * 4);
+        for (int y = 0; y < h; y++) {
+            for (int x = 0; x < w; x++) {
+                int pixel = pixels_raw[y * w + x];
                 pixels.put((byte)((pixel >> 16) & 0xFF));   //RED
                 pixels.put((byte)((pixel >>  8) & 0xFF));   //GREEN
                 pixels.put((byte)((pixel      ) & 0xFF));   //BLUE
