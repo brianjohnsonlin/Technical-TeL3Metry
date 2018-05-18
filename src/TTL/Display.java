@@ -5,8 +5,11 @@ import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.nio.*;
 import java.util.*;
+import javax.imageio.ImageIO;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -264,12 +267,17 @@ public class Display {
 		}
 	}
 
-	public void setIcon(Image icon) {
-		GLFWImage image = GLFWImage.malloc();
-		image.set((int)icon.Width, (int)icon.Height, icon.GetPixelBuffer());
-		GLFWImage.Buffer images = GLFWImage.malloc(1);
-		images.put(0, image);
-		glfwSetWindowIcon(window, images);
+	public void SetIcon(String iconFilePath) {
+		try {
+			GLFWImage image = GLFWImage.malloc();
+			BufferedImage bi = ImageIO.read(new File(iconFilePath));
+			image.set(bi.getWidth(), bi.getHeight(), Image.createPixelBuffer(bi));
+			GLFWImage.Buffer images = GLFWImage.malloc(1);
+			images.put(0, image);
+			glfwSetWindowIcon(window, images);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public int GetWidth() {
