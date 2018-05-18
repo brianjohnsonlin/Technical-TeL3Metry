@@ -1,8 +1,8 @@
 package TTL.Level;
 
 import TTL.*;
-import TTL.GameObject.GameObject;
-import TTL.GameObject.GameObjectData;
+import TTL.GameObject.*;
+import TTL.GameObject.Device.*;
 
 public class LevelTitle extends Level {
     public LevelTitle() {
@@ -24,6 +24,8 @@ public class LevelTitle extends Level {
                 sprite.Layer = 3;
             } data.SpriteData = sprite;
             data.InitialPosition = new Vector2(2, 14).scale(Level.MAPTOIMAGESCALE);
+            data.DeviceType = Device.DEVICETYPINGTEXT;
+            data.Value = "128";
             gameObjectData.add(data);
         }
 

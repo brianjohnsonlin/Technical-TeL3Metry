@@ -78,6 +78,10 @@ public class GameObject {
         return Position.add(collisionBoxCornerB);
     }
 
+    public Vector2 ColBoxCenterPos() {
+        return Position.add(collisionBoxCornerA.lerp(collisionBoxCornerB, 0.5f));
+    }
+
     protected boolean overlapping(GameObject other) {
         // if one or the other doesn't have collision
         if (collisionBoxCornerA == null || collisionBoxCornerB == null ||

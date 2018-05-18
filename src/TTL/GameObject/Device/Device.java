@@ -25,4 +25,9 @@ public abstract class Device extends GameObject {
     protected abstract boolean deactivateCondition();
     protected abstract void activate();
     protected abstract void deactivate();
+
+    public void Reset() {
+        super.Reset();
+        activated = false;
+    }
 }
