@@ -74,29 +74,26 @@ public class Image extends Sprite {
 	public void Render() {
 		if (!Visible) return;
 
-		int windowWidth = Game.instance.GameWindow.GetWidth();
-		int windowHeight = Game.instance.GameWindow.GetHeight();
-		float texLeft = (float)(CurrentFrame % numSSColumns + (HorizontalMirror ? 1 : 0)) / numSSColumns;
+		float texLeft  = (float)(CurrentFrame % numSSColumns + (HorizontalMirror ? 1 : 0)) / numSSColumns;
 		float texRight = (float)(CurrentFrame % numSSColumns + (HorizontalMirror ? 0 : 1)) / numSSColumns;
-		float texTop = (float)(CurrentFrame / numSSColumns + (VerticalMirror ? 1 : 0)) / numSSRows();
-		float texBot = (float)(CurrentFrame / numSSColumns + (VerticalMirror ? 0 : 1)) / numSSRows();
-		float vertLeft = (Position.x / windowWidth * 2) - 1;
+		float texTop   = (float)(CurrentFrame / numSSColumns + (VerticalMirror ? 1 : 0)) / numSSRows();
+		float texBot   = (float)(CurrentFrame / numSSColumns + (VerticalMirror ? 0 : 1)) / numSSRows();
+
+		int windowWidth  = Game.instance.GameWindow.GetWidth();
+		int windowHeight = Game.instance.GameWindow.GetHeight();
+		float vertLeft  = (Position.x / windowWidth * 2) - 1;
 		float vertRight = ((Position.x + Width) / windowWidth * 2) - 1;
-		float vertTop = -(Position.y / windowHeight * 2) + 1;
-		float vertBot = -((Position.y + Height) / windowHeight * 2) + 1;
+		float vertTop   = -(Position.y / windowHeight * 2) + 1;
+		float vertBot   = -((Position.y + Height) / windowHeight * 2) + 1;
 
 
 		glBindTexture(GL_TEXTURE_2D, id);
 		glBegin(GL_QUADS);
 		{
-			glTexCoord2f(texLeft, texTop);
-			glVertex2f(vertLeft, vertTop);
-			glTexCoord2f(texLeft, texBot);
-			glVertex2f(vertLeft, vertBot);
-			glTexCoord2f(texRight, texBot);
-			glVertex2f(vertRight, vertBot);
-			glTexCoord2f(texRight, texTop);
-			glVertex2f(vertRight, vertTop);
+			glTexCoord2f(texLeft, texTop);  glVertex2f(vertLeft, vertTop);
+			glTexCoord2f(texLeft, texBot);  glVertex2f(vertLeft, vertBot);
+			glTexCoord2f(texRight, texBot); glVertex2f(vertRight, vertBot);
+			glTexCoord2f(texRight, texTop); glVertex2f(vertRight, vertTop);
 		}
 		glEnd();
 	}
