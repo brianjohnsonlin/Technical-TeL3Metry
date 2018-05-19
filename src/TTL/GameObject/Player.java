@@ -55,29 +55,28 @@ public class Player extends GameObject {
             Invert();
         }
         move();
-
-        // TODO: if stuck, change to stuck frame
-        sprite.SetState("" + (facingLeft ? '-' : '+') + '+' + ((int)currentFrame + frameOffset));
-
+        sprite.SetState("" + (facingLeft ? '-' : '+') + (inverted ? '-' : '+') + (stuck() ? 7 : (int)currentFrame + frameOffset));
         super.Update();
     }
 
     private void move() {
         // left / right
-        if (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT) ^ Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT)) {
+        boolean left = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT);
+        boolean right = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT);
+        if (left ^ right && !stuck()) {
             for (int i = 0; i < MOVEMENTSPEED; i++) {
                 float increment = (i == (int)MOVEMENTSPEED) ? (MOVEMENTSPEED - (int)MOVEMENTSPEED) : 1;
-                increment *= Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT) ? -1 : 1;
+                increment *= left ? -1 : 1;
                 Position.x += increment;
-                if ((Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT) && (!isEmptySpace(ColBoxTopLeftPos()) || !isEmptySpace(ColBoxBottomLeftPos())))
-                 || (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT) && (!isEmptySpace(ColBoxTopRightPos()) || !isEmptySpace(ColBoxBottomRightPos())))) {
+                if ((left && (!isEmptySpace(ColBoxTopLeftPos()) || !isEmptySpace(ColBoxBottomLeftPos())))
+                 || (right && (!isEmptySpace(ColBoxTopRightPos()) || !isEmptySpace(ColBoxBottomRightPos())))) {
                     Position.x -= increment;
                     currentFrame = 0;
                     break;
                 }
             }
 
-            facingLeft = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT);
+            facingLeft = left;
             currentFrame += FRAMESPEED;
             currentFrame %= 6;
         } else {
@@ -166,5 +165,16 @@ public class Player extends GameObject {
 
     private Level currentLevel() {
         return Game.instance.GetCurrentLevel();
+    }
+
+    private boolean stuck() {
+        for (int y = (int)(collisionBoxCornerA.y + Position.y); y <= collisionBoxCornerB.y + Position.y; y++) {
+            for (int x = (int)(collisionBoxCornerA.x + Position.x); x <= collisionBoxCornerB.x + Position.x; x++) {
+                if (!isEmptySpace(new Vector2(x, y))) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
