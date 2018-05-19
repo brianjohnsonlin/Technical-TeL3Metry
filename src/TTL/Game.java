@@ -21,6 +21,12 @@ public class Game {
 	private String nextLevel;
 	private HashMap<String, FontType> fonts;
 
+	private BackgroundImage bkgGray;
+	private BackgroundImage bkgGear;
+	private BackgroundImage bkgBlue;
+	private BackgroundImage bkgGreen;
+	private BackgroundImage bkgDigital;
+
 	public Game() {
 		Game.instance = this;
 		GameWindow = new Display(this);
@@ -51,6 +57,18 @@ public class Game {
 //		Levels.put("3-4", new Level3x4());
 //		Levels.put("3-5", new Level3x5());
 //		Levels.put("credits", new LevelCredits());
+
+		//backgrounds
+		bkgGray = new BackgroundImage("./res/bkg_gray.png", Level.SPACE_GRAY);
+		bkgGear = new BackgroundImage("./res/bkg_gear.png", Level.SPACE_WHITE);
+		bkgBlue = new BackgroundImage("./res/bkg_blue.png", Level.SPACE_BLACK);
+		bkgGreen = new BackgroundImage("./res/bkg_green.png", Level.SPACE_WHITE);
+		bkgDigital = new BackgroundImage("./res/bkg_digital.png", Level.SPACE_BLACK);
+		Game.instance.GameWindow.addSprite(bkgGray);
+		Game.instance.GameWindow.addSprite(bkgGear);
+		Game.instance.GameWindow.addSprite(bkgBlue);
+		Game.instance.GameWindow.addSprite(bkgGreen);
+		Game.instance.GameWindow.addSprite(bkgDigital);
 
 		//setup player
 		player = new Player();
@@ -143,6 +161,11 @@ public class Game {
 			GameWindow.removeSprite(gameObject.GetSprite());
 		}
 		gameObjects.clear();
+	}
+
+	public void SetBackgroundsInverted(boolean inverted) {
+		bkgGreen.Visible = bkgDigital.Visible = inverted;
+		bkgBlue.Visible = bkgGear.Visible = !inverted;
 	}
 
 }

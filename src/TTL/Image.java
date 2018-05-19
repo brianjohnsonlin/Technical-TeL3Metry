@@ -15,19 +15,18 @@ public class Image extends Sprite {
 	public boolean VerticalMirror = false;
 	public boolean HorizontalMirror = false;
 
+	protected ImageData data;
+	protected int id;
 	protected int actualWidth;
 	protected int actualHeight;
-
-	private ImageData data;
-	private int id;
-	private int numFrames = 1;
-	private int numSSColumns = 1;
+	protected int numFrames = 1;
+	protected int numSSColumns = 1;
 
 	protected Image() {}
 
 	public Image(ImageData data) {
 		this.data = data;
-		Init();
+		Init(data.Filename);
 		Width = (data.Width == -1) ? (actualWidth / numSSColumns) : data.Width;
 		Height = (data.Height == -1) ? (actualHeight / numSSRows()) : data.Height;
 		this.numFrames = data.NumFrames;
@@ -35,9 +34,9 @@ public class Image extends Sprite {
 		layer = data.Layer;
 	}
 
-	protected void Init() {
+	protected void Init(String imageFilename) {
 		try {
-			BufferedImage bi = ImageIO.read(new File(data.Filename));
+			BufferedImage bi = ImageIO.read(new File(imageFilename));
 			actualWidth = bi.getWidth();
 			actualHeight = bi.getHeight();
 			applyPixels(createPixelBuffer(bi));
@@ -86,7 +85,6 @@ public class Image extends Sprite {
 		float vertTop   = -(Position.y / windowHeight * 2) + 1;
 		float vertBot   = -((Position.y + Height) / windowHeight * 2) + 1;
 
-
 		glBindTexture(GL_TEXTURE_2D, id);
 		glBegin(GL_QUADS);
 		{
@@ -122,7 +120,7 @@ public class Image extends Sprite {
 		VerticalMirror = false;
 	}
 
-	private int numSSRows() {
+	protected int numSSRows() {
 		return (numFrames + numSSColumns - 1) / numSSColumns;
 	}
 }

@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.util.*;
 
 public class Level {
-    public final static int MAPTOIMAGESCALE = 32;
     public final static int SPACE_WHITE = 0;
     public final static int SPACE_BLACK = 1;
     public final static int SPACE_GRAY = 2;
@@ -21,11 +20,6 @@ public class Level {
     protected boolean startInverted;
     protected int[][] LevelMap;
     protected ArrayList<GameObjectData> gameObjectData;
-    protected BackgroundImage bkgGray;
-    protected BackgroundImage bkgGear;
-    protected BackgroundImage bkgBlue;
-    protected BackgroundImage bkgGreen;
-    protected BackgroundImage bkgDigital;
 
     public Level() {
         gameObjectData = new ArrayList<>();
@@ -33,20 +27,6 @@ public class Level {
     }
 
     public void Load() {
-        // create backgrounds
-        bkgGray = new BackgroundImage("./res/bkg_gray.png", LevelMap, SPACE_GRAY);
-        bkgGear = new BackgroundImage("./res/bkg_gear.png", LevelMap, SPACE_WHITE);
-        bkgBlue = new BackgroundImage("./res/bkg_blue.png", LevelMap, SPACE_BLACK);
-        bkgGreen = new BackgroundImage("./res/bkg_green.png", LevelMap, SPACE_WHITE);
-        bkgDigital = new BackgroundImage("./res/bkg_digital.png", LevelMap, SPACE_BLACK);
-        Game.instance.GameWindow.addSprite(bkgGray);
-        Game.instance.GameWindow.addSprite(bkgGear);
-        Game.instance.GameWindow.addSprite(bkgBlue);
-        Game.instance.GameWindow.addSprite(bkgGreen);
-        Game.instance.GameWindow.addSprite(bkgDigital);
-        bkgGreen.Visible = bkgDigital.Visible = startInverted;
-        bkgBlue.Visible = bkgGear.Visible = !startInverted;
-
         // load all game objects
         for (GameObjectData data : gameObjectData) {
             if (data.DeviceType == GameObject.DEVICENONE) {
@@ -92,20 +72,18 @@ public class Level {
         }
     }
 
+    public int[][] GetLevelMap() {
+        return LevelMap;
+    }
+
     public int GetSpaceType(Vector2 coord) {
         // out of bounds
-        if (coord.x < 0 || coord.x >= LevelMap[0].length*MAPTOIMAGESCALE || coord.y < 0 || coord.y >= LevelMap.length*MAPTOIMAGESCALE) {
+        if (coord.x < 0 || coord.x >= Game.instance.GameWindow.GetWidth() || coord.y < 0 || coord.y >= Game.instance.GameWindow.GetHeight()) {
             return SPACE_INVALID;
         }
 
-        return LevelMap[(int)coord.y/MAPTOIMAGESCALE][(int)coord.x/MAPTOIMAGESCALE];
-    }
-
-    public void Invert(boolean inverted) {
-        bkgDigital.Visible = inverted;
-        bkgGreen.Visible = inverted;
-        bkgGear.Visible = !inverted;
-        bkgBlue.Visible = !inverted;
+        return LevelMap[(int)(coord.y / Game.instance.GameWindow.GetHeight() * LevelMap.length)]
+                       [(int)(coord.x / Game.instance.GameWindow.GetWidth() * LevelMap[0].length)];
     }
 
     public Vector2 GetStartingPoint() {
@@ -113,11 +91,6 @@ public class Level {
     }
 
     public void Unload() {
-        Game.instance.GameWindow.removeSprite(bkgGray);
-        Game.instance.GameWindow.removeSprite(bkgGear);
-        Game.instance.GameWindow.removeSprite(bkgBlue);
-        Game.instance.GameWindow.removeSprite(bkgGreen);
-        Game.instance.GameWindow.removeSprite(bkgDigital);
         Game.instance.DestroyAllGameObjects();
     }
 }

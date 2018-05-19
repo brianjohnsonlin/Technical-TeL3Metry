@@ -107,31 +107,37 @@ public class Player extends GameObject {
     }
 
     private boolean isEmptySpace(Vector2 coord) {
-        return currentLevel().GetSpaceType(coord) == (inverted ? Level.SPACE_BLACK : Level.SPACE_WHITE);
+        return Game.instance.GetCurrentLevel().GetSpaceType(coord) == (inverted ? Level.SPACE_BLACK : Level.SPACE_WHITE);
     }
 
     // only checks bottom corners because nothing is thinner than L3M
     private boolean isGrounded() {
+        Level currentLevel = Game.instance.GetCurrentLevel();
+
         if (!inverted) {
-            return currentLevel().GetSpaceType(ColBoxBottomLeftPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE ||
-                   currentLevel().GetSpaceType(ColBoxBottomRightPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE;
+            return currentLevel.GetSpaceType(ColBoxBottomLeftPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE ||
+                   currentLevel.GetSpaceType(ColBoxBottomRightPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE;
         } else {
-            return currentLevel().GetSpaceType(ColBoxTopLeftPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK ||
-                   currentLevel().GetSpaceType(ColBoxTopRightPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK;
+            return currentLevel.GetSpaceType(ColBoxTopLeftPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK ||
+                   currentLevel.GetSpaceType(ColBoxTopRightPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK;
         }
     }
 
     private boolean canFlip() {
+        Level currentLevel = Game.instance.GetCurrentLevel();
+
         if (!inverted) {
-            return currentLevel().GetSpaceType(ColBoxBottomLeftPos().add(new Vector2(0, 1))) == Level.SPACE_BLACK &&
-                   currentLevel().GetSpaceType(ColBoxBottomRightPos().add(new Vector2(0, 1))) == Level.SPACE_BLACK;
+            return currentLevel.GetSpaceType(ColBoxBottomLeftPos().add(new Vector2(0, 1))) == Level.SPACE_BLACK &&
+                   currentLevel.GetSpaceType(ColBoxBottomRightPos().add(new Vector2(0, 1))) == Level.SPACE_BLACK;
         } else {
-            return currentLevel().GetSpaceType(ColBoxTopLeftPos().add(new Vector2(0, -1))) == Level.SPACE_WHITE &&
-                   currentLevel().GetSpaceType(ColBoxTopRightPos().add(new Vector2(0, -1))) == Level.SPACE_WHITE;
+            return currentLevel.GetSpaceType(ColBoxTopLeftPos().add(new Vector2(0, -1))) == Level.SPACE_WHITE &&
+                   currentLevel.GetSpaceType(ColBoxTopRightPos().add(new Vector2(0, -1))) == Level.SPACE_WHITE;
         }
     }
 
     public void Invert(boolean inverted) {
+        Game.instance.SetBackgroundsInverted(inverted);
+
         if (this.inverted == inverted) return;
 
         this.inverted = inverted;
@@ -147,7 +153,6 @@ public class Player extends GameObject {
         collisionBoxCornerA = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerA.clone() : null;
         collisionBoxCornerB = data.CollisionBoxCornerB != null ? data.CollisionBoxCornerB.clone() : null;
         spriteOffset = data.SpriteOffset != null ? data.SpriteOffset.clone() : new Vector2();
-        currentLevel().Invert(inverted);
     }
 
     public void Invert() {
@@ -159,12 +164,8 @@ public class Player extends GameObject {
         Invert(false);
         currentFrame = 0;
         super.Reset();
-        Position.replaceWith(currentLevel().GetStartingPoint());
+        Position.replaceWith(Game.instance.GetCurrentLevel().GetStartingPoint());
         sprite.Reset();
-    }
-
-    private Level currentLevel() {
-        return Game.instance.GetCurrentLevel();
     }
 
     private boolean stuck() {
