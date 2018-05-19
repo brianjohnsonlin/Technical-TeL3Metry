@@ -18,7 +18,7 @@ public class Level {
 
     protected Vector2 startingPoint;
     protected boolean startInverted;
-    protected int[][] LevelMap;
+    protected int[][] levelMap;
     protected ArrayList<GameObjectData> gameObjectData;
 
     public Level() {
@@ -53,17 +53,17 @@ public class Level {
             BufferedImage levelMapBI = ImageIO.read(new File(filename));
             int width = levelMapBI.getWidth();
             int height = levelMapBI.getHeight();
-            LevelMap = new int[height][width];
+            levelMap = new int[height][width];
             int[] level_map = levelMapBI.getRGB(0, 0, width, height, null, 0, width);
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
                     int pixel = level_map[y * width + x];
                     if (pixel == 0xFFFFFFFF) {        // WHITE
-                        LevelMap[y][x] = SPACE_WHITE;
+                        levelMap[y][x] = SPACE_WHITE;
                     } else if (pixel == 0xFF000000) { // BLACK
-                        LevelMap[y][x] = SPACE_BLACK;
+                        levelMap[y][x] = SPACE_BLACK;
                     } else {                          // GRAY and everything else
-                        LevelMap[y][x] = SPACE_GRAY;
+                        levelMap[y][x] = SPACE_GRAY;
                     }
                 }
             }
@@ -73,17 +73,7 @@ public class Level {
     }
 
     public int[][] GetLevelMap() {
-        return LevelMap;
-    }
-
-    public int GetSpaceType(Vector2 coord) {
-        // out of bounds
-        if (coord.x < 0 || coord.x >= Game.instance.GameWindow.GetWidth() || coord.y < 0 || coord.y >= Game.instance.GameWindow.GetHeight()) {
-            return SPACE_INVALID;
-        }
-
-        return LevelMap[(int)(coord.y / Game.instance.GameWindow.GetHeight() * LevelMap.length)]
-                       [(int)(coord.x / Game.instance.GameWindow.GetWidth() * LevelMap[0].length)];
+        return levelMap;
     }
 
     public Vector2 GetStartingPoint() {

@@ -13,13 +13,14 @@ public class Game {
 	public static Game instance;
 
 	public Display GameWindow;
-	public HashMap<String, Level> Levels;
+	public int[][] CurrentLevelMap;
 
+	private HashMap<String, Level> levels;
 	private Level currentLevel;
-	private Player player;
-	private ArrayList<GameObject> gameObjects; // does NOT include the Player GameObject
 	private String nextLevel;
 	private HashMap<String, FontType> fonts;
+	private Player player;
+	private ArrayList<GameObject> gameObjects; // does NOT include the Player GameObject
 
 	private BackgroundImage bkgGray;
 	private BackgroundImage bkgGear;
@@ -38,25 +39,25 @@ public class Game {
 		fonts.put("Opificio", new FontType(new File("./res/Opificio.png"), new File("./res/Opificio.fnt")));
 
 		// create levels
-		Levels = new HashMap<>();
-		Levels.put("title", new LevelTitle());
-		Levels.put("levelselect", new LevelSelect());
-//		Levels.put("1-1", new Level1x1());
-//		Levels.put("1-2", new Level1x2());
-//		Levels.put("1-3", new Level1x3());
-//		Levels.put("1-4", new Level1x4());
-//		Levels.put("1-5", new Level1x5());
-//		Levels.put("2-1", new Level2x1());
-//		Levels.put("2-2", new Level2x2());
-//		Levels.put("2-3", new Level2x3());
-//		Levels.put("2-4", new Level2x4());
-//		Levels.put("2-5", new Level2x5());
-//		Levels.put("3-1", new Level3x1());
-//		Levels.put("3-2", new Level3x2());
-//		Levels.put("3-3", new Level3x3());
-//		Levels.put("3-4", new Level3x4());
-//		Levels.put("3-5", new Level3x5());
-//		Levels.put("credits", new LevelCredits());
+		levels = new HashMap<>();
+		levels.put("title", new LevelTitle());
+		levels.put("levelselect", new LevelSelect());
+//		levels.put("1-1", new Level1x1());
+//		levels.put("1-2", new Level1x2());
+//		levels.put("1-3", new Level1x3());
+//		levels.put("1-4", new Level1x4());
+//		levels.put("1-5", new Level1x5());
+//		levels.put("2-1", new Level2x1());
+//		levels.put("2-2", new Level2x2());
+//		levels.put("2-3", new Level2x3());
+//		levels.put("2-4", new Level2x4());
+//		levels.put("2-5", new Level2x5());
+//		levels.put("3-1", new Level3x1());
+//		levels.put("3-2", new Level3x2());
+//		levels.put("3-3", new Level3x3());
+//		levels.put("3-4", new Level3x4());
+//		levels.put("3-5", new Level3x5());
+//		levels.put("credits", new LevelCredits());
 
 		//backgrounds
 		bkgGray = new BackgroundImage("./res/bkg_gray.png", Level.SPACE_GRAY);
@@ -75,8 +76,9 @@ public class Game {
 		GameWindow.addSprite(player.GetSprite());
 
 		//load in first level
-		currentLevel = Levels.get("title");
+		currentLevel = levels.get("title");
 		currentLevel.Load();
+		CurrentLevelMap = currentLevel.GetLevelMap();
 
 		GameWindow.run();
 	}
@@ -88,13 +90,22 @@ public class Game {
 	public void Update() {
 		// change level if one is slated to be loaded
 		if (nextLevel != null) {
-			loadLevel(nextLevel);
+			Level level = levels.get(nextLevel);
+			if (level != null) {
+				currentLevel.Unload();
+				currentLevel = level;
+				currentLevel.Load();
+				CurrentLevelMap = currentLevel.GetLevelMap();
+			}
 			nextLevel = null;
 		}
 
 		// if R is pressed, reset the level
 		if (GameWindow.GetKeyDown(GLFW_KEY_R)) {
-			resetLevel();
+			player.Reset();
+			for (GameObject gameObject : gameObjects) {
+				gameObject.Reset();
+			}
 			return;
 		}
 
@@ -117,11 +128,22 @@ public class Game {
 		}
 	}
 
+	public void ChangeLevel(String level) {
+		nextLevel = level;
+	}
+
 	public void AddGameObject(GameObject gameObject) {
 		gameObjects.add(gameObject);
 		if (gameObject.GetSprite() != null) {
 			GameWindow.addSprite(gameObject.GetSprite());
 		}
+	}
+
+	public void DestroyAllGameObjects() {
+		for (GameObject gameObject : gameObjects) {
+			GameWindow.removeSprite(gameObject.GetSprite());
+		}
+		gameObjects.clear();
 	}
 
 	public Player GetPlayer() {
@@ -132,40 +154,22 @@ public class Game {
 		return currentLevel;
 	}
 
-	public void ChangeLevel(String level) {
-		nextLevel = level;
-	}
-
-	private void resetLevel() {
-		player.Reset();
-		for (GameObject gameObject : gameObjects) {
-			gameObject.Reset();
-		}
-	}
-
-	private void loadLevel(String levelname) {
-		Level level = Levels.get(levelname);
-		if (level != null) {
-			currentLevel.Unload();
-			currentLevel = level;
-			currentLevel.Load();
-		}
-	}
-
 	public FontType GetFont(String fontName) {
 		return fonts.get(fontName);
 	}
 
-	public void DestroyAllGameObjects() {
-		for (GameObject gameObject : gameObjects) {
-			GameWindow.removeSprite(gameObject.GetSprite());
+	public int GetSpaceType(Vector2 coord) {
+		// out of bounds
+		if (coord.x < 0 || coord.x >= Game.instance.GameWindow.GetWidth() || coord.y < 0 || coord.y >= Game.instance.GameWindow.GetHeight()) {
+			return Level.SPACE_INVALID;
 		}
-		gameObjects.clear();
+
+		return CurrentLevelMap[(int)(coord.y / Game.instance.GameWindow.GetHeight() * CurrentLevelMap.length)]
+							  [(int)(coord.x / Game.instance.GameWindow.GetWidth() * CurrentLevelMap[0].length)];
 	}
 
 	public void SetBackgroundsInverted(boolean inverted) {
 		bkgGreen.Visible = bkgDigital.Visible = inverted;
 		bkgBlue.Visible = bkgGear.Visible = !inverted;
 	}
-
 }

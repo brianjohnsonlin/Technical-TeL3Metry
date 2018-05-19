@@ -17,7 +17,7 @@ public class BackgroundImage extends Image {
     public void Render() {
         if (!Visible) return;
 
-        int[][] LevelMap = Game.instance.GetCurrentLevel().GetLevelMap();
+        int[][] LevelMap = Game.instance.CurrentLevelMap;
         glBindTexture(GL_TEXTURE_2D, id);
         glBegin(GL_QUADS);
         for (float y = 0; y < LevelMap.length; y++){
