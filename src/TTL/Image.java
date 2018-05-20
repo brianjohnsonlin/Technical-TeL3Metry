@@ -29,8 +29,8 @@ public class Image extends Sprite {
 		Init(data.Filename);
 		Width = (data.Width == -1) ? (actualWidth / numSSColumns) : data.Width;
 		Height = (data.Height == -1) ? (actualHeight / numSSRows()) : data.Height;
-		this.numFrames = data.NumFrames;
-		this.numSSColumns = data.NumSSColumns;
+		numFrames = data.NumFrames;
+		numSSColumns = data.NumSSColumns < 0 ? data.NumFrames : data.NumSSColumns;
 		layer = data.Layer;
 	}
 

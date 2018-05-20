@@ -14,6 +14,7 @@ public class Game {
 
 	public Display GameWindow;
 	public int[][] CurrentLevelMap;
+	public HashMap<Integer, Boolean> SwitchIDs;
 
 	private HashMap<String, Level> levels;
 	private Level currentLevel;
@@ -33,6 +34,7 @@ public class Game {
 		GameWindow = new Display(this);
 		GameWindow.SetIcon("./res/icon.png");
 		gameObjects = new ArrayList<>();
+		SwitchIDs = new HashMap<>();
 		nextLevel = null;
 
 		fonts = new HashMap<>();
@@ -76,9 +78,7 @@ public class Game {
 		GameWindow.addSprite(player.GetSprite());
 
 		//load in first level
-		currentLevel = levels.get("title");
-		currentLevel.Load();
-		CurrentLevelMap = currentLevel.GetLevelMap();
+		loadLevel(levels.get("title"));
 
 		GameWindow.run();
 	}
@@ -92,10 +92,12 @@ public class Game {
 		if (nextLevel != null) {
 			Level level = levels.get(nextLevel);
 			if (level != null) {
-				currentLevel.Unload();
-				currentLevel = level;
-				currentLevel.Load();
-				CurrentLevelMap = currentLevel.GetLevelMap();
+				for (GameObject gameObject : gameObjects) { // destroy all GameObjects
+					GameWindow.removeSprite(gameObject.GetSprite());
+				}
+				gameObjects.clear();
+				SwitchIDs.clear();
+				loadLevel(level);
 			}
 			nextLevel = null;
 		}
@@ -139,13 +141,6 @@ public class Game {
 		}
 	}
 
-	public void DestroyAllGameObjects() {
-		for (GameObject gameObject : gameObjects) {
-			GameWindow.removeSprite(gameObject.GetSprite());
-		}
-		gameObjects.clear();
-	}
-
 	public Player GetPlayer() {
 		return player;
 	}
@@ -171,5 +166,14 @@ public class Game {
 	public void SetBackgroundsInverted(boolean inverted) {
 		bkgGreen.Visible = bkgDigital.Visible = inverted;
 		bkgBlue.Visible = bkgGear.Visible = !inverted;
+	}
+
+	private void loadLevel(Level level) {
+		currentLevel = level;
+		CurrentLevelMap = new int[currentLevel.GetLevelMap().length][]; // deep clone
+		for(int i = 0; i < currentLevel.GetLevelMap().length; i++) {
+			CurrentLevelMap[i] = currentLevel.GetLevelMap()[i].clone();
+		}
+		currentLevel.Load();
 	}
 }

@@ -29,18 +29,25 @@ public class Level {
     public void Load() {
         // load all game objects
         for (GameObjectData data : gameObjectData) {
-            if (data.DeviceType == GameObject.DEVICENONE) {
-                Game.instance.AddGameObject(new GameObject(data));
-            } else if (data.DeviceType == GameObject.DEVICEGATE) {
-                Game.instance.AddGameObject(new Gate(data));
-            } else if (data.DeviceType == GameObject.DEVICEBUTTON) {
-                Game.instance.AddGameObject(new Button(data));
-            } else if (data.DeviceType == GameObject.DEVICESTONE) {
-                Game.instance.AddGameObject(new Stone(data));
-            } else if (data.DeviceType == GameObject.DEVICEFORCEFIELD) {
-                Game.instance.AddGameObject(new Forcefield(data));
-            } else if (data.DeviceType == GameObject.DEVICETYPINGTEXT) {
-                Game.instance.AddGameObject(new TypingText(data));
+            switch (data.DeviceType) {
+                case GameObject.DEVICEGATE:
+                    Game.instance.AddGameObject(new Gate(data));
+                    break;
+                case GameObject.DEVICEBUTTON:
+                    Game.instance.AddGameObject(new Button(data));
+                    break;
+                case GameObject.DEVICESTONE:
+                    Game.instance.AddGameObject(new Stone(data));
+                    break;
+                case GameObject.DEVICEFORCEFIELD:
+                    Game.instance.AddGameObject(new Forcefield(data));
+                    break;
+                case GameObject.DEVICETYPINGTEXT:
+                    Game.instance.AddGameObject(new TypingText(data));
+                    break;
+                default:
+                    Game.instance.AddGameObject(new GameObject(data));
+                    break;
             }
         }
 
@@ -57,13 +64,16 @@ public class Level {
             int[] level_map = levelMapBI.getRGB(0, 0, width, height, null, 0, width);
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
-                    int pixel = level_map[y * width + x];
-                    if (pixel == 0xFFFFFFFF) {        // WHITE
-                        levelMap[y][x] = SPACE_WHITE;
-                    } else if (pixel == 0xFF000000) { // BLACK
-                        levelMap[y][x] = SPACE_BLACK;
-                    } else {                          // GRAY and everything else
-                        levelMap[y][x] = SPACE_GRAY;
+                    switch (level_map[y * width + x]) {
+                        case 0xFFFFFFFF: // WHITE
+                            levelMap[y][x] = SPACE_WHITE;
+                            break;
+                        case 0xFF000000: // BLACK
+                            levelMap[y][x] = SPACE_BLACK;
+                            break;
+                        default:         // GRAY and everything else
+                            levelMap[y][x] = SPACE_GRAY;
+                            break;
                     }
                 }
             }
@@ -78,9 +88,5 @@ public class Level {
 
     public Vector2 GetStartingPoint() {
         return startingPoint;
-    }
-
-    public void Unload() {
-        Game.instance.DestroyAllGameObjects();
     }
 }
