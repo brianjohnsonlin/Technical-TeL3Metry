@@ -27,7 +27,6 @@ public class LevelSelect extends Level {
             GameObjectData data = new GameObjectData();
             ImageData sprite = new ImageData("./res/spr_button_blue.png"); {
                 sprite.Layer = 1;
-                sprite.Width = 32;
                 sprite.NumFrames = 2;
             } data.SpriteData = sprite;
             data.InitialPosition = new Vector2(1, 12).scale(32);
@@ -42,7 +41,6 @@ public class LevelSelect extends Level {
             GameObjectData data = new GameObjectData();
             ImageData sprite = new ImageData("./res/spr_stone_0.png"); {
                 sprite.Layer = 1;
-                sprite.Width = 32;
                 sprite.NumFrames = 2;
             } data.SpriteData = sprite;
             data.InitialPosition = new Vector2(2, 9).scale(32);

@@ -4,11 +4,15 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import java.awt.image.*;
 import java.nio.*;
+import java.util.*;
+
 import org.lwjgl.*;
 
 import static org.lwjgl.opengl.GL11.*;
 
 public class Image extends Sprite {
+	private static HashMap<String, ImageLibraryEntry> imageLibrary = new HashMap<>();
+
 	public float Width;
 	public float Height;
 	public int CurrentFrame = 0;
@@ -27,21 +31,31 @@ public class Image extends Sprite {
 	public Image(ImageData data) {
 		this.data = data;
 		Init(data.Filename);
-		Width = (data.Width == -1) ? (actualWidth / numSSColumns) : data.Width;
-		Height = (data.Height == -1) ? (actualHeight / numSSRows()) : data.Height;
 		numFrames = data.NumFrames;
 		numSSColumns = data.NumSSColumns < 0 ? data.NumFrames : data.NumSSColumns;
+		Width = (data.Width == -1) ? (actualWidth / numSSColumns) : data.Width;
+		Height = (data.Height == -1) ? (actualHeight / numSSRows()) : data.Height;
 		layer = data.Layer;
 	}
 
 	protected void Init(String imageFilename) {
-		try {
-			BufferedImage bi = ImageIO.read(new File(imageFilename));
-			actualWidth = bi.getWidth();
-			actualHeight = bi.getHeight();
-			applyPixels(createPixelBuffer(bi));
-		} catch (IOException e) {
-			e.printStackTrace();
+		ImageLibraryEntry entry = imageLibrary.get(imageFilename);
+
+		if (entry == null) {
+			try {
+				BufferedImage bi = ImageIO.read(new File(imageFilename));
+				actualWidth = bi.getWidth();
+				actualHeight = bi.getHeight();
+				entry = createImage(createPixelBuffer(bi), actualWidth, actualHeight);
+				id = entry.ID;
+				imageLibrary.put(imageFilename, entry);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			actualWidth = entry.Width;
+			actualHeight = entry.Height;
+			id = entry.ID;
 		}
 	}
 
@@ -62,12 +76,13 @@ public class Image extends Sprite {
 		return pixels;
 	}
 
-	protected void applyPixels(ByteBuffer pixels) {
-		id = glGenTextures();
+	public static ImageLibraryEntry createImage(ByteBuffer pixels, int width, int height) {
+		int id = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, id);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, actualWidth, actualHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+		return new ImageLibraryEntry(id, width, height);
 	}
 
 	@Override
