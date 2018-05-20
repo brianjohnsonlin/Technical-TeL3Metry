@@ -40,6 +40,29 @@ public class Game {
 		fonts = new HashMap<>();
 		fonts.put("Opificio", new FontType(new File("./res/Opificio.png"), new File("./res/Opificio.fnt")));
 
+		// Preload all images
+		String[] imagesToPreload = {
+				"./res/bkg_blue.png",
+				"./res/bkg_digital.png",
+				"./res/bkg_green.png",
+				"./res/bkg_gear.png",
+				"./res/bkg_gray.png",
+				"./res/spr_button_blue.png",
+				"./res/spr_button_green.png",
+				"./res/spr_cake_0.png",
+				"./res/spr_char_0.png",
+				"./res/spr_dup_0.png",
+				"./res/spr_forcefield_0.png",
+				"./res/spr_gate_0.png",
+				"./res/spr_hint_d.png",
+				"./res/spr_hint_f.png",
+				"./res/spr_hint_move.png",
+				"./res/spr_record_0.png",
+				"./res/spr_stone_0.png",
+				"./res/spr_title_0.png"
+		};
+		Image.PreloadImages(imagesToPreload);
+
 		// create levels
 		levels = new HashMap<>();
 		levels.put("title", new LevelTitle());

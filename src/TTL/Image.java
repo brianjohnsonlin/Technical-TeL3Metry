@@ -40,7 +40,6 @@ public class Image extends Sprite {
 
 	protected void Init(String imageFilename) {
 		ImageLibraryEntry entry = imageLibrary.get(imageFilename);
-
 		if (entry == null) {
 			try {
 				BufferedImage bi = ImageIO.read(new File(imageFilename));
@@ -83,6 +82,22 @@ public class Image extends Sprite {
 		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 		return new ImageLibraryEntry(id, width, height);
+	}
+
+	public static void PreloadImages(String[] imageFilenames) {
+		for (String imageFilename : imageFilenames) {
+			ImageLibraryEntry entry = imageLibrary.get(imageFilename);
+			if (entry == null) {
+				try {
+					BufferedImage bi = ImageIO.read(new File(imageFilename));
+					int w = bi.getWidth(), h = bi.getHeight();
+					entry = createImage(createPixelBuffer(bi), w, h);
+					imageLibrary.put(imageFilename, entry);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 
 	@Override
