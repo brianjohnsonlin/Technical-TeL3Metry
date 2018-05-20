@@ -8,18 +8,22 @@ public class Gate extends Device {
         super(data);
     }
 
+    @Override
     protected boolean activateCondition() {
         return overlapping(Game.instance.GetPlayer());
     }
 
+    @Override
     protected boolean deactivateCondition() {
         return false; // cannot deactivate
     }
 
+    @Override
     protected void activate() {
         Game.instance.ChangeLevel(data.Value);
     }
 
+    @Override
     protected void deactivate() {
         // nothing
     }

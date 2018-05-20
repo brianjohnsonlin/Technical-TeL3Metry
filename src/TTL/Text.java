@@ -56,14 +56,17 @@ public class Text extends Sprite{
 		meshData = null;
 	}
 
+	@Override
 	public void SetState(String state) {
 		setTextString(state);
 	}
 
+	@Override
 	public String GetState() {
 		return textString;
 	}
 
+	@Override
 	public void Render() {
 		// generate meshData if it's null
 		if (meshData == null) {
@@ -91,6 +94,7 @@ public class Text extends Sprite{
 		glEnd();
 	}
 
+	@Override
 	public void Reset() {
 		setTextString(data.Text);
 		this.fontSize = data.FontSize;

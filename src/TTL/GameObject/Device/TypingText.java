@@ -16,22 +16,27 @@ public class TypingText extends Device {
         step = 0;
     }
 
+    @Override
     protected boolean activateCondition() {
         return Position.subtract(Game.instance.GetPlayer().ColBoxCenterPos()).length() <= activationRadius;
     }
 
+    @Override
     protected boolean deactivateCondition() {
         return false; // cannot deactivate
     }
 
+    @Override
     protected void activate() {
         step++;
     }
 
+    @Override
     protected void deactivate() {
         // nothing
     }
 
+    @Override
     public void Update() {
         super.Update();
         if (step > 0) {
@@ -50,6 +55,7 @@ public class TypingText extends Device {
         }
     }
 
+    @Override
     public void Reset() {
         super.Reset();
         sprite.SetState("");

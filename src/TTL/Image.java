@@ -70,6 +70,7 @@ public class Image extends Sprite {
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, actualWidth, actualHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 	}
 
+	@Override
 	public void Render() {
 		if (!Visible) return;
 
@@ -100,16 +101,19 @@ public class Image extends Sprite {
 		return numFrames;
 	}
 
+	@Override
 	public void SetState(String state) {
 		HorizontalMirror = state.charAt(0) == '-'; // ideally I would put + for false, but anything else actually works
 		VerticalMirror = state.charAt(1) == '-';
 		CurrentFrame = Integer.parseInt(state.substring(2));
 	}
 
+	@Override
 	public String GetState() {
 		return "" + (HorizontalMirror ? '-' : '+') + (VerticalMirror ? '-' : '+') + CurrentFrame;
 	}
 
+	@Override
 	public void Reset() {
 		if (data != null) {
 			Width = (data.Width == -1) ? (actualWidth / numSSColumns) : data.Width;

@@ -10,6 +10,7 @@ public abstract class Device extends GameObject {
         activated = false;
     }
 
+    @Override
     public void Update() {
         if (activateCondition() && !activated) {
             activated = true;
@@ -26,6 +27,7 @@ public abstract class Device extends GameObject {
     protected abstract void activate();
     protected abstract void deactivate();
 
+    @Override
     public void Reset() {
         super.Reset();
         activated = false;

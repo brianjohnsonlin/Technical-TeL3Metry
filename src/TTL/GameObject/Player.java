@@ -49,6 +49,7 @@ public class Player extends GameObject {
         Init();
     }
 
+    @Override
     public void Update() {
         if (Game.instance.GameWindow.GetKeyDown(GLFW_KEY_F) && canFlip()) {
             Invert(!inverted);
@@ -77,6 +78,7 @@ public class Player extends GameObject {
         spriteOffset = data.SpriteOffset != null ? data.SpriteOffset.clone() : new Vector2();
     }
 
+    @Override
     public void Reset() {
         verticalVelocity = 0;
         Invert(Game.instance.GetCurrentLevel().GetStartInverted());

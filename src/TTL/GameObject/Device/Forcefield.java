@@ -7,18 +7,22 @@ public class Forcefield extends Device {
         super(data);
     }
 
+    @Override
     protected boolean activateCondition() {
         return false;
     }
 
+    @Override
     protected boolean deactivateCondition() {
         return false;
     }
 
+    @Override
     protected void activate() {
 
     }
 
+    @Override
     protected void deactivate() {
 
     }

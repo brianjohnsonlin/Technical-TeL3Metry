@@ -14,6 +14,7 @@ public class BackgroundImage extends Image {
         layer = 0;
     }
 
+    @Override
     public void Render() {
         if (!Visible) return;
 

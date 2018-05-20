@@ -11,6 +11,7 @@ public class ImageData extends SpriteData {
         Filename = filename;
     }
 
+    @Override
     public Sprite Instantiate() {
         return new Image(this);
     }

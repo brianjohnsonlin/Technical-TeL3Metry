@@ -12,6 +12,7 @@ public class TextData extends SpriteData {
         Text = text;
     }
 
+    @Override
     public Sprite Instantiate() {
         return new Text(this);
     }

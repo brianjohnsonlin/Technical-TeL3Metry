@@ -36,14 +36,17 @@ public class Stone extends Device {
         sprite.SetState(offState);
     }
 
+    @Override
     protected boolean activateCondition() {
         return Game.instance.SwitchIDs.get(switchID);
     }
 
+    @Override
     protected boolean deactivateCondition() {
         return !Game.instance.SwitchIDs.get(switchID);
     }
 
+    @Override
     protected void activate() {
         switch (originalSpaceType) {
             case Level.SPACE_WHITE:
@@ -56,11 +59,13 @@ public class Stone extends Device {
         sprite.SetState(onState);
     }
 
+    @Override
     protected void deactivate() {
         Game.instance.CurrentLevelMap[coordY][coordX] = originalSpaceType;
         sprite.SetState(offState);
     }
 
+    @Override
     public void Reset() {
         super.Reset();
         Game.instance.CurrentLevelMap[coordY][coordX] = originalSpaceType;
