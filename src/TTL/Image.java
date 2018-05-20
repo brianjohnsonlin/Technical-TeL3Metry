@@ -39,23 +39,10 @@ public class Image extends Sprite {
 	}
 
 	protected void Init(String imageFilename) {
-		ImageLibraryEntry entry = imageLibrary.get(imageFilename);
-		if (entry == null) {
-			try {
-				BufferedImage bi = ImageIO.read(new File(imageFilename));
-				actualWidth = bi.getWidth();
-				actualHeight = bi.getHeight();
-				entry = createImage(createPixelBuffer(bi), actualWidth, actualHeight);
-				id = entry.ID;
-				imageLibrary.put(imageFilename, entry);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} else {
-			actualWidth = entry.Width;
-			actualHeight = entry.Height;
-			id = entry.ID;
-		}
+		ImageLibraryEntry entry = getImageLibraryEntry(imageFilename);
+		actualWidth = entry.Width;
+		actualHeight = entry.Height;
+		id = entry.ID;
 	}
 
 	public static ByteBuffer createPixelBuffer(BufferedImage bi) {
@@ -75,28 +62,9 @@ public class Image extends Sprite {
 		return pixels;
 	}
 
-	public static ImageLibraryEntry createImage(ByteBuffer pixels, int width, int height) {
-		int id = glGenTextures();
-		glBindTexture(GL_TEXTURE_2D, id);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-		return new ImageLibraryEntry(id, width, height);
-	}
-
 	public static void PreloadImages(String[] imageFilenames) {
 		for (String imageFilename : imageFilenames) {
-			ImageLibraryEntry entry = imageLibrary.get(imageFilename);
-			if (entry == null) {
-				try {
-					BufferedImage bi = ImageIO.read(new File(imageFilename));
-					int w = bi.getWidth(), h = bi.getHeight();
-					entry = createImage(createPixelBuffer(bi), w, h);
-					imageLibrary.put(imageFilename, entry);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
+			getImageLibraryEntry(imageFilename);
 		}
 	}
 
@@ -156,5 +124,25 @@ public class Image extends Sprite {
 
 	protected int numSSRows() {
 		return (numFrames + numSSColumns - 1) / numSSColumns;
+	}
+
+	private static ImageLibraryEntry getImageLibraryEntry(String imageFilename) {
+		ImageLibraryEntry entry = imageLibrary.get(imageFilename);
+		if (entry == null) {
+			try {
+				BufferedImage bi = ImageIO.read(new File(imageFilename));
+				int width = bi.getWidth(), height = bi.getHeight();
+				int id = glGenTextures();
+				glBindTexture(GL_TEXTURE_2D, id);
+				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+				glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, createPixelBuffer(bi));
+				entry = new ImageLibraryEntry(id, width, height);
+				imageLibrary.put(imageFilename, entry);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return entry;
 	}
 }
