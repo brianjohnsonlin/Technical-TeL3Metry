@@ -5,6 +5,7 @@ import java.util.*;
 
 import TTL.GameObject.*;
 import TTL.Level.*;
+import TTL.Sprite.*;
 import fontMeshCreator.*;
 
 import static org.lwjgl.glfw.GLFW.*;

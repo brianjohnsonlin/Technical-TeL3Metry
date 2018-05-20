@@ -1,6 +1,7 @@
 package TTL.GameObject;
 
 import TTL.*;
+import TTL.Sprite.*;
 
 public class GameObjectData {
     public Vector2 InitialPosition = null;

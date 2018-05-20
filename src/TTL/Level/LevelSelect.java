@@ -1,8 +1,8 @@
 package TTL.Level;
 
 import TTL.*;
-import TTL.GameObject.GameObject;
-import TTL.GameObject.GameObjectData;
+import TTL.GameObject.*;
+import TTL.Sprite.*;
 
 public class LevelSelect extends Level {
     public LevelSelect() {

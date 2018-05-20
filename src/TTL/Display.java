@@ -1,5 +1,6 @@
 package TTL;
 
+import TTL.Sprite.*;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;

@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
-import TTL.*;
+import TTL.Sprite.*;
 
 import static org.lwjgl.opengl.GL11.*;
 

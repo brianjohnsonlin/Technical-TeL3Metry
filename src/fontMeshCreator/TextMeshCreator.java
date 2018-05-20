@@ -1,6 +1,6 @@
 package fontMeshCreator;
 
-import TTL.*;
+import TTL.Sprite.Text;
 
 import java.io.File;
 import java.util.ArrayList;

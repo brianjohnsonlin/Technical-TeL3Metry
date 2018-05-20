@@ -2,7 +2,6 @@ package TTL.Level;
 
 import TTL.*;
 import TTL.GameObject.*;
-import TTL.GameObject.Device.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

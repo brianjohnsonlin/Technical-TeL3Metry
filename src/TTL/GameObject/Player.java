@@ -2,6 +2,7 @@ package TTL.GameObject;
 
 import TTL.*;
 import TTL.Level.Level;
+import TTL.Sprite.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 

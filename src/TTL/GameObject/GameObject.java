@@ -1,6 +1,7 @@
 package TTL.GameObject;
 
 import TTL.*;
+import TTL.Sprite.*;
 
 public class GameObject {
     public static final int DEVICENONE = 0;

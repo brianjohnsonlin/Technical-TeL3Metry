@@ -2,7 +2,7 @@ package TTL.Level;
 
 import TTL.*;
 import TTL.GameObject.*;
-import TTL.GameObject.Device.*;
+import TTL.Sprite.*;
 
 public class LevelTitle extends Level {
     public LevelTitle() {
