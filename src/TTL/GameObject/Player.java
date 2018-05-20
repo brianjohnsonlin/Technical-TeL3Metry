@@ -11,48 +11,48 @@ public class Player extends GameObject {
     private final float DOWNWARDACCELERATION = 1f;
     private final float FRAMESPEED = 0.25f;
 
-    private GameObjectData defaultData;
-    private GameObjectData invertedData;
-    private boolean inverted;
-    private float currentFrame;
-    private int frameOffset;
-    private float verticalVelocity;
-    private boolean facingLeft;
+    protected GameObjectData defaultData;
+    protected GameObjectData invertedData;
+    protected boolean inverted = false;
+    protected int defaultFrameOffset;
+    protected int invertedFrameOffset;
+
+    private float currentFrame = 0;
+    private int frameOffset = 0;
+    private float verticalVelocity = 0;
+    private boolean facingLeft = false;
 
     public Player() {
-        ImageData sprite = new ImageData("./res/spr_char_0.png"); {
-            sprite.Width = 32;
-            sprite.Height = 32;
-            sprite.NumFrames = 16;
-            sprite.NumSSColumns = 4;
-            sprite.Layer = 2;
+        ImageData spriteData = new ImageData("./res/spr_char_0.png"); {
+            spriteData.Width = 32;
+            spriteData.Height = 32;
+            spriteData.NumFrames = 16;
+            spriteData.NumSSColumns = 4;
+            spriteData.Layer = 2;
         }
 
         defaultData = new GameObjectData(); {
             defaultData.CollisionBoxCornerA = new Vector2(4, 6);
             defaultData.CollisionBoxCornerB = new Vector2(27, 31);
-            defaultData.SpriteData = sprite;
+            defaultData.SpriteData = spriteData;
         }
 
         invertedData = new GameObjectData(); {
             invertedData.CollisionBoxCornerA = new Vector2(4, 0);
             invertedData.CollisionBoxCornerB = new Vector2(27, 25);
-            invertedData.SpriteData = sprite;
+            invertedData.SpriteData = spriteData;
         }
 
         data = defaultData;
+        defaultFrameOffset = 0;
+        invertedFrameOffset = 8;
         Init();
-
-        inverted = false;
-        currentFrame = 0;
-        frameOffset = 0;
-        verticalVelocity = 0;
-        facingLeft = false;
     }
 
     public void Update() {
         if (Game.instance.GameWindow.GetKeyDown(GLFW_KEY_F) && canFlip()) {
-            Invert();
+            Invert(!inverted);
+            Game.instance.SetBackgroundsInverted(inverted);
         }
         move();
         sprite.SetState("" + (facingLeft ? '-' : '+') + (inverted ? '-' : '+') + (stuck() ? 7 : (int)currentFrame + frameOffset));
@@ -60,18 +60,16 @@ public class Player extends GameObject {
     }
 
     public void Invert(boolean inverted) {
-        Game.instance.SetBackgroundsInverted(inverted);
-
         if (this.inverted == inverted) return;
 
         this.inverted = inverted;
         if (!inverted) {
             data = defaultData;
-            frameOffset = 0;
+            frameOffset = defaultFrameOffset;
             Position.y -= 32;
         } else {
             data = invertedData;
-            frameOffset = 8;
+            frameOffset = invertedFrameOffset;
             Position.y += 32;
         }
         collisionBoxCornerA = data.CollisionBoxCornerA != null ? data.CollisionBoxCornerA.clone() : null;
@@ -79,13 +77,9 @@ public class Player extends GameObject {
         spriteOffset = data.SpriteOffset != null ? data.SpriteOffset.clone() : new Vector2();
     }
 
-    public void Invert() {
-        Invert(!inverted);
-    }
-
     public void Reset() {
         verticalVelocity = 0;
-        Invert(false);
+        Invert(Game.instance.GetCurrentLevel().GetStartInverted());
         currentFrame = 0;
         super.Reset();
         Position.replaceWith(Game.instance.GetCurrentLevel().GetStartingPoint());
@@ -139,8 +133,8 @@ public class Player extends GameObject {
         }
     }
 
-    private boolean isEmptySpace(Vector2 coord) {
-        return Game.instance.GetSpaceType(coord) == (inverted ? Level.SPACE_BLACK : Level.SPACE_WHITE);
+    protected boolean isEmptySpace(Vector2 coord) {
+        return Game.instance.GetSpaceType(coord) == (inverted ? Level.SPACE_BLACK : Level.SPACE_WHITE); // TODO: need to account for forcefields
     }
 
     // only checks bottom corners because nothing is thinner than L3M

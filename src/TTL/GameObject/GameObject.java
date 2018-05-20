@@ -10,7 +10,7 @@ public class GameObject {
     public static final int DEVICEFORCEFIELD = 4;
     public static final int DEVICETYPINGTEXT = 5;
 
-    public boolean SlatedForDestruction;
+    public boolean SlatedForDestruction = false;
     public Vector2 Position;
 
     protected GameObjectData data;
@@ -24,7 +24,6 @@ public class GameObject {
     public GameObject(GameObjectData data) {
         this.data = data;
         Init();
-        SlatedForDestruction = false;
     }
 
     protected void Init() {

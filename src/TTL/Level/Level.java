@@ -52,6 +52,7 @@ public class Level {
         }
 
         Game.instance.GetPlayer().Invert(startInverted);                // set player inversion
+        Game.instance.SetBackgroundsInverted(startInverted);
         Game.instance.GetPlayer().Position.replaceWith(startingPoint);  // place player at starting Position
     }
 
@@ -88,5 +89,9 @@ public class Level {
 
     public Vector2 GetStartingPoint() {
         return startingPoint;
+    }
+
+    public boolean GetStartInverted() {
+        return startInverted;
     }
 }

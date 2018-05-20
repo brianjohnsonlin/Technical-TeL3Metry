@@ -105,6 +105,7 @@ public class Game {
 		// if R is pressed, reset the level
 		if (GameWindow.GetKeyDown(GLFW_KEY_R)) {
 			player.Reset();
+			SetBackgroundsInverted(currentLevel.GetStartInverted());
 			for (GameObject gameObject : gameObjects) {
 				gameObject.Reset();
 			}
