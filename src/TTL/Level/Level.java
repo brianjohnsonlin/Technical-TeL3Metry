@@ -28,7 +28,7 @@ public class Level {
     public void Load() {
         // load all game objects
         for (GameObjectData data : gameObjectData) {
-            switch (data.DeviceType) {
+            switch (data.Type) {
                 case GameObject.DEVICEGATE:
                     Game.instance.AddGameObject(new Gate(data));
                     break;
@@ -38,11 +38,11 @@ public class Level {
                 case GameObject.DEVICESTONE:
                     Game.instance.AddGameObject(new Stone(data));
                     break;
-                case GameObject.DEVICEFORCEFIELD:
-                    Game.instance.AddGameObject(new Forcefield(data));
-                    break;
                 case GameObject.DEVICETYPINGTEXT:
                     Game.instance.AddGameObject(new TypingText(data));
+                    break;
+                case GameObject.FORCEFIELD:
+                    Game.instance.AddGameObject(new Forcefield(data));
                     break;
                 default:
                     Game.instance.AddGameObject(new GameObject(data));

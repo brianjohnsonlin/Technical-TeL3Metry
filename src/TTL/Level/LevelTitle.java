@@ -24,7 +24,7 @@ public class LevelTitle extends Level {
                 sprite.Layer = 3;
             } data.SpriteData = sprite;
             data.InitialPosition = new Vector2(2, 14).scale(32);
-            data.DeviceType = Device.DEVICETYPINGTEXT;
+            data.Type = Device.DEVICETYPINGTEXT;
             data.Value = "128";
             gameObjectData.add(data);
         }
@@ -37,7 +37,7 @@ public class LevelTitle extends Level {
             data.InitialPosition = new Vector2(19, 13).scale(32);
             data.CollisionBoxCornerA = new Vector2();
             data.CollisionBoxCornerB = new Vector2(31, 31);
-            data.DeviceType = GameObject.DEVICEGATE;
+            data.Type = GameObject.DEVICEGATE;
             data.Value = "levelselect";
             gameObjectData.add(data);
         }

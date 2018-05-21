@@ -15,6 +15,7 @@ public class Game {
 
 	public Display GameWindow;
 	public int[][] CurrentLevelMap;
+	public boolean[][] ForcefieldMap;
 	public HashMap<Integer, Boolean> SwitchIDs;
 
 	private HashMap<String, Level> levels;
@@ -184,8 +185,15 @@ public class Game {
 			return Level.SPACE_INVALID;
 		}
 
-		return CurrentLevelMap[(int)(coord.y / Game.instance.GameWindow.GetHeight() * CurrentLevelMap.length)]
-							  [(int)(coord.x / Game.instance.GameWindow.GetWidth() * CurrentLevelMap[0].length)];
+		return CurrentLevelMap[LocationToCoordinatesY(coord)][LocationToCoordinatesX(coord)];
+	}
+
+	public int LocationToCoordinatesX(Vector2 location) {
+		return (int)(location.x / Game.instance.GameWindow.GetWidth() * CurrentLevelMap[0].length);
+	}
+
+	public int LocationToCoordinatesY(Vector2 location) {
+		return (int)(location.y / Game.instance.GameWindow.GetHeight() * CurrentLevelMap.length);
 	}
 
 	public void SetBackgroundsInverted(boolean inverted) {
@@ -199,6 +207,7 @@ public class Game {
 		for(int i = 0; i < currentLevel.GetLevelMap().length; i++) {
 			CurrentLevelMap[i] = currentLevel.GetLevelMap()[i].clone();
 		}
+		ForcefieldMap = new boolean[CurrentLevelMap.length][CurrentLevelMap[0].length];
 		currentLevel.Load();
 	}
 }

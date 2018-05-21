@@ -18,7 +18,7 @@ public class LevelSelect extends Level {
             data.InitialPosition = new Vector2(0, 16).scale(32);
             data.CollisionBoxCornerA = new Vector2();
             data.CollisionBoxCornerB = new Vector2(31, 31);
-            data.DeviceType = GameObject.DEVICEGATE;
+            data.Type = GameObject.DEVICEGATE;
             data.Value = "title";
             gameObjectData.add(data);
         }
@@ -32,7 +32,7 @@ public class LevelSelect extends Level {
             data.InitialPosition = new Vector2(1, 12).scale(32);
             data.CollisionBoxCornerA = new Vector2(4, 22);
             data.CollisionBoxCornerB = new Vector2(27, 31);
-            data.DeviceType = GameObject.DEVICEBUTTON;
+            data.Type = GameObject.DEVICEBUTTON;
             data.Value = "0";
             gameObjectData.add(data);
         }
@@ -44,7 +44,7 @@ public class LevelSelect extends Level {
                 sprite.NumFrames = 2;
             } data.SpriteData = sprite;
             data.InitialPosition = new Vector2(2, 9).scale(32);
-            data.DeviceType = GameObject.DEVICESTONE;
+            data.Type = GameObject.DEVICESTONE;
             data.Value = "0";
             gameObjectData.add(data);
         }

@@ -15,8 +15,8 @@ public class Stone extends Device {
         super(data);
         switchID = Integer.parseInt(data.Value);
         Game.instance.SwitchIDs.putIfAbsent(switchID, false);
-        coordX = (int)(Position.x / Game.instance.GameWindow.GetWidth() * Game.instance.CurrentLevelMap[0].length);
-        coordY = (int)(Position.y / Game.instance.GameWindow.GetHeight() * Game.instance.CurrentLevelMap.length);
+        coordX = Game.instance.LocationToCoordinatesX(Position);
+        coordY = Game.instance.LocationToCoordinatesY(Position);
         originalSpaceType = Game.instance.GetSpaceType(Position);
         switch (originalSpaceType) {
             case Level.SPACE_WHITE:

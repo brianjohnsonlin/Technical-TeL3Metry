@@ -4,12 +4,12 @@ import TTL.*;
 import TTL.Sprite.*;
 
 public class GameObject {
-    public static final int DEVICENONE = 0;
+    public static final int NONE = 0;
     public static final int DEVICEGATE = 1;
     public static final int DEVICEBUTTON = 2;
     public static final int DEVICESTONE = 3;
-    public static final int DEVICEFORCEFIELD = 4;
-    public static final int DEVICETYPINGTEXT = 5;
+    public static final int DEVICETYPINGTEXT = 4;
+    public static final int FORCEFIELD = 5;
 
     public boolean SlatedForDestruction = false;
     public Vector2 Position;
@@ -96,5 +96,14 @@ public class GameObject {
         }
 
         return true;
+    }
+
+    protected boolean overlapping(Vector2 point) {
+        if (collisionBoxCornerA == null || collisionBoxCornerB == null) {
+            return false;
+        }
+
+        return point.x >= collisionBoxCornerA.x + Position.x && point.x <= collisionBoxCornerB.x + Position.x &&
+               point.y >= collisionBoxCornerA.y + Position.y && point.y <= collisionBoxCornerB.y + Position.y;
     }
 }

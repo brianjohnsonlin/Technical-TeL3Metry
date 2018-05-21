@@ -137,17 +137,25 @@ public class Player extends GameObject {
     }
 
     protected boolean isEmptySpace(Vector2 coord) {
-        return Game.instance.GetSpaceType(coord) == (inverted ? Level.SPACE_BLACK : Level.SPACE_WHITE); // TODO: need to account for forcefields
+        if (Game.instance.GetSpaceType(coord) != (inverted ? Level.SPACE_BLACK : Level.SPACE_WHITE)) {
+            return false; // if not empty space
+        }
+
+        if (Game.instance.ForcefieldMap[Game.instance.LocationToCoordinatesY(coord)][Game.instance.LocationToCoordinatesX(coord)]) {
+            return false; // if occupied by forcefield
+        }
+
+        return true;
     }
 
     // only checks bottom corners because nothing is thinner than L3M
     private boolean isGrounded() {
         if (!inverted) {
-            return Game.instance.GetSpaceType(ColBoxBottomLeftPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE ||
-                   Game.instance.GetSpaceType(ColBoxBottomRightPos().add(new Vector2(0, 1))) != Level.SPACE_WHITE;
+            return !isEmptySpace(ColBoxBottomLeftPos().add(new Vector2(0, 1))) ||
+                   !isEmptySpace(ColBoxBottomRightPos().add(new Vector2(0, 1)));
         } else {
-            return Game.instance.GetSpaceType(ColBoxTopLeftPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK ||
-                   Game.instance.GetSpaceType(ColBoxTopRightPos().add(new Vector2(0, -1))) != Level.SPACE_BLACK;
+            return !isEmptySpace(ColBoxTopLeftPos().add(new Vector2(0, -1))) ||
+                   !isEmptySpace(ColBoxTopRightPos().add(new Vector2(0, -1)));
         }
     }
 
