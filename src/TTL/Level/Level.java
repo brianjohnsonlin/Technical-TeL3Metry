@@ -44,6 +44,12 @@ public class Level {
                 case GameObject.FORCEFIELD:
                     Game.instance.AddGameObject(new Forcefield(data));
                     break;
+                case GameObject.DEVICEHINT:
+                    Game.instance.AddGameObject(new Hint(data));
+                    break;
+                case GameObject.DEVICEMOVEHINT:
+                    Game.instance.AddGameObject(new MoveHint(data));
+                    break;
                 default:
                     Game.instance.AddGameObject(new GameObject(data));
                     break;

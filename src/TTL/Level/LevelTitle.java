@@ -4,6 +4,8 @@ import TTL.*;
 import TTL.GameObject.*;
 import TTL.Sprite.*;
 
+import static org.lwjgl.glfw.GLFW.*;
+
 public class LevelTitle extends Level {
     public LevelTitle() {
         super();
@@ -39,6 +41,18 @@ public class LevelTitle extends Level {
             data.CollisionBoxCornerB = new Vector2(31, 31);
             data.Type = GameObject.DEVICEGATE;
             data.Value = "levelselect";
+            gameObjectData.add(data);
+        }
+
+        { // Move Hint
+            GameObjectData data = new GameObjectData();
+            ImageData sprite = new ImageData("./res/spr_hint_move.png"); {
+                sprite.Layer = 2;
+                sprite.NumFrames = 2;
+            } data.SpriteData = sprite;
+            data.SpriteOffset = new Vector2(24, -24);
+            data.Type = GameObject.DEVICEMOVEHINT;
+            data.Value = "" + 5f;
             gameObjectData.add(data);
         }
     }
