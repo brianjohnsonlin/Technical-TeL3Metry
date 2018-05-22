@@ -150,6 +150,7 @@ public class Player extends GameObject {
         spriteOffset.replaceWith(data.SpriteOffset != null ? data.SpriteOffset : new Vector2()); // probably unnecessary
         Position.replaceWith(Game.instance.GetCurrentLevel().GetStartingPoint());
         sprite.Reset();
+        updateSprite();
 
         // reset recoding ability stuff
         startRecordingPosition = null;

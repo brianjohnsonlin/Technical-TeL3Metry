@@ -127,6 +127,12 @@ public class Game {
 			nextLevel = null;
 		}
 
+		// update player and GameObjects
+		player.Update();
+		for (GameObject gameObject: gameObjects) {
+			gameObject.Update();
+		}
+
 		// if R is pressed, reset the level
 		if (GameWindow.GetKeyDown(GLFW_KEY_R)) {
 			player.Reset();
@@ -134,13 +140,6 @@ public class Game {
 			for (GameObject gameObject : gameObjects) {
 				gameObject.Reset();
 			}
-			return;
-		}
-
-		// update player and GameObjects
-		player.Update();
-		for (GameObject gameObject: gameObjects) {
-			gameObject.Update();
 		}
 
 		// delete anything slated for removal

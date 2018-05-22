@@ -10,6 +10,8 @@ public class GameObject {
     public static final int DEVICESTONE = 3;
     public static final int DEVICETYPINGTEXT = 4;
     public static final int FORCEFIELD = 5;
+    public static final int DEVICEHINT = 6;
+    public static final int DEVICEMOVEHINT = 7;
 
     public boolean SlatedForDestruction = false;
     public Vector2 Position;
@@ -59,6 +61,7 @@ public class GameObject {
         }
         if (sprite != null) {
             sprite.Reset();
+            sprite.Position = Position.add(spriteOffset);
         }
     }
 
