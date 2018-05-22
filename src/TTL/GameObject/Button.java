@@ -9,7 +9,6 @@ public class Button extends Device {
         super(data);
         switchID = Integer.parseInt(data.Value);
         Game.instance.SwitchIDs.putIfAbsent(switchID, false);
-        sprite.SetState("++0");
     }
 
     @Override

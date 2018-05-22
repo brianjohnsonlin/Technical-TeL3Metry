@@ -12,7 +12,13 @@ public class Player extends GameObject {
     private final float MOVEMENTSPEED = 5;
     private final float JUMPVELOCITY = 9f;
     private final float DOWNWARDACCELERATION = 1f;
+
     private final float FRAMESPEED = 0.25f;
+    private final int STANDINGFRAME = 0;
+    private final int FIRSTWALKFRAME = 0;
+    private final int NUMWALKFRAMES = 6;
+    private final int FALLINGFRAME = 6;
+    private final int STUCKFRAME = 7;
 
     protected GameObjectData defaultData;
     protected GameObjectData invertedData;
@@ -20,7 +26,7 @@ public class Player extends GameObject {
     protected int defaultFrameOffset;
     protected int invertedFrameOffset;
 
-    protected float currentFrame = 0;
+    protected float currentFrame = STANDINGFRAME;
     protected int frameOffset = 0;
     protected float verticalVelocity = 0;
     protected boolean facingLeft = false;
@@ -140,7 +146,7 @@ public class Player extends GameObject {
     public void Reset() {
         verticalVelocity = 0;
         Invert(Game.instance.GetCurrentLevel().GetStartInverted());
-        currentFrame = 0;
+        currentFrame = STANDINGFRAME;
         spriteOffset.replaceWith(data.SpriteOffset != null ? data.SpriteOffset : new Vector2()); // probably unnecessary
         Position.replaceWith(Game.instance.GetCurrentLevel().GetStartingPoint());
         sprite.Reset();
@@ -171,16 +177,15 @@ public class Player extends GameObject {
                 if ((left && (!isEmptySpace(ColBoxTopLeftPos()) || !isEmptySpace(ColBoxBottomLeftPos())))
                  || (right && (!isEmptySpace(ColBoxTopRightPos()) || !isEmptySpace(ColBoxBottomRightPos())))) {
                     Position.x -= increment;
-                    currentFrame = 0;
+                    currentFrame = STANDINGFRAME;
                     break;
                 }
             }
 
             facingLeft = left;
-            currentFrame += FRAMESPEED;
-            currentFrame %= 6;
+            currentFrame = FIRSTWALKFRAME + ((currentFrame + FRAMESPEED) % NUMWALKFRAMES);
         } else {
-            currentFrame = 0;
+            currentFrame = STANDINGFRAME;
         }
 
         // jumping / falling
@@ -190,7 +195,7 @@ public class Player extends GameObject {
             }
         } else {
             verticalVelocity += DOWNWARDACCELERATION * (inverted ? -1 : 1);
-            currentFrame = 6;
+            currentFrame = FALLINGFRAME;
         }
 
         for (int i = 0; i < Math.abs(verticalVelocity); i++) { // no iterations will run if verticalVelocity is 0
@@ -207,7 +212,7 @@ public class Player extends GameObject {
     }
 
     protected void updateSprite() {
-        sprite.SetState("" + (facingLeft ? '-' : '+') + (inverted ? '-' : '+') + (stuck() ? 7 : (int)currentFrame + frameOffset));
+        sprite.SetState("" + (facingLeft ? '-' : '+') + (inverted ? '-' : '+') + (stuck() ? STUCKFRAME : (int)currentFrame + frameOffset));
         sprite.Position = Position.add(spriteOffset);
     }
 
