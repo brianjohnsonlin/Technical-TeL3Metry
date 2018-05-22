@@ -13,7 +13,7 @@ public class LevelTitle extends Level {
         { // Title
             GameObjectData data = new GameObjectData();
             ImageData sprite = new ImageData("./res/spr_title_0.png"); {
-                sprite.Layer = 3;
+                sprite.Layer = 4;
             } data.SpriteData = sprite;
             gameObjectData.add(data);
         }
@@ -21,7 +21,7 @@ public class LevelTitle extends Level {
         { // Hello Text
             GameObjectData data = new GameObjectData();
     		TextData sprite = new TextData("Hello there, Unit L3M. Let's begin testing.");{
-                sprite.Layer = 3;
+                sprite.Layer = 4;
             } data.SpriteData = sprite;
             data.InitialPosition = new Vector2(2, 14).scale(32);
             data.Type = Device.DEVICETYPINGTEXT;

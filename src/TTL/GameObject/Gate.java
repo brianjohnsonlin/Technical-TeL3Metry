@@ -9,7 +9,7 @@ public class Gate extends Device {
 
     @Override
     protected boolean activateCondition() {
-        return overlapping(Game.instance.GetPlayer());
+        return overlapping(Game.instance.GetPlayer()) || overlapping(Game.instance.GetPlayer().getDuplicate());
     }
 
     @Override

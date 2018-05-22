@@ -5,8 +5,9 @@ public abstract class SpriteData {
     // Layers:
     // 0 Background
     // 1 Devices
-    // 2 Player
-    // 3 Title, Text, Foreground
+    // 2 PlayerDuplicate
+    // 3 Player
+    // 4 Title, Text, Foreground
 
     public abstract Sprite Instantiate();
 }

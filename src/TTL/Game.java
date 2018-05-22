@@ -99,7 +99,7 @@ public class Game {
 		Game.instance.GameWindow.addSprite(bkgDigital);
 
 		//setup player
-		player = new Player();
+		player = new Player(false);
 		GameWindow.addSprite(player.GetSprite());
 
 		//load in first level
@@ -208,6 +208,7 @@ public class Game {
 			CurrentLevelMap[i] = currentLevel.GetLevelMap()[i].clone();
 		}
 		ForcefieldMap = new boolean[CurrentLevelMap.length][CurrentLevelMap[0].length];
+		player.Reset();
 		currentLevel.Load();
 	}
 }

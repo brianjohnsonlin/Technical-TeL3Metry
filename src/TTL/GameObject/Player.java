@@ -4,6 +4,8 @@ import TTL.*;
 import TTL.Level.Level;
 import TTL.Sprite.*;
 
+import java.util.*;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 public class Player extends GameObject {
@@ -18,18 +20,26 @@ public class Player extends GameObject {
     protected int defaultFrameOffset;
     protected int invertedFrameOffset;
 
-    private float currentFrame = 0;
-    private int frameOffset = 0;
-    private float verticalVelocity = 0;
-    private boolean facingLeft = false;
+    protected float currentFrame = 0;
+    protected int frameOffset = 0;
+    protected float verticalVelocity = 0;
+    protected boolean facingLeft = false;
 
-    public Player() {
+    private Vector2 startRecordingPosition;
+    private LinkedList<Boolean> recordedInputs;
+    private boolean recordedStartInverted;
+    private PlayerDuplicate duplicate;
+    private Image recordingSymbol;
+
+    public Player() {}
+
+    public Player(boolean startInverted) {
         ImageData spriteData = new ImageData("./res/spr_char_0.png"); {
             spriteData.Width = 32;
             spriteData.Height = 32;
             spriteData.NumFrames = 16;
             spriteData.NumSSColumns = 4;
-            spriteData.Layer = 2;
+            spriteData.Layer = 3;
         }
 
         defaultData = new GameObjectData(); {
@@ -44,21 +54,68 @@ public class Player extends GameObject {
             invertedData.SpriteData = spriteData;
         }
 
-        data = defaultData;
+        data = startInverted ? invertedData : defaultData;
         defaultFrameOffset = 0;
         invertedFrameOffset = 8;
         Init();
+
+        startRecordingPosition = null;
+        recordedInputs = null;
+        duplicate = new PlayerDuplicate(startInverted);
+        Game.instance.GameWindow.addSprite(duplicate.GetSprite());
+
+        // initialize the recording dot symbol
+        ImageData recData = new ImageData("./res/spr_record_0.png"); {
+            recData.Layer = 3;
+        }
+        recordingSymbol = new Image(recData);
+        recordingSymbol.Visible = false;
+        Game.instance.GameWindow.addSprite(recordingSymbol);
     }
 
     @Override
     public void Update() {
-        if (Game.instance.GameWindow.GetKeyDown(GLFW_KEY_F) && canFlip()) {
-            Invert(!inverted);
-            Game.instance.SetBackgroundsInverted(inverted);
+        boolean f = Game.instance.GameWindow.GetKeyDown(GLFW_KEY_F);
+        boolean left = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT);
+        boolean right = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT);
+        boolean space = Game.instance.GameWindow.GetKeyDown(GLFW_KEY_SPACE);
+
+        // recording ability
+        if (startRecordingPosition == null) {
+            if (Game.instance.GameWindow.GetKeyDown(GLFW_KEY_D)) {
+                startRecordingPosition = Position.clone();
+                recordedStartInverted = inverted;
+                recordedInputs = new LinkedList<>();
+            }
+            recordingSymbol.Visible = false;
         }
-        move();
-        sprite.SetState("" + (facingLeft ? '-' : '+') + (inverted ? '-' : '+') + (stuck() ? 7 : (int)currentFrame + frameOffset));
-        super.Update();
+
+        if (startRecordingPosition != null){
+            if (Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_D)) {
+                recordingSymbol.Visible = true;
+                recordedInputs.add(f);
+                recordedInputs.add(left);
+                recordedInputs.add(right);
+                recordedInputs.add(space);
+            } else {
+                recordingSymbol.Visible = false;
+                duplicate.Execute(startRecordingPosition, recordedStartInverted, recordedInputs);
+                Invert(recordedStartInverted);
+                Game.instance.SetBackgroundsInverted(inverted);
+                Position.replaceWith(startRecordingPosition);
+                startRecordingPosition = null;
+                recordedInputs = null;
+            }
+        }
+
+        if (f && canFlip()) {
+            Game.instance.SetBackgroundsInverted(!inverted);
+        }
+
+        move(f, left, right, space);
+        updateSprite();
+        recordingSymbol.Position = Position.add(new Vector2(25, inverted ? 25 : 0));
+        duplicate.Update();
     }
 
     public void Invert(boolean inverted) {
@@ -84,15 +141,28 @@ public class Player extends GameObject {
         verticalVelocity = 0;
         Invert(Game.instance.GetCurrentLevel().GetStartInverted());
         currentFrame = 0;
-        super.Reset();
+        spriteOffset.replaceWith(data.SpriteOffset != null ? data.SpriteOffset : new Vector2()); // probably unnecessary
         Position.replaceWith(Game.instance.GetCurrentLevel().GetStartingPoint());
         sprite.Reset();
+
+        // reset recoding ability stuff
+        startRecordingPosition = null;
+        recordedInputs = null;
+        duplicate.Reset();
+        recordingSymbol.Visible = false;
     }
 
-    private void move() {
+    public PlayerDuplicate getDuplicate() {
+        return duplicate;
+    }
+
+    protected void move(boolean flip, boolean left, boolean right, boolean space) {
+        // flip
+        if (flip && canFlip()) {
+            Invert(!inverted);
+        }
+
         // left / right
-        boolean left = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_LEFT);
-        boolean right = Game.instance.GameWindow.GetKeyHeld(GLFW_KEY_RIGHT);
         if (left ^ right && !stuck()) {
             for (int i = 0; i < MOVEMENTSPEED; i++) {
                 float increment = (i == (int)MOVEMENTSPEED) ? (MOVEMENTSPEED - (int)MOVEMENTSPEED) : 1;
@@ -115,7 +185,7 @@ public class Player extends GameObject {
 
         // jumping / falling
         if (isGrounded()) {
-            if (Game.instance.GameWindow.GetKeyDown(GLFW_KEY_SPACE)) {
+            if (space) {
                 verticalVelocity -= JUMPVELOCITY * (inverted ? -1 : 1);
             }
         } else {
@@ -134,6 +204,11 @@ public class Player extends GameObject {
                 break;
             }
         }
+    }
+
+    protected void updateSprite() {
+        sprite.SetState("" + (facingLeft ? '-' : '+') + (inverted ? '-' : '+') + (stuck() ? 7 : (int)currentFrame + frameOffset));
+        sprite.Position = Position.add(spriteOffset);
     }
 
     protected boolean isEmptySpace(Vector2 coord) {
