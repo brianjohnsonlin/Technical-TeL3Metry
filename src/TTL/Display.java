@@ -156,6 +156,8 @@ public class Display {
 			// invoked during this call.
 			glfwPollEvents();
 		}
+
+		Game.Cleanup();
 	}
 
 	private void setInputVariables() {

@@ -24,12 +24,28 @@ public class Game {
 	private HashMap<String, FontType> fonts;
 	private Player player;
 	private ArrayList<GameObject> gameObjects; // does NOT include the Player GameObject
+	private Random random;
+	private boolean musicPlaying;
+	private int currentMusic;
+	private String[] musicList = {
+			"./res/music/Aces.ogg",
+			"./res/music/Bliss.ogg",
+			"./res/music/Catalyst.ogg",
+			"./res/music/Divine.ogg",
+			"./res/music/Epsilon.ogg",
+			"./res/music/Flow.ogg",
+			"./res/music/Glass Breakers.ogg",
+			"./res/music/Hex.ogg",
+			"./res/music/In High Spirits.ogg"
+	};
 
 	private BackgroundImage bkgGray;
 	private BackgroundImage bkgGear;
 	private BackgroundImage bkgBlue;
 	private BackgroundImage bkgGreen;
 	private BackgroundImage bkgDigital;
+
+	private MusicPlayer music;
 
 	public Game() {
 		Game.instance = this;
@@ -41,6 +57,8 @@ public class Game {
 
 		fonts = new HashMap<>();
 		fonts.put("Opificio", new FontType(new File("./res/Opificio.png"), new File("./res/Opificio.fnt")));
+
+		musicPlaying = true;
 
 		// Preload all images
 		String[] imagesToPreload = {
@@ -105,6 +123,8 @@ public class Game {
 		//load in first level
 		loadLevel(levels.get("title"));
 
+		random = new Random();
+
 		GameWindow.run();
 	}
 
@@ -113,6 +133,12 @@ public class Game {
 	}
 
 	public void Update() {
+		if (music == null || music.finished()) {
+			currentMusic = random.nextInt(musicList.length);
+			music = new MusicPlayer(musicList[currentMusic]);
+			music.start();
+		}
+
 		// change level if one is slated to be loaded
 		if (nextLevel != null) {
 			Level level = levels.get(nextLevel);
@@ -142,6 +168,12 @@ public class Game {
 			}
 		}
 
+		// if M is pressed, toggle the music
+		if (GameWindow.GetKeyDown(GLFW_KEY_M)) {
+			musicPlaying = !musicPlaying;
+			music.pause(!musicPlaying);
+		}
+
 		// delete anything slated for removal
 		for (int i = 0; i < gameObjects.size(); i++) {
 			GameObject gobj = gameObjects.get(i);
@@ -153,6 +185,10 @@ public class Game {
 				i--;
 			}
 		}
+	}
+
+	public void Cleanup() {
+		music.cleanup();
 	}
 
 	public void ChangeLevel(String level) {
