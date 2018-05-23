@@ -40,6 +40,7 @@ public class Display {
 			GLFW_KEY_F, // Flip Ability
 			GLFW_KEY_L, // Level Select
 			GLFW_KEY_R, // Restart
+			GLFW_KEY_S, // Level Select
 			GLFW_KEY_M, // Music Toggle
 			GLFW_KEY_SPACE, // Jump
 			GLFW_KEY_LEFT,  // Move Left

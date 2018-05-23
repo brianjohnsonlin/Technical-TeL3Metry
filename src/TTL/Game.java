@@ -168,6 +168,11 @@ public class Game {
 			}
 		}
 
+		// if S is pressed, queue up LevelSelect
+		if (GameWindow.GetKeyDown(GLFW_KEY_S)) {
+			ChangeLevel("levelselect");
+		}
+
 		// if M is pressed, toggle the music
 		if (GameWindow.GetKeyDown(GLFW_KEY_M)) {
 			musicPlaying = !musicPlaying;
