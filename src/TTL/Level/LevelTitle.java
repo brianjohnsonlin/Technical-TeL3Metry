@@ -4,8 +4,6 @@ import TTL.*;
 import TTL.GameObject.*;
 import TTL.Sprite.*;
 
-import static org.lwjgl.glfw.GLFW.*;
-
 public class LevelTitle extends Level {
     public LevelTitle() {
         super();
@@ -52,7 +50,7 @@ public class LevelTitle extends Level {
             } data.SpriteData = sprite;
             data.SpriteOffset = new Vector2(24, -24);
             data.Type = GameObject.DEVICEMOVEHINT;
-            data.Value = "" + 5f;
+            data.Value = "" + 0;
             gameObjectData.add(data);
         }
     }
