@@ -147,6 +147,7 @@ public class Player extends GameObject {
         verticalVelocity = 0;
         Invert(Game.instance.GetCurrentLevel().GetStartInverted());
         currentFrame = STANDINGFRAME;
+        facingLeft = false;
         spriteOffset.replaceWith(data.SpriteOffset != null ? data.SpriteOffset : new Vector2()); // probably unnecessary
         Position.replaceWith(Game.instance.GetCurrentLevel().GetStartingPoint());
         sprite.Reset();
