@@ -10,6 +10,7 @@ public class TextMeshCreator {
 
 	protected static final double LINE_HEIGHT = 0.03f;
 	protected static final int SPACE_ASCII = 32;
+	protected static final int RETURN_ASCII = '\n';
 
 	private MetaFile metaData;
 
@@ -39,6 +40,12 @@ public class TextMeshCreator {
 				}
 				currentWord = new Word(text.getFontSize());
 				continue;
+			}
+			if (ascii == RETURN_ASCII) {
+				currentLine.attemptToAddWord(currentWord);
+				lines.add(currentLine);
+				currentLine = new Line(metaData.getSpaceWidth(), text.getFontSize(), text.getMaxLineSize());
+				currentWord = new Word(text.getFontSize());
 			}
 			Character character = metaData.getCharacter(ascii);
 			currentWord.addCharacter(character);
