@@ -87,11 +87,11 @@ public class Game {
 		levels = new HashMap<>();
 		levels.put("title", new LevelTitle());
 		levels.put("levelselect", new LevelSelect());
-//		levels.put("1-1", new Level1x1());
-//		levels.put("1-2", new Level1x2());
-//		levels.put("1-3", new Level1x3());
-//		levels.put("1-4", new Level1x4());
-//		levels.put("1-5", new Level1x5());
+		levels.put("1-1", new Level1x1());
+		levels.put("1-2", new Level1x2());
+		levels.put("1-3", new Level1x3());
+		levels.put("1-4", new Level1x4());
+		levels.put("1-5", new Level1x5());
 //		levels.put("2-1", new Level2x1());
 //		levels.put("2-2", new Level2x2());
 //		levels.put("2-3", new Level2x3());
