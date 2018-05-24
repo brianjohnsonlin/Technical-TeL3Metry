@@ -7,6 +7,7 @@ import TTL.GameObject.*;
 import TTL.Level.*;
 import TTL.Sprite.*;
 import fontMeshCreator.*;
+import org.json.*;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -27,17 +28,7 @@ public class Game {
 	private Random random;
 	private boolean musicPlaying;
 	private int currentMusic;
-	private String[] musicList = {
-			"./res/music/Aces.ogg",
-			"./res/music/Bliss.ogg",
-			"./res/music/Catalyst.ogg",
-			"./res/music/Divine.ogg",
-			"./res/music/Epsilon.ogg",
-			"./res/music/Flow.ogg",
-			"./res/music/Glass Breakers.ogg",
-			"./res/music/Hex.ogg",
-			"./res/music/In High Spirits.ogg"
-	};
+	private String[] musicList = new String[0];
 
 	private BackgroundImage bkgGray;
 	private BackgroundImage bkgGear;
@@ -56,31 +47,33 @@ public class Game {
 		nextLevel = null;
 
 		fonts = new HashMap<>();
-		fonts.put("Opificio", new FontType(new File("./res/Opificio.png"), new File("./res/Opificio.fnt")));
-
-		musicPlaying = true;
+		try {
+			FileInputStream stream = new FileInputStream(new File("./res/fonts.json"));
+			JSONTokener tokener = new JSONTokener(stream);
+			JSONObject root = new JSONObject(tokener);
+			JSONArray imageJSONArray = root.getJSONArray("Fonts");
+			for (int i = 0; i < imageJSONArray.length(); i++) {
+				JSONObject font = imageJSONArray.getJSONObject(i);
+				fonts.put(font.getString("Name"), new FontType(new File(font.getString("PNG")), new File(font.getString("FNT"))));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		// Preload all images
-		String[] imagesToPreload = {
-				"./res/bkg_blue.png",
-				"./res/bkg_digital.png",
-				"./res/bkg_green.png",
-				"./res/bkg_gear.png",
-				"./res/bkg_gray.png",
-				"./res/spr_button_blue.png",
-				"./res/spr_button_green.png",
-				"./res/spr_cake_0.png",
-				"./res/spr_char_0.png",
-				"./res/spr_dup_0.png",
-				"./res/spr_forcefield_0.png",
-				"./res/spr_gate_0.png",
-				"./res/spr_hint_d.png",
-				"./res/spr_hint_f.png",
-				"./res/spr_hint_move.png",
-				"./res/spr_record_0.png",
-				"./res/spr_stone_0.png",
-				"./res/spr_title_0.png"
-		};
+		String[] imagesToPreload = new String[0];
+		try {
+			FileInputStream stream = new FileInputStream(new File("./res/images.json"));
+			JSONTokener tokener = new JSONTokener(stream);
+			JSONObject root = new JSONObject(tokener);
+			JSONArray imageJSONArray = root.getJSONArray("Images");
+			imagesToPreload = new String[imageJSONArray.length()];
+			for (int i = 0; i < imageJSONArray.length(); i++) {
+				imagesToPreload[i] = imageJSONArray.getString(i);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		Image.PreloadImages(imagesToPreload);
 
 		// create levels
@@ -124,6 +117,19 @@ public class Game {
 		loadLevel(levels.get("title"));
 
 		random = new Random();
+		musicPlaying = true;
+		try { // load in music list
+			FileInputStream stream = new FileInputStream(new File("./res/music.json"));
+			JSONTokener tokener = new JSONTokener(stream);
+			JSONObject root = new JSONObject(tokener);
+			JSONArray musicJSONArray = root.getJSONArray("Music");
+			musicList = new String[musicJSONArray.length()];
+			for (int i = 0; i < musicJSONArray.length(); i++) {
+				musicList[i] = musicJSONArray.getString(i);
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		GameWindow.run();
 	}
@@ -133,7 +139,7 @@ public class Game {
 	}
 
 	public void Update() {
-		if (music == null || music.finished()) {
+		if (musicList.length > 0 && (music == null || music.finished())) {
 			currentMusic = random.nextInt(musicList.length);
 			music = new MusicPlayer(musicList[currentMusic]);
 			music.start();
@@ -174,7 +180,7 @@ public class Game {
 		}
 
 		// if M is pressed, toggle the music
-		if (GameWindow.GetKeyDown(GLFW_KEY_M)) {
+		if (music != null && GameWindow.GetKeyDown(GLFW_KEY_M)) {
 			musicPlaying = !musicPlaying;
 			music.pause(!musicPlaying);
 		}
@@ -193,7 +199,9 @@ public class Game {
 	}
 
 	public void Cleanup() {
-		music.cleanup();
+		if (music != null) {
+			music.cleanup();
+		}
 	}
 
 	public void ChangeLevel(String level) {

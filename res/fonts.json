@@ -1,0 +1,9 @@
+{
+  "Fonts": [
+    {
+      "Name": "Opificio",
+      "PNG": "./res/Opificio.png",
+      "FNT": "./res/Opificio.fnt"
+    }
+  ]
+}
