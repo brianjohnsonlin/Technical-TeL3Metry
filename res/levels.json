@@ -1,0 +1,52 @@
+{
+  "Levels": [
+    {
+      "Name": "title",
+      "LevelMap": "./res/levels/title.png",
+      "StartingPoint": { "x": 32, "y": 320 },
+      "GameObjects": [
+        {
+          "Name": "Title",
+          "Sprite": {
+            "Type": "image",
+            "Path": "./res/spr_title_0.png",
+            "Layer": 4
+          }
+        }, {
+          "Name": "Hello Text",
+          "Sprite": {
+            "Type": "text",
+            "Text": "Hello there, Unit L3M. Let's begin testing.",
+            "Layer": 4
+          },
+          "InitialPosition": { "x": 64, "y": 448 },
+          "Type": "DEVICETYPINGTEXT",
+          "Value": "128"
+        }, {
+          "Name": "Exit Gate",
+          "Sprite": {
+            "Type": "image",
+            "Path": "./res/spr_gate_0.png",
+            "Layer": 1
+          },
+          "InitialPosition": { "x": 608, "y": 416 },
+          "CollisionBoxCornerA": { "x": 0, "y": 0 },
+          "CollisionBoxCornerB": { "x": 31, "y": 31 },
+          "Type": "DEVICEGATE",
+          "Value": "levelselect"
+        }, {
+          "Name": "Move Hint",
+          "Sprite": {
+            "Type": "image",
+            "Path": "./res/spr_hint_move.png",
+            "Layer": 2,
+            "NumFrames": 2
+          },
+          "SpriteOffset": { "x": 24, "y": -24 },
+          "Type": "DEVICEMOVEHINT",
+          "Value": "0"
+        }
+      ]
+    }
+  ]
+}

@@ -19,7 +19,7 @@ public class Game {
 	public boolean[][] ForcefieldMap;
 	public HashMap<Integer, Boolean> SwitchIDs;
 
-	private HashMap<String, Level> levels;
+	private HashMap<String, Level> levels = new HashMap<>();
 	private Level currentLevel;
 	private String nextLevel;
 	private HashMap<String, FontType> fonts;
@@ -49,8 +49,7 @@ public class Game {
 		fonts = new HashMap<>();
 		try {
 			FileInputStream stream = new FileInputStream(new File("./res/fonts.json"));
-			JSONTokener tokener = new JSONTokener(stream);
-			JSONObject root = new JSONObject(tokener);
+			JSONObject root = new JSONObject(new JSONTokener(stream));
 			JSONArray imageJSONArray = root.getJSONArray("Fonts");
 			for (int i = 0; i < imageJSONArray.length(); i++) {
 				JSONObject font = imageJSONArray.getJSONObject(i);
@@ -64,8 +63,7 @@ public class Game {
 		String[] imagesToPreload = new String[0];
 		try {
 			FileInputStream stream = new FileInputStream(new File("./res/images.json"));
-			JSONTokener tokener = new JSONTokener(stream);
-			JSONObject root = new JSONObject(tokener);
+			JSONObject root = new JSONObject(new JSONTokener(stream));
 			JSONArray imageJSONArray = root.getJSONArray("Images");
 			imagesToPreload = new String[imageJSONArray.length()];
 			for (int i = 0; i < imageJSONArray.length(); i++) {
@@ -76,15 +74,14 @@ public class Game {
 		}
 		Image.PreloadImages(imagesToPreload);
 
-		// create levels
-		levels = new HashMap<>();
-		levels.put("title", new LevelTitle());
-		levels.put("levelselect", new LevelSelect());
-		levels.put("1-1", new Level1x1());
-		levels.put("1-2", new Level1x2());
-		levels.put("1-3", new Level1x3());
-		levels.put("1-4", new Level1x4());
-		levels.put("1-5", new Level1x5());
+		importLevels();
+//		levels.put("title", new LevelTitle());
+//		levels.put("levelselect", new LevelSelect());
+//		levels.put("1-1", new Level1x1());
+//		levels.put("1-2", new Level1x2());
+//		levels.put("1-3", new Level1x3());
+//		levels.put("1-4", new Level1x4());
+//		levels.put("1-5", new Level1x5());
 //		levels.put("2-1", new Level2x1());
 //		levels.put("2-2", new Level2x2());
 //		levels.put("2-3", new Level2x3());
@@ -247,6 +244,20 @@ public class Game {
 	public void SetBackgroundsInverted(boolean inverted) {
 		bkgGreen.Visible = bkgDigital.Visible = inverted;
 		bkgBlue.Visible = bkgGear.Visible = !inverted;
+	}
+
+	private void importLevels() {
+		try {
+			FileInputStream stream = new FileInputStream(new File("res/levels.json"));
+			JSONObject root = new JSONObject(new JSONTokener(stream));
+			JSONArray levelArray = root.getJSONArray("Levels");
+			for (int i = 0; i < levelArray.length(); i++) {
+				JSONObject levelObj = levelArray.getJSONObject(i);
+				levels.put(levelObj.getString("Name"), new Level(levelObj));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void loadLevel(Level level) {

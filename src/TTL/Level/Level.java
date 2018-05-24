@@ -2,6 +2,8 @@ package TTL.Level;
 
 import TTL.*;
 import TTL.GameObject.*;
+import TTL.Sprite.*;
+import org.json.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -21,8 +23,89 @@ public class Level {
     protected ArrayList<GameObjectData> gameObjectData;
 
     public Level() {
+        startingPoint = new Vector2();
         gameObjectData = new ArrayList<>();
         startInverted = false;
+    }
+
+    public Level(JSONObject obj) {
+        if (obj.has("LevelMap")) {
+            ImportLevelMap(obj.getString("LevelMap"));
+        }
+        if (obj.has("StartingPoint")) {
+            startingPoint = ToVector2(obj.getJSONObject("StartingPoint"));
+        } else {
+            startingPoint = new Vector2();
+        }
+        startInverted = obj.has("StartInverted") && obj.getBoolean("StartInverted"); // obj.has("StartInverted") ? obj.getBoolean("StartInverted") : false;
+        gameObjectData = new ArrayList<>();
+
+        if (obj.has("GameObjects")) {
+            JSONArray levelArray = obj.getJSONArray("GameObjects");
+            for (int i = 0; i < levelArray.length(); i++) {
+                JSONObject gameObj = levelArray.getJSONObject(i);
+                GameObjectData data = new GameObjectData();
+                if (gameObj.has("InitialPosition")) data.InitialPosition = ToVector2(gameObj.getJSONObject("InitialPosition"));
+                if (gameObj.has("CollisionBoxCornerA")) data.CollisionBoxCornerA = ToVector2(gameObj.getJSONObject("CollisionBoxCornerA"));
+                if (gameObj.has("CollisionBoxCornerB")) data.CollisionBoxCornerA = ToVector2(gameObj.getJSONObject("CollisionBoxCornerB"));
+                SpriteData sprite = null;
+                if (gameObj.has("Sprite")) {
+                    JSONObject spriteObj = gameObj.getJSONObject("Sprite");
+                    if (spriteObj.has("Type")) {
+                        if (spriteObj.getString("Type").equals("image")) {
+                            ImageData image = new ImageData(spriteObj.getString("Path"));
+                            if (spriteObj.has("Width")) image.Width = spriteObj.getFloat("Width");
+                            if (spriteObj.has("Height")) image.Height = spriteObj.getFloat("Height");
+                            if (spriteObj.has("NumFrames")) image.NumFrames = spriteObj.getInt("NumFrames");
+                            if (spriteObj.has("NumSSColumns")) image.NumSSColumns = spriteObj.getInt("NumSSColumns");
+                            if (spriteObj.has("Layer")) image.Layer = spriteObj.getInt("Layer");
+                            sprite = image;
+                        } else if (spriteObj.getString("Type").equals("text")) {
+                            TextData text = new TextData(spriteObj.getString("Text"));
+                            if (spriteObj.has("FontName")) text.FontName = spriteObj.getString("FontName");
+                            if (spriteObj.has("FontSize")) text.FontSize = spriteObj.getFloat("FontSize");
+                            if (spriteObj.has("Color")) text.Color = ToColor(spriteObj.getJSONObject("Color"));
+                            if (spriteObj.has("MaxLineLength")) text.MaxLineLength = spriteObj.getFloat("MaxLineLength");
+                            if (spriteObj.has("Centered")) text.Centered = spriteObj.getBoolean("Centered");
+                            if (spriteObj.has("Layer")) text.Layer = spriteObj.getInt("Layer");
+                            sprite = text;
+                        }
+                    }
+                }
+                data.SpriteData = sprite;
+                if (gameObj.has("SpriteOffset")) data.SpriteOffset = ToVector2(gameObj.getJSONObject("SpriteOffset"));
+                if (gameObj.has("Type")) {
+                    switch (gameObj.getString("Type")) {
+                        case "DEVICEGATE":
+                            data.Type = GameObject.DEVICEGATE;
+                            break;
+                        case "DEVICEBUTTON":
+                            data.Type = GameObject.DEVICEBUTTON;
+                            break;
+                        case "DEVICESTONE":
+                            data.Type = GameObject.DEVICESTONE;
+                            break;
+                        case "DEVICETYPINGTEXT":
+                            data.Type = GameObject.DEVICETYPINGTEXT;
+                            break;
+                        case "FORCEFIELD":
+                            data.Type = GameObject.FORCEFIELD;
+                            break;
+                        case "DEVICEHINT":
+                            data.Type = GameObject.DEVICEHINT;
+                            break;
+                        case "DEVICEMOVEHINT":
+                            data.Type = GameObject.DEVICEMOVEHINT;
+                            break;
+                        default:
+                            data.Type = GameObject.NONE;
+                            break;
+                    }
+                }
+                if (gameObj.has("Value")) data.Value = gameObj.getString("Value");
+                gameObjectData.add(data);
+            }
+        }
     }
 
     public void Load() {
@@ -98,5 +181,13 @@ public class Level {
 
     public boolean GetStartInverted() {
         return startInverted;
+    }
+
+    public static Vector2 ToVector2(JSONObject obj) {
+        return new Vector2(obj.getFloat("x"), obj.getFloat("y"));
+    }
+
+    public static java.awt.Color ToColor(JSONObject obj) {
+        return new java.awt.Color(obj.getInt("r") / 255f, obj.getInt("g") / 255f, obj.getInt("b") / 255f);
     }
 }
