@@ -1,11 +1,8 @@
 package TTL.Level;
 
-import TTL.GameObject.Device;
-import TTL.GameObject.GameObject;
-import TTL.GameObject.GameObjectData;
-import TTL.Sprite.ImageData;
-import TTL.Sprite.TextData;
-import TTL.Vector2;
+import TTL.*;
+import TTL.GameObject.*;
+import TTL.Sprite.*;
 
 import java.awt.*;
 
