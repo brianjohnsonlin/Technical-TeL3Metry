@@ -45,6 +45,7 @@ public class Game {
 		SwitchIDs = new HashMap<>();
 		nextLevel = null;
 
+		// load in fonts
 		fonts = new HashMap<>();
 		try {
 			FileInputStream stream = new FileInputStream(new File("./res/fonts.json"));
@@ -73,26 +74,6 @@ public class Game {
 		}
 		Image.PreloadImages(imagesToPreload);
 
-		importLevels();
-//		levels.put("title", new LevelTitle());
-//		levels.put("levelselect", new LevelSelect());
-//		levels.put("1-1", new Level1x1());
-//		levels.put("1-2", new Level1x2());
-//		levels.put("1-3", new Level1x3());
-//		levels.put("1-4", new Level1x4());
-//		levels.put("1-5", new Level1x5());
-//		levels.put("2-1", new Level2x1());
-//		levels.put("2-2", new Level2x2());
-//		levels.put("2-3", new Level2x3());
-//		levels.put("2-4", new Level2x4());
-//		levels.put("2-5", new Level2x5());
-//		levels.put("3-1", new Level3x1());
-//		levels.put("3-2", new Level3x2());
-//		levels.put("3-3", new Level3x3());
-//		levels.put("3-4", new Level3x4());
-//		levels.put("3-5", new Level3x5());
-//		levels.put("credits", new LevelCredits());
-
 		//backgrounds
 		bkgGray = new BackgroundImage("./res/bkg_gray.png", Level.SPACE_GRAY);
 		bkgGear = new BackgroundImage("./res/bkg_gear.png", Level.SPACE_WHITE);
@@ -109,12 +90,14 @@ public class Game {
 		player = new Player(false);
 		GameWindow.addSprite(player.GetSprite());
 
-		//load in first level
+		// load in levels
+		importLevels();
 		loadLevel(levels.get("title"));
 
+		// load in music list
 		random = new Random();
 		musicPlaying = true;
-		try { // load in music list
+		try {
 			FileInputStream stream = new FileInputStream(new File("./res/music.json"));
 			JSONTokener tokener = new JSONTokener(stream);
 			JSONObject root = new JSONObject(tokener);
