@@ -1,0 +1,69 @@
+{
+  "Name": "2-3",
+  "LevelMap": "./res/levels/2-3.png",
+  "StartingPoint": { "x": 16, "y": 192 },
+  "GameObjects": [
+    {
+      "Name": "Level Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Level 2-3",
+        "Color": { "r": 0, "g": 0, "b": 0 },
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 8, "y": 8 }
+    }, {
+      "Name": "Flavor Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Foolish is the one who\nfollows the road he cannot see.",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 232, "y": 200 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }, {
+      "Name": "Exit Gate",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 480, "y": 512 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "2-4"
+    }, {
+      "Name": "Forcefield left",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 96, "y": 320 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield middle",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 320 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield right",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 160, "y": 320 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }
+  ]
+}

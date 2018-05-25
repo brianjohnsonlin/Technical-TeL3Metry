@@ -1,0 +1,239 @@
+{
+  "Name": "2-4",
+  "LevelMap": "./res/levels/2-4.png",
+  "StartingPoint": { "x": 16, "y": 384 },
+  "GameObjects": [
+    {
+      "Name": "Level Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Level 2-4",
+        "Color": { "r": 0, "g": 0, "b": 0 },
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 8, "y": 8 }
+    }, {
+      "Name": "Flavor Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Why are you rubbing against that wall?",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 240, "y": 424 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }, {
+      "Name": "Exit Gate",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 576, "y": 192 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "2-5"
+    }, {
+      "Name": "Forcefield 0",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 0 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 1",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 32 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 2",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 64 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 3",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 96 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 4",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 128 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 5",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 160 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 6",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 192 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 7",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 224 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 8",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 256 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 9",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 288 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 10",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 320 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 11",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 352 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 12",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 384 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 13",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 416 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 14",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 448 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 15",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 480 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 16",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 512 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 17",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 544 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 18",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 576 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield 19",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 608 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }
+  ]
+}

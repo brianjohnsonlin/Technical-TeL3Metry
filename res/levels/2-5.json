@@ -1,0 +1,219 @@
+{
+  "Name": "2-5",
+  "LevelMap": "./res/levels/2-5.png",
+  "StartingPoint": { "x": 16, "y": 192 },
+  "GameObjects": [
+    {
+      "Name": "Level Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Level 2-5",
+        "Color": { "r": 0, "g": 0, "b": 0 },
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 8, "y": 8 }
+    }, {
+      "Name": "Flavor Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "This one's\ntedious.",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 40, "y": 296 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }, {
+      "Name": "Exit Gate",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 32, "y": 480 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "3-1"
+    }, {
+      "Name": "Button 0",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_button_blue.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 96, "y": 256 },
+      "CollisionBoxCornerA": { "x": 4, "y": 22 },
+      "CollisionBoxCornerB": { "x": 27, "y": 31 },
+      "Type": "DEVICEBUTTON",
+      "Value": "0"
+    }, {
+      "Name": "Button 1",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_button_blue.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 160, "y": 256 },
+      "CollisionBoxCornerA": { "x": 4, "y": 22 },
+      "CollisionBoxCornerB": { "x": 27, "y": 31 },
+      "Type": "DEVICEBUTTON",
+      "Value": "1"
+    }, {
+      "Name": "Stone Top 1",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 128, "y": 192 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Stone Top 2",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 192, "y": 192 },
+      "Type": "DEVICESTONE",
+      "Value": "1"
+    }, {
+      "Name": "Stone Top 3",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 256, "y": 192 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Stone Top 4",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 320, "y": 192 },
+      "Type": "DEVICESTONE",
+      "Value": "1"
+    }, {
+      "Name": "Stone Top 5",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 384, "y": 192 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Stone Top 6",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 448, "y": 192 },
+      "Type": "DEVICESTONE",
+      "Value": "1"
+    }, {
+      "Name": "Stone Top 7",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 512, "y": 192 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Stone Bot 1",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 128, "y": 480 },
+      "Type": "DEVICESTONE",
+      "Value": "1"
+    }, {
+      "Name": "Stone Bot 2",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 192, "y": 480 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Stone Bot 3",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 256, "y": 480 },
+      "Type": "DEVICESTONE",
+      "Value": "1"
+    }, {
+      "Name": "Stone Bot 4",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 320, "y": 480 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Stone Bot 5",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 384, "y": 480 },
+      "Type": "DEVICESTONE",
+      "Value": "1"
+    }, {
+      "Name": "Stone Bot 6",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 448, "y": 480 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Stone Bot 7",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 512, "y": 480 },
+      "Type": "DEVICESTONE",
+      "Value": "1"
+    }
+  ]
+}

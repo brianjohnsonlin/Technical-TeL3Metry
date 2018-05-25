@@ -1,0 +1,84 @@
+{
+  "Name": "2-1",
+  "LevelMap": "./res/levels/2-1.png",
+  "StartingPoint": { "x": 16, "y": 288 },
+  "GameObjects": [
+    {
+      "Name": "Level Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Level 2-1",
+        "Color": { "r": 0, "g": 0, "b": 0 },
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 8, "y": 8 }
+    }, {
+      "Name": "Flavor Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Why don't you have\nyour duplicate drop\ndown instead?",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 360, "y": 488 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }, {
+      "Name": "Exit Gate",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 576, "y": 288 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "2-2"
+    }, {
+      "Name": "D Hint",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_hint_d.png",
+        "Layer": 2,
+        "NumFrames": 2
+      },
+      "SpriteOffset": { "x": 24, "y": -24 },
+      "Type": "DEVICEHINT",
+      "Value": "68"
+    }, {
+      "Name": "Button",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_button_blue.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 320, "y": 544 },
+      "CollisionBoxCornerA": { "x": 4, "y": 22 },
+      "CollisionBoxCornerB": { "x": 27, "y": 31 },
+      "Type": "DEVICEBUTTON",
+      "Value": "0"
+    }, {
+      "Name": "Stone",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 256, "y": 288 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 320, "y": 480 },
+      "Type": "FORCEFIELD",
+      "Value": "0"
+    }
+  ]
+}
