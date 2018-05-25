@@ -1,0 +1,39 @@
+{
+  "Name": "1-4",
+  "LevelMap": "./res/levels/1-4.png",
+  "StartingPoint": { "x": 16, "y": 32 },
+  "GameObjects": [
+    {
+      "Name": "Level Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Level 1-4",
+        "Color": { "r": 0, "g": 0, "b": 0 },
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 8, "y": 8 }
+    }, {
+      "Name": "Flavor Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Remember that you\ncan restart with R.",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 144, "y": 560 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }, {
+      "Name": "Exit Gate",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 608, "y": 576 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "1-5"
+    }
+  ]
+}

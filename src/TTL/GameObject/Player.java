@@ -1,7 +1,6 @@
 package TTL.GameObject;
 
 import TTL.*;
-import TTL.Level.Level;
 import TTL.Sprite.*;
 
 import java.util.*;

@@ -1,7 +1,6 @@
 package TTL.GameObject;
 
 import TTL.*;
-import TTL.Level.*;
 
 public class Stone extends Device {
     private int switchID;

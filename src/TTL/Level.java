@@ -1,6 +1,5 @@
-package TTL.Level;
+package TTL;
 
-import TTL.*;
 import TTL.GameObject.*;
 import TTL.Sprite.*;
 import org.json.*;

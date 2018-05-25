@@ -1,0 +1,50 @@
+{
+  "Name": "1-1",
+  "LevelMap": "./res/levels/1-1.png",
+  "StartingPoint": { "x": 32, "y": 320 },
+  "GameObjects": [
+    {
+      "Name": "Level Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Level 1-1",
+        "Color": { "r": 0, "g": 0, "b": 0 },
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 8, "y": 8 }
+    }, {
+      "Name": "Flavor Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Overcoming an obstacle is a\nmatter of seeing both sides.",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 128, "y": 384 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "640"
+    }, {
+      "Name": "Exit Gate",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 576, "y": 256 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "1-2"
+    }, {
+      "Name": "F Hint",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_hint_f.png",
+        "Layer": 2,
+        "NumFrames": 2
+      },
+      "SpriteOffset": { "x": 24, "y": -24 },
+      "Type": "DEVICEHINT",
+      "Value": "70"
+    }
+  ]
+}

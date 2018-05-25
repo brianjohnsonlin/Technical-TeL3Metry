@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.*;
 
 import TTL.GameObject.*;
-import TTL.Level.*;
 import TTL.Sprite.*;
 import fontMeshCreator.*;
 import org.json.*;
