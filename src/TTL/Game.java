@@ -252,7 +252,8 @@ public class Game {
 			JSONObject root = new JSONObject(new JSONTokener(stream));
 			JSONArray levelArray = root.getJSONArray("Levels");
 			for (int i = 0; i < levelArray.length(); i++) {
-				JSONObject levelObj = levelArray.getJSONObject(i);
+				FileInputStream levelStream = new FileInputStream(new File(levelArray.getString(i)));
+				JSONObject levelObj = new JSONObject(new JSONTokener(levelStream));
 				levels.put(levelObj.getString("Name"), new Level(levelObj));
 			}
 		} catch (IOException e) {

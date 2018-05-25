@@ -47,7 +47,7 @@ public class Level {
                 GameObjectData data = new GameObjectData();
                 if (gameObj.has("InitialPosition")) data.InitialPosition = ToVector2(gameObj.getJSONObject("InitialPosition"));
                 if (gameObj.has("CollisionBoxCornerA")) data.CollisionBoxCornerA = ToVector2(gameObj.getJSONObject("CollisionBoxCornerA"));
-                if (gameObj.has("CollisionBoxCornerB")) data.CollisionBoxCornerA = ToVector2(gameObj.getJSONObject("CollisionBoxCornerB"));
+                if (gameObj.has("CollisionBoxCornerB")) data.CollisionBoxCornerB = ToVector2(gameObj.getJSONObject("CollisionBoxCornerB"));
                 SpriteData sprite = null;
                 if (gameObj.has("Sprite")) {
                     JSONObject spriteObj = gameObj.getJSONObject("Sprite");

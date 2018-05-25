@@ -1,0 +1,390 @@
+{
+  "Name": "levelselect",
+  "LevelMap": "./res/levels/levelselect.png",
+  "StartingPoint": { "x": 32, "y": 512 },
+  "GameObjects": [
+    {
+      "Name": "Select a level Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Select a level.",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 70, "y": 552 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }, {
+      "Name": "Mute music text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "M to toggle music.",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 400, "y": 580 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "640"
+    }, {
+      "Name": "Return Gate",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 0, "y": 512 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "title"
+    }, {
+      "Name": "Button",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_button_blue.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 32, "y": 384 },
+      "CollisionBoxCornerA": { "x": 4, "y": 22 },
+      "CollisionBoxCornerB": { "x": 27, "y": 31 },
+      "Type": "DEVICEBUTTON",
+      "Value": "0"
+    }, {
+      "Name": "Stone",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 64, "y": 288 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Stone",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 128, "y": 384 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "1-1",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 160, "y": 480 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "1-1"
+    }, {
+      "Name": "1-1 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "1-1",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 160, "y": 480 }
+    }, {
+      "Name": "1-2",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 224, "y": 480 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "1-2"
+    }, {
+      "Name": "1-2 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "1-2",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 224, "y": 480 }
+    }, {
+      "Name": "1-3",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 288, "y": 480 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "1-3"
+    }, {
+      "Name": "1-3 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "1-3",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 288, "y": 480 }
+    }, {
+      "Name": "1-4",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 352, "y": 480 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "1-4"
+    }, {
+      "Name": "1-4 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "1-4",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 352, "y": 480 }
+    }, {
+      "Name": "1-5",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 416, "y": 480 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "1-5"
+    }, {
+      "Name": "1-5 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "1-5",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 416, "y": 480 }
+    }, {
+      "Name": "2-1",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 480, "y": 320 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "2-1"
+    }, {
+      "Name": "2-1 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "2-1",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 480, "y": 320 }
+    }, {
+      "Name": "2-2",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 416, "y": 320 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "2-2"
+    }, {
+      "Name": "2-2 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "2-2",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 416, "y": 320 }
+    }, {
+      "Name": "2-3",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 352, "y": 320 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "2-3"
+    }, {
+      "Name": "2-3 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "2-3",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 352, "y": 320 }
+    }, {
+      "Name": "2-4",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 288, "y": 320 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "2-4"
+    }, {
+      "Name": "2-4 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "2-4",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 288, "y": 320 }
+    }, {
+      "Name": "2-5",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 224, "y": 320 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "2-5"
+    }, {
+      "Name": "2-5 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "2-5",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 224, "y": 320 }
+    }, {
+      "Name": "3-1",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 192, "y": 160 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "3-1"
+    }, {
+      "Name": "3-1 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "3-1",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 192, "y": 160 }
+    }, {
+      "Name": "3-2",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 256, "y": 160 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "3-2"
+    }, {
+      "Name": "3-2 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "3-2",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 256, "y": 160 }
+    }, {
+      "Name": "3-3",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 320, "y": 160 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "3-3"
+    }, {
+      "Name": "3-3 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "3-3",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 320, "y": 160 }
+    }, {
+      "Name": "3-4",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 384, "y": 160 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "3-4"
+    }, {
+      "Name": "3-4 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "3-4",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 384, "y": 160 }
+    }, {
+      "Name": "3-5",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 448, "y": 160 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "3-5"
+    }, {
+      "Name": "3-5 Label",
+      "Sprite": {
+        "Type": "text",
+        "Text": "3-5",
+        "Layer": 1,
+        "Color": { "r": 0, "g": 0, "b": 0 }
+      },
+      "InitialPosition": { "x": 448, "y": 160 }
+    }
+  ]
+}
