@@ -34,8 +34,7 @@ public class PlayerDuplicate extends Player {
         defaultFrameOffset = invertedFrameOffset = 0;
         Init();
 
-        active = false;
-        sprite.Visible = false;
+        active = sprite.Visible = false;
         inputs = null;
     }
 
@@ -55,7 +54,7 @@ public class PlayerDuplicate extends Player {
     public void Execute(Vector2 startingPosition, boolean startInverted, LinkedList<Boolean> inputs) {
         Invert(startInverted);
         Position.replaceWith(startingPosition);
-        sprite.Visible = true;
+        active = sprite.Visible = true;
         this.inputs = inputs;
     }
 
@@ -72,6 +71,10 @@ public class PlayerDuplicate extends Player {
         spriteOffset.replaceWith(data.SpriteOffset != null ? data.SpriteOffset : new Vector2()); // probably unnecessary
         Position.replaceWith(Game.instance.GetCurrentLevel().GetStartingPoint());
         sprite.Reset();
-        sprite.Visible = false;
+        active = sprite.Visible = false;
+    }
+
+    public boolean IsActive() {
+        return active;
     }
 }

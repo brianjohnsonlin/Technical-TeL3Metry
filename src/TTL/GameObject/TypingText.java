@@ -17,7 +17,9 @@ public class TypingText extends Device {
 
     @Override
     protected boolean activateCondition() {
-        return Position.subtract(Game.instance.GetPlayer().ColBoxCenterPos()).length() <= activationRadius;
+        Player player = Game.instance.GetPlayer();
+        return Position.subtract(player.ColBoxCenterPos()).length() <= activationRadius ||
+                (player.getDuplicate().IsActive() && Position.subtract(player.getDuplicate().ColBoxCenterPos()).length() <= activationRadius);
     }
 
     @Override

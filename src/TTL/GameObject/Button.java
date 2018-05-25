@@ -13,12 +13,14 @@ public class Button extends Device {
 
     @Override
     protected boolean activateCondition() {
-        return overlapping(Game.instance.GetPlayer()) || overlapping(Game.instance.GetPlayer().getDuplicate());
+        Player player = Game.instance.GetPlayer();
+        return overlapping(player) || (overlapping(player.getDuplicate()) && player.getDuplicate().IsActive());
     }
 
     @Override
     protected boolean deactivateCondition() {
-        return !(overlapping(Game.instance.GetPlayer()) || overlapping(Game.instance.GetPlayer().getDuplicate()));
+        Player player = Game.instance.GetPlayer();
+        return !(overlapping(player) || (overlapping(player.getDuplicate()) && player.getDuplicate().IsActive()));
     }
 
     @Override
