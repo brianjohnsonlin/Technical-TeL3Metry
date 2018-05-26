@@ -7,7 +7,7 @@ import java.io.*;
 import javax.sound.sampled.*;
 
 public class MusicPlayer extends Thread {
-    private FileInputStream inputStream = null;
+    private InputStream inputStream = null;
 
     byte[] buffer = null;
     int bufferSize = 2048;
@@ -38,11 +38,7 @@ public class MusicPlayer extends Thread {
     private boolean finished = false;
 
     public MusicPlayer(String filename)  {
-        try {
-            inputStream = new FileInputStream(new File(filename));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        inputStream = ClassLoader.getSystemResourceAsStream(filename);
     }
 
     public void run() {

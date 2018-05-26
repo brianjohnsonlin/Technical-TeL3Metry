@@ -258,7 +258,7 @@ public class Display {
 	public void SetIcon(String iconFilePath) {
 		try {
 			GLFWImage image = GLFWImage.malloc();
-			BufferedImage bi = ImageIO.read(new File(iconFilePath));
+			BufferedImage bi = ImageIO.read(Game.ClassLoader.getResourceAsStream(iconFilePath));
 			image.set(bi.getWidth(), bi.getHeight(), Image.createPixelBuffer(bi));
 			GLFWImage.Buffer images = GLFWImage.malloc(1);
 			images.put(0, image);

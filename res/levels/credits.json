@@ -1,20 +1,20 @@
 {
   "Name": "credits",
-  "LevelMap": "./res/levels/credits.png",
+  "LevelMap": "levels/credits.png",
   "StartingPoint": { "x": 16, "y": 352 },
   "GameObjects": [
     {
       "Name": "Title",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_title_0.png",
+        "Path": "spr_title_0.png",
         "Layer": 4
       }
     }, {
       "Name": "Cake",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_cake_0.png",
+        "Path": "spr_cake_0.png",
         "Layer": 4
       },
       "InitialPosition": { "x": 544, "y": 320 }

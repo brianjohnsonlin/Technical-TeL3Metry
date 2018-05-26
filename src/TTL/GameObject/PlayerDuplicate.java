@@ -10,7 +10,7 @@ public class PlayerDuplicate extends Player {
     private LinkedList<Boolean> inputs;
 
     public PlayerDuplicate(boolean startInverted) {
-        ImageData spriteData = new ImageData("./res/spr_dup_0.png"); {
+        ImageData spriteData = new ImageData("spr_dup_0.png"); {
             spriteData.Width = 32;
             spriteData.Height = 32;
             spriteData.NumFrames = 8;

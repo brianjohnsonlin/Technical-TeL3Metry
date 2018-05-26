@@ -12,6 +12,7 @@ import static org.lwjgl.glfw.GLFW.*;
 
 public class Game {
 	public static Game instance;
+	public static ClassLoader ClassLoader;
 
 	public Display GameWindow;
 	public int[][] CurrentLevelMap;
@@ -39,47 +40,43 @@ public class Game {
 
 	public Game() {
 		Game.instance = this;
+		ClassLoader = getClass().getClassLoader();
 		GameWindow = new Display(this);
-		GameWindow.SetIcon("./res/icon.png");
+		GameWindow.SetIcon("icon.png");
 		gameObjects = new ArrayList<>();
 		SwitchIDs = new HashMap<>();
 		nextLevel = null;
 
 		// load in fonts
 		fonts = new HashMap<>();
-		try {
-			FileInputStream stream = new FileInputStream(new File("./res/fonts.json"));
+		{
+			InputStream stream = ClassLoader.getResourceAsStream("fonts.json");
 			JSONObject root = new JSONObject(new JSONTokener(stream));
 			JSONArray imageJSONArray = root.getJSONArray("Fonts");
 			for (int i = 0; i < imageJSONArray.length(); i++) {
 				JSONObject font = imageJSONArray.getJSONObject(i);
-				fonts.put(font.getString("Name"), new FontType(new File(font.getString("PNG")), new File(font.getString("FNT"))));
+				fonts.put(font.getString("Name"), new FontType(ClassLoader.getResourceAsStream(font.getString("PNG")), ClassLoader.getResourceAsStream(font.getString("FNT"))));
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
 		// Preload all images
-		String[] imagesToPreload = new String[0];
-		try {
-			FileInputStream stream = new FileInputStream(new File("./res/images.json"));
+		{
+			InputStream stream = ClassLoader.getResourceAsStream("images.json");
 			JSONObject root = new JSONObject(new JSONTokener(stream));
 			JSONArray imageJSONArray = root.getJSONArray("Images");
-			imagesToPreload = new String[imageJSONArray.length()];
+			String[] imagesToPreload = new String[imageJSONArray.length()];
 			for (int i = 0; i < imageJSONArray.length(); i++) {
 				imagesToPreload[i] = imageJSONArray.getString(i);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
+			Image.PreloadImages(imagesToPreload);
 		}
-		Image.PreloadImages(imagesToPreload);
 
 		//backgrounds
-		bkgGray = new BackgroundImage("./res/bkg_gray.png", Level.SPACE_GRAY);
-		bkgGear = new BackgroundImage("./res/bkg_gear.png", Level.SPACE_WHITE);
-		bkgBlue = new BackgroundImage("./res/bkg_blue.png", Level.SPACE_BLACK);
-		bkgGreen = new BackgroundImage("./res/bkg_green.png", Level.SPACE_WHITE);
-		bkgDigital = new BackgroundImage("./res/bkg_digital.png", Level.SPACE_BLACK);
+		bkgGray = new BackgroundImage("bkg_gray.png", Level.SPACE_GRAY);
+		bkgGear = new BackgroundImage("bkg_gear.png", Level.SPACE_WHITE);
+		bkgBlue = new BackgroundImage("bkg_blue.png", Level.SPACE_BLACK);
+		bkgGreen = new BackgroundImage("bkg_green.png", Level.SPACE_WHITE);
+		bkgDigital = new BackgroundImage("bkg_digital.png", Level.SPACE_BLACK);
 		Game.instance.GameWindow.addSprite(bkgGray);
 		Game.instance.GameWindow.addSprite(bkgGear);
 		Game.instance.GameWindow.addSprite(bkgBlue);
@@ -97,8 +94,8 @@ public class Game {
 		// load in music list
 		random = new Random();
 		musicPlaying = true;
-		try {
-			FileInputStream stream = new FileInputStream(new File("./res/music.json"));
+		{
+			InputStream stream = ClassLoader.getResourceAsStream("music.json");
 			JSONTokener tokener = new JSONTokener(stream);
 			JSONObject root = new JSONObject(tokener);
 			JSONArray musicJSONArray = root.getJSONArray("Music");
@@ -106,14 +103,12 @@ public class Game {
 			for (int i = 0; i < musicJSONArray.length(); i++) {
 				musicList[i] = musicJSONArray.getString(i);
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 
 		GameWindow.run();
 	}
 
-	public static void main(String[] args) throws FileNotFoundException{
+	public static void main(String[] args) {
 		new Game();
 	}
 
@@ -229,17 +224,13 @@ public class Game {
 	}
 
 	private void importLevels() {
-		try {
-			FileInputStream stream = new FileInputStream(new File("res/levels.json"));
-			JSONObject root = new JSONObject(new JSONTokener(stream));
-			JSONArray levelArray = root.getJSONArray("Levels");
-			for (int i = 0; i < levelArray.length(); i++) {
-				FileInputStream levelStream = new FileInputStream(new File(levelArray.getString(i)));
-				JSONObject levelObj = new JSONObject(new JSONTokener(levelStream));
-				levels.put(levelObj.getString("Name"), new Level(levelObj));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		InputStream stream = ClassLoader.getResourceAsStream("levels.json");
+		JSONObject root = new JSONObject(new JSONTokener(stream));
+		JSONArray levelArray = root.getJSONArray("Levels");
+		for (int i = 0; i < levelArray.length(); i++) {
+			InputStream levelStream = ClassLoader.getResourceAsStream(levelArray.getString(i));
+			JSONObject levelObj = new JSONObject(new JSONTokener(levelStream));
+			levels.put(levelObj.getString("Name"), new Level(levelObj));
 		}
 	}
 

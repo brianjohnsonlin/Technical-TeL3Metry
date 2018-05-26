@@ -1,6 +1,6 @@
 {
   "Name": "2-4",
-  "LevelMap": "./res/levels/2-4.png",
+  "LevelMap": "levels/2-4.png",
   "StartingPoint": { "x": 16, "y": 384 },
   "GameObjects": [
     {
@@ -26,7 +26,7 @@
       "Name": "Exit Gate",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_gate_0.png",
+        "Path": "spr_gate_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 576, "y": 192 },
@@ -38,7 +38,7 @@
       "Name": "Forcefield 0",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 0 },
@@ -48,7 +48,7 @@
       "Name": "Forcefield 1",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 32 },
@@ -58,7 +58,7 @@
       "Name": "Forcefield 2",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 64 },
@@ -68,7 +68,7 @@
       "Name": "Forcefield 3",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 96 },
@@ -78,7 +78,7 @@
       "Name": "Forcefield 4",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 128 },
@@ -88,7 +88,7 @@
       "Name": "Forcefield 5",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 160 },
@@ -98,7 +98,7 @@
       "Name": "Forcefield 6",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 192 },
@@ -108,7 +108,7 @@
       "Name": "Forcefield 7",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 224 },
@@ -118,7 +118,7 @@
       "Name": "Forcefield 8",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 256 },
@@ -128,7 +128,7 @@
       "Name": "Forcefield 9",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 288 },
@@ -138,7 +138,7 @@
       "Name": "Forcefield 10",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 320 },
@@ -148,7 +148,7 @@
       "Name": "Forcefield 11",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 352 },
@@ -158,7 +158,7 @@
       "Name": "Forcefield 12",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 384 },
@@ -168,7 +168,7 @@
       "Name": "Forcefield 13",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 416 },
@@ -178,7 +178,7 @@
       "Name": "Forcefield 14",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 448 },
@@ -188,7 +188,7 @@
       "Name": "Forcefield 15",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 480 },
@@ -198,7 +198,7 @@
       "Name": "Forcefield 16",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 512 },
@@ -208,7 +208,7 @@
       "Name": "Forcefield 17",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 544 },
@@ -218,7 +218,7 @@
       "Name": "Forcefield 18",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 576 },
@@ -228,7 +228,7 @@
       "Name": "Forcefield 19",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 608 },

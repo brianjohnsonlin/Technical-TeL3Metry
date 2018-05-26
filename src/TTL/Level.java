@@ -145,7 +145,7 @@ public class Level {
 
     protected void ImportLevelMap(String filename) {
         try {
-            BufferedImage levelMapBI = ImageIO.read(new File(filename));
+            BufferedImage levelMapBI = ImageIO.read(ClassLoader.getSystemResourceAsStream(filename));
             int width = levelMapBI.getWidth();
             int height = levelMapBI.getHeight();
             levelMap = new int[height][width];

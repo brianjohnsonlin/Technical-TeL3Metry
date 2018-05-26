@@ -3,6 +3,7 @@ package fontMeshCreator;
 import TTL.Sprite.Text;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class TextMeshCreator {
 
 	private MetaFile metaData;
 
-	protected TextMeshCreator(File metaFile) {
+	protected TextMeshCreator(InputStream metaFile) {
 		metaData = new MetaFile(metaFile);
 	}
 

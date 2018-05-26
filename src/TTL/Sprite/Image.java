@@ -131,7 +131,7 @@ public class Image extends Sprite {
 		ImageLibraryEntry entry = imageLibrary.get(imageFilename);
 		if (entry == null) {
 			try {
-				BufferedImage bi = ImageIO.read(new File(imageFilename));
+				BufferedImage bi = ImageIO.read(ClassLoader.getSystemResourceAsStream(imageFilename));
 				int width = bi.getWidth(), height = bi.getHeight();
 				int id = glGenTextures();
 				glBindTexture(GL_TEXTURE_2D, id);

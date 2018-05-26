@@ -1,6 +1,6 @@
 {
   "Name": "2-5",
-  "LevelMap": "./res/levels/2-5.png",
+  "LevelMap": "levels/2-5.png",
   "StartingPoint": { "x": 16, "y": 192 },
   "GameObjects": [
     {
@@ -26,7 +26,7 @@
       "Name": "Exit Gate",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_gate_0.png",
+        "Path": "spr_gate_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 32, "y": 480 },
@@ -38,7 +38,7 @@
       "Name": "Button 0",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_button_blue.png",
+        "Path": "spr_button_blue.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -51,7 +51,7 @@
       "Name": "Button 1",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_button_blue.png",
+        "Path": "spr_button_blue.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -64,7 +64,7 @@
       "Name": "Stone Top 1",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -75,7 +75,7 @@
       "Name": "Stone Top 2",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -86,7 +86,7 @@
       "Name": "Stone Top 3",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -97,7 +97,7 @@
       "Name": "Stone Top 4",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -108,7 +108,7 @@
       "Name": "Stone Top 5",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -119,7 +119,7 @@
       "Name": "Stone Top 6",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -130,7 +130,7 @@
       "Name": "Stone Top 7",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -141,7 +141,7 @@
       "Name": "Stone Bot 1",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -152,7 +152,7 @@
       "Name": "Stone Bot 2",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -163,7 +163,7 @@
       "Name": "Stone Bot 3",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -174,7 +174,7 @@
       "Name": "Stone Bot 4",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -185,7 +185,7 @@
       "Name": "Stone Bot 5",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -196,7 +196,7 @@
       "Name": "Stone Bot 6",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -207,7 +207,7 @@
       "Name": "Stone Bot 7",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },

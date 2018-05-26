@@ -39,7 +39,7 @@ public class Player extends GameObject {
     public Player() {}
 
     public Player(boolean startInverted) {
-        ImageData spriteData = new ImageData("./res/spr_char_0.png"); {
+        ImageData spriteData = new ImageData("spr_char_0.png"); {
             spriteData.Width = 32;
             spriteData.Height = 32;
             spriteData.NumFrames = 16;
@@ -70,7 +70,7 @@ public class Player extends GameObject {
         Game.instance.GameWindow.addSprite(duplicate.GetSprite());
 
         // initialize the recording dot symbol
-        ImageData recData = new ImageData("./res/spr_record_0.png"); {
+        ImageData recData = new ImageData("spr_record_0.png"); {
             recData.Layer = 3;
         }
         recordingSymbol = new Image(recData);

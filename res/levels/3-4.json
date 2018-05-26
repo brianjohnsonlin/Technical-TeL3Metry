@@ -1,6 +1,6 @@
 {
   "Name": "3-4",
-  "LevelMap": "./res/levels/3-4.png",
+  "LevelMap": "levels/3-4.png",
   "StartingPoint": { "x": 16, "y": 64 },
   "GameObjects": [
     {
@@ -26,7 +26,7 @@
       "Name": "Exit Gate",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_gate_0.png",
+        "Path": "spr_gate_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 224, "y": 544 },
@@ -38,7 +38,7 @@
       "Name": "Button",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_button_blue.png",
+        "Path": "spr_button_blue.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -51,7 +51,7 @@
       "Name": "Stone",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -62,7 +62,7 @@
       "Name": "Forcefield Left 1",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 0, "y": 96 },
@@ -71,7 +71,7 @@
       "Name": "Forcefield Left 2",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 32, "y": 96 },
@@ -80,7 +80,7 @@
       "Name": "Forcefield Left 3",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 64, "y": 96 },
@@ -89,7 +89,7 @@
       "Name": "Forcefield Left 4",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 96, "y": 96 },
@@ -98,7 +98,7 @@
       "Name": "Forcefield Left 5",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 128, "y": 96 },
@@ -107,7 +107,7 @@
       "Name": "Forcefield Left 6",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 160, "y": 96 },
@@ -116,7 +116,7 @@
       "Name": "Forcefield Right 1",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 416, "y": 96 },
@@ -125,7 +125,7 @@
       "Name": "Forcefield Right 2",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 448, "y": 96 },
@@ -134,7 +134,7 @@
       "Name": "Forcefield Right 3",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 480, "y": 96 },
@@ -143,7 +143,7 @@
       "Name": "Forcefield Right 4",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 512, "y": 96 },
@@ -152,7 +152,7 @@
       "Name": "Forcefield Right 5",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 544, "y": 96 },
@@ -161,7 +161,7 @@
       "Name": "Forcefield Right 6",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 576, "y": 96 },
@@ -170,7 +170,7 @@
       "Name": "Forcefield Right 7",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 608, "y": 96 },

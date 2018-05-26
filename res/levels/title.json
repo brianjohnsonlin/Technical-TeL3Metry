@@ -1,13 +1,13 @@
 {
   "Name": "title",
-  "LevelMap": "./res/levels/title.png",
+  "LevelMap": "levels/title.png",
   "StartingPoint": { "x": 32, "y": 320 },
   "GameObjects": [
     {
       "Name": "Title",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_title_0.png",
+        "Path": "spr_title_0.png",
         "Layer": 4
       }
     }, {
@@ -24,7 +24,7 @@
       "Name": "Exit Gate",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_gate_0.png",
+        "Path": "spr_gate_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 608, "y": 416 },
@@ -36,7 +36,7 @@
       "Name": "Move Hint",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_hint_move.png",
+        "Path": "spr_hint_move.png",
         "Layer": 2,
         "NumFrames": 2
       },

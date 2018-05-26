@@ -1,6 +1,6 @@
 {
   "Name": "3-5",
-  "LevelMap": "./res/levels/3-5.png",
+  "LevelMap": "levels/3-5.png",
   "StartingPoint": { "x": 112, "y": 416 },
   "GameObjects": [
     {
@@ -26,7 +26,7 @@
       "Name": "Exit Gate",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_gate_0.png",
+        "Path": "spr_gate_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 576, "y": 320 },
@@ -38,7 +38,7 @@
       "Name": "Button Below Blue",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_button_blue.png",
+        "Path": "spr_button_blue.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -51,7 +51,7 @@
       "Name": "Stone Below Middle",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -62,7 +62,7 @@
       "Name": "Button Below Green",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_button_green.png",
+        "Path": "spr_button_green.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -75,7 +75,7 @@
       "Name": "Stone Below Green Left",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -86,7 +86,7 @@
       "Name": "Stone Below Green Right",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -97,7 +97,7 @@
       "Name": "Button Above Green",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_button_green.png",
+        "Path": "spr_button_green.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -110,7 +110,7 @@
       "Name": "Stone Above Left",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -121,7 +121,7 @@
       "Name": "Button Above Blue",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_button_blue.png",
+        "Path": "spr_button_blue.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -134,7 +134,7 @@
       "Name": "Stone Above Right",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -145,7 +145,7 @@
       "Name": "Forcefield Top",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 320, "y": 160 },
@@ -154,7 +154,7 @@
       "Name": "Forcefield Middle",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 288, "y": 192 },
@@ -163,7 +163,7 @@
       "Name": "Forcefield Bottom",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_forcefield_0.png",
+        "Path": "spr_forcefield_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 288, "y": 224 },

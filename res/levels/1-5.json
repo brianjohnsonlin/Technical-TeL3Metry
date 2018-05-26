@@ -1,6 +1,6 @@
 {
   "Name": "1-5",
-  "LevelMap": "./res/levels/1-5.png",
+  "LevelMap": "levels/1-5.png",
   "StartingPoint": { "x": 0, "y": 0 },
   "GameObjects": [
     {
@@ -26,7 +26,7 @@
       "Name": "Exit Gate",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_gate_0.png",
+        "Path": "spr_gate_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 608, "y": 576 },

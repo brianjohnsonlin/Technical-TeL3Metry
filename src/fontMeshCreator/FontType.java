@@ -4,6 +4,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 import TTL.Sprite.*;
@@ -34,7 +35,7 @@ public class FontType {
 	 *            - the font file containing information about each character in
 	 *            the texture atlas.
 	 */
-	public FontType(File fontImage, File fontFile) {
+	public FontType(InputStream fontImage, InputStream fontFile) {
 		try {
 			BufferedImage bi = ImageIO.read(fontImage);
 			width = bi.getWidth();

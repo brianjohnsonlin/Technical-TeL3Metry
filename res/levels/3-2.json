@@ -1,6 +1,6 @@
 {
   "Name": "3-2",
-  "LevelMap": "./res/levels/3-2.png",
+  "LevelMap": "levels/3-2.png",
   "StartingPoint": { "x": 416, "y": 320 },
   "GameObjects": [
     {
@@ -26,7 +26,7 @@
       "Name": "Exit Gate",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_gate_0.png",
+        "Path": "spr_gate_0.png",
         "Layer": 1
       },
       "InitialPosition": { "x": 224, "y": 192 },
@@ -38,7 +38,7 @@
       "Name": "Button Blue",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_button_blue.png",
+        "Path": "spr_button_blue.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -51,7 +51,7 @@
       "Name": "Stone Blue",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -62,7 +62,7 @@
       "Name": "Button Green",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_button_green.png",
+        "Path": "spr_button_green.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -75,7 +75,7 @@
       "Name": "Stone Green Left",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
@@ -86,7 +86,7 @@
       "Name": "Stone Green Right",
       "Sprite": {
         "Type": "image",
-        "Path": "./res/spr_stone_0.png",
+        "Path": "spr_stone_0.png",
         "Layer": 1,
         "NumFrames": 2
       },
