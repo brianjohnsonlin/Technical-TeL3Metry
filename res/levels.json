@@ -11,9 +11,7 @@
     "./res/levels/2-2.json",
     "./res/levels/2-3.json",
     "./res/levels/2-4.json",
-    "./res/levels/2-5.json"
-  ],
-  "Unfinished": [
+    "./res/levels/2-5.json",
     "./res/levels/3-1.json",
     "./res/levels/3-2.json",
     "./res/levels/3-3.json",

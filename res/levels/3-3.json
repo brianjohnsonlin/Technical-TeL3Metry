@@ -1,0 +1,48 @@
+{
+  "Name": "3-3",
+  "LevelMap": "./res/levels/3-3.png",
+  "StartingPoint": { "x": 16, "y": 384 },
+  "GameObjects": [
+    {
+      "Name": "Level Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Level 3-3",
+        "Color": { "r": 0, "g": 0, "b": 0 },
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 8, "y": 8 }
+    }, {
+      "Name": "Flavor Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Long way around....",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 376, "y": 488 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }, {
+      "Name": "Exit Gate",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 160, "y": 352 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "3-4"
+    }, {
+      "Name": "Forcefield",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 64, "y": 416 },
+      "Type": "FORCEFIELD"
+    }
+  ]
+}

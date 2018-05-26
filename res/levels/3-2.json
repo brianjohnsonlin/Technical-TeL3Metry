@@ -1,0 +1,98 @@
+{
+  "Name": "3-2",
+  "LevelMap": "./res/levels/3-2.png",
+  "StartingPoint": { "x": 416, "y": 320 },
+  "GameObjects": [
+    {
+      "Name": "Level Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Level 3-2",
+        "Color": { "r": 0, "g": 0, "b": 0 },
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 8, "y": 8 }
+    }, {
+      "Name": "Flavor Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Abstract Art.",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 200, "y": 424 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }, {
+      "Name": "Exit Gate",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 224, "y": 192 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "3-3"
+    }, {
+      "Name": "Button Blue",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_button_blue.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 352, "y": 320 },
+      "CollisionBoxCornerA": { "x": 4, "y": 22 },
+      "CollisionBoxCornerB": { "x": 27, "y": 31 },
+      "Type": "DEVICEBUTTON",
+      "Value": "0"
+    }, {
+      "Name": "Stone Blue",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 320, "y": 160 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Button Green",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_button_green.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 320, "y": 128 },
+      "CollisionBoxCornerA": { "x": 4, "y": 0 },
+      "CollisionBoxCornerB": { "x": 27, "y": 9 },
+      "Type": "DEVICEBUTTON",
+      "Value": "1"
+    }, {
+      "Name": "Stone Green Left",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 480, "y": 416 },
+      "Type": "DEVICESTONE",
+      "Value": "1"
+    }, {
+      "Name": "Stone Green Right",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 512, "y": 416 },
+      "Type": "DEVICESTONE",
+      "Value": "1"
+    }
+  ]
+}

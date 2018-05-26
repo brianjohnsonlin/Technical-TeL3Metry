@@ -1,0 +1,53 @@
+{
+  "Name": "credits",
+  "LevelMap": "./res/levels/credits.png",
+  "StartingPoint": { "x": 16, "y": 352 },
+  "GameObjects": [
+    {
+      "Name": "Title",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_title_0.png",
+        "Layer": 4
+      }
+    }, {
+      "Name": "Cake",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_cake_0.png",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 544, "y": 320 }
+    }, {
+      "Name": "Congrats Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Congratulations! You've finished\nthe test course! Here's some cake.",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 72, "y": 424 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }, {
+      "Name": "Credits Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Thanks for playing!\nArt by Yunyi Ding\nProgramming by Brian Lin\nMusic by Kevin Lin\n     (aka Gallant Evoquex)",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 200, "y": 488 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "640"
+    }, {
+      "Name": "DontWorry Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Don't worry, it won't\nblow up or anything.",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 456, "y": 424 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }
+  ]
+}

@@ -1,0 +1,180 @@
+{
+  "Name": "3-4",
+  "LevelMap": "./res/levels/3-4.png",
+  "StartingPoint": { "x": 16, "y": 64 },
+  "GameObjects": [
+    {
+      "Name": "Level Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Level 3-4",
+        "Color": { "r": 0, "g": 0, "b": 0 },
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 8, "y": 8 }
+    }, {
+      "Name": "Flavor Text",
+      "Sprite": {
+        "Type": "text",
+        "Text": "Did you bring a parachute?",
+        "Layer": 4
+      },
+      "InitialPosition": { "x": 192, "y": 104 },
+      "Type": "DEVICETYPINGTEXT",
+      "Value": "128"
+    }, {
+      "Name": "Exit Gate",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_gate_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 224, "y": 544 },
+      "CollisionBoxCornerA": { "x": 0, "y": 0 },
+      "CollisionBoxCornerB": { "x": 31, "y": 31 },
+      "Type": "DEVICEGATE",
+      "Value": "3-5"
+    }, {
+      "Name": "Button",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_button_blue.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 64, "y": 544 },
+      "CollisionBoxCornerA": { "x": 4, "y": 22 },
+      "CollisionBoxCornerB": { "x": 27, "y": 31 },
+      "Type": "DEVICEBUTTON",
+      "Value": "0"
+    }, {
+      "Name": "Stone",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_stone_0.png",
+        "Layer": 1,
+        "NumFrames": 2
+      },
+      "InitialPosition": { "x": 288, "y": 64 },
+      "Type": "DEVICESTONE",
+      "Value": "0"
+    }, {
+      "Name": "Forcefield Left 1",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 0, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Left 2",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 32, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Left 3",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 64, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Left 4",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 96, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Left 5",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 128, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Left 6",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 160, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Right 1",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 416, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Right 2",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 448, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Right 3",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 480, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Right 4",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 512, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Right 5",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 544, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Right 6",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 576, "y": 96 },
+      "Type": "FORCEFIELD"
+    }, {
+      "Name": "Forcefield Right 7",
+      "Sprite": {
+        "Type": "image",
+        "Path": "./res/spr_forcefield_0.png",
+        "Layer": 1
+      },
+      "InitialPosition": { "x": 608, "y": 96 },
+      "Type": "FORCEFIELD"
+    }
+  ]
+}
