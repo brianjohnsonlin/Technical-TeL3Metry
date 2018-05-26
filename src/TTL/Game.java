@@ -19,6 +19,7 @@ public class Game {
 	public boolean[][] ForcefieldMap;
 	public HashMap<Integer, Boolean> SwitchIDs;
 
+	private int initStep = 0;
 	private HashMap<String, Level> levels = new HashMap<>();
 	private Level currentLevel;
 	private String nextLevel;
@@ -40,8 +41,12 @@ public class Game {
 
 	public Game() {
 		Game.instance = this;
-		ClassLoader = getClass().getClassLoader();
 		GameWindow = new Display(this);
+		GameWindow.run();
+	}
+
+	private void init() {
+		ClassLoader = getClass().getClassLoader();
 		GameWindow.SetIcon("icon.png");
 		gameObjects = new ArrayList<>();
 		SwitchIDs = new HashMap<>();
@@ -105,7 +110,7 @@ public class Game {
 			}
 		}
 
-		GameWindow.run();
+		GameWindow.SetTitle("Technial TeL3Metry");
 	}
 
 	public static void main(String[] args) {
@@ -113,6 +118,14 @@ public class Game {
 	}
 
 	public void Update() {
+		if (initStep == 0) {
+			initStep++;
+			return;
+		} else if (initStep == 1){
+			init();
+			initStep++;
+		}
+
 		if (musicList.length > 0 && (music == null || music.finished())) {
 			currentMusic = random.nextInt(musicList.length);
 			music = new MusicPlayer(musicList[currentMusic]);

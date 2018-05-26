@@ -90,7 +90,7 @@ public class Display {
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE); // the window will be resizable
 
 		// Create the window
-		window = glfwCreateWindow(windowWidth, windowHeight, "Technial TeL3Metry", NULL, NULL);
+		window = glfwCreateWindow(windowWidth, windowHeight, "Loading...", NULL, NULL);
 		glfwSetWindowAspectRatio(window, 16, 9);
 		if (window == NULL)
 			throw new RuntimeException("Failed to create the GLFW window");
@@ -124,17 +124,15 @@ public class Display {
 		// Make the window visible
 		glfwShowWindow(window);
 
-		GL.createCapabilities();
-	}
-
-	private void loop() {
 		// This line is critical for LWJGL's interoperation with GLFW's
 		// OpenGL context, or any context that is managed externally.
 		// LWJGL detects the context that is current in the current thread,
 		// creates the GLCapabilities instance and makes the OpenGL
 		// bindings available for use.
 		GL.createCapabilities();
+	}
 
+	private void loop() {
 		// Set the clear color
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glEnable(GL_TEXTURE_2D);
@@ -253,6 +251,10 @@ public class Display {
 				spr.Render();
 			}
 		}
+	}
+
+	public void SetTitle(String title) {
+		glfwSetWindowTitle(window, title);
 	}
 
 	public void SetIcon(String iconFilePath) {
