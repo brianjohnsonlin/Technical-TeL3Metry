@@ -109,6 +109,7 @@ public class Game {
 				musicList[i] = musicJSONArray.getString(i);
 			}
 		}
+		currentMusic = -1;
 
 		GameWindow.SetTitle("Technial TeL3Metry");
 	}
@@ -127,7 +128,11 @@ public class Game {
 		}
 
 		if (musicList.length > 0 && (music == null || music.finished())) {
-			currentMusic = random.nextInt(musicList.length);
+			int nextMusic = random.nextInt(musicList.length);
+			while (nextMusic == currentMusic && musicList.length > 1) {
+				nextMusic = random.nextInt(musicList.length);
+			}
+			currentMusic = nextMusic;
 			music = new MusicPlayer(musicList[currentMusic]);
 			music.start();
 		}

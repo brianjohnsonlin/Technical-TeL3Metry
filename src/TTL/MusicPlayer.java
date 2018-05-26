@@ -250,7 +250,7 @@ public class MusicPlayer extends Thread {
                 try { // Read from the InputStream.
                     count = inputStream.read(buffer, index, bufferSize);
                 } catch(Exception e) {
-                    System.err.println(e);
+                    // System.err.println(e);
                     return;
                 }
                 joggSyncState.wrote(count); // We let SyncState know how many bytes we read.
