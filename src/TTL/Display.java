@@ -31,8 +31,6 @@ public class Display {
 
 	//Input Variables
 	private DoubleBuffer xpos, ypos;
-	private HashMap<Integer, Boolean> mousePrev;
-	private HashMap<Integer, Boolean> mouse;
 	private HashMap<Integer, Boolean> keysPrev;
 	private HashMap<Integer, Boolean> keys;
 	private int[] trackedKeys = {
@@ -46,10 +44,6 @@ public class Display {
 			GLFW_KEY_LEFT,  // Move Left
 			GLFW_KEY_RIGHT  // Move Right
 	};
-	private int[] trackedMouse = {
-			// GLFW_MOUSE_BUTTON_LEFT,
-			// GLFW_MOUSE_BUTTON_RIGHT
-	};
 
 	public Display(Game game) {
 		Game = game;
@@ -57,8 +51,6 @@ public class Display {
 		sprites = new HashMap<>();
 		keysPrev = new HashMap<>();
 		keys = new HashMap<>();
-		mousePrev = new HashMap<>();
-		mouse = new HashMap<>();
 		xpos = BufferUtils.createDoubleBuffer(1);
 		ypos = BufferUtils.createDoubleBuffer(1);
 	}
@@ -94,12 +86,6 @@ public class Display {
 		glfwSetWindowAspectRatio(window, 16, 9);
 		if (window == NULL)
 			throw new RuntimeException("Failed to create the GLFW window");
-
-		// Setup a key callback. It will be called every time a key is pressed, repeated or released.
-		glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
-			if (key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE)
-				glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
-		});
 
 		// Get the thread stack and push a new frame
 		try (MemoryStack stack = stackPush()) {
@@ -141,8 +127,7 @@ public class Display {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		// Run the rendering loop until the user has attempted to close
-		// the window or has pressed the ESCAPE key.
+		// Run the rendering loop until the user has attempted to close the window
 		while (!glfwWindowShouldClose(window)) {
 			setInputVariables();
 			Game.Update();
@@ -160,10 +145,6 @@ public class Display {
 	}
 
 	private void setInputVariables() {
-		glfwGetCursorPos(window, xpos, ypos);
-		for (int i : trackedMouse) {
-			mousePrev.put(i, mouse.put(i, glfwGetMouseButton(window, i) == GLFW_TRUE));
-		}
 		for (int i : trackedKeys) {
 			keysPrev.put(i, keys.put(i, glfwGetKey(window, i) == GLFW_TRUE));
 		}
@@ -181,31 +162,6 @@ public class Display {
 		return !keys.get(key) && keysPrev.get(key);
 	}
 
-	public boolean GetMouseHeld(int mouseButton) {
-		return mouse.get(mouseButton);
-	}
-
-	public boolean GetMouseDown(int mouseButton) {
-		return mouse.get(mouseButton) && !mousePrev.get(mouseButton);
-	}
-
-	public boolean GetMouseUp(int mouseButton) {
-		return !mouse.get(mouseButton) && mousePrev.get(mouseButton);
-	}
-
-	public Vector2 GetMousePosition() {
-		return new Vector2((float)xpos.get(0), (float)ypos.get(0));
-	}
-
-//    public boolean GetMouseOver(Image image) {
-//        return GetMouseX() >= image.Position.x && GetMouseY() >= image.Position.y &&
-//               GetMouseX() <= image.Position.x + image.Width && GetMouseY() <= image.Position.y + image.Height;
-//    }
-//
-//    public boolean GetMouseOver(double x, double y, double radius) {
-//        return radius >= Math.sqrt(Math.pow(GetMouseX() - x, 2) + Math.pow(GetMouseY() - y, 2));
-//    }
-
 	public boolean addSprite(Sprite sprite) {
 		// abort if image is already marked as added to display
 		if (sprite.AddedToDisplay || sprite.GetLayer() < 0) {
@@ -215,38 +171,32 @@ public class Display {
 		// if layer doesn't exist, create it
 		ArrayList<Sprite> list = sprites.get(sprite.GetLayer());
 		if (list == null) {
-		    list = new ArrayList<>();
+		  list = new ArrayList<>();
 			sprites.put(sprite.GetLayer(), list);
-		    if (sprite.GetLayer() + 1 > numLayers) {
-		        numLayers = sprite.GetLayer() + 1;
-            }
-        }
+		  if (sprite.GetLayer() + 1 > numLayers) {
+		    numLayers = sprite.GetLayer() + 1;
+      }
+    }
 
-        // add image
-        list.add(sprite);
+    // add image
+    list.add(sprite);
 		sprite.AddedToDisplay = true;
-        return true;
+    return true;
 	}
 
 	public boolean removeSprite(Sprite sprite) {
-	    if (!sprite.AddedToDisplay) {
-	        return false;
-        }
+	  if (!sprite.AddedToDisplay) {
+	    return false;
+    }
 		sprites.get(sprite.GetLayer()).remove(sprite);
 		sprite.AddedToDisplay = false;
-        return true;
+    return true;
 	}
-
-	// returns number of images removed
-	//	public int clearLayer(int layer) {
-	//		ArrayList<Sprite> removedLayer = sprites.remove(layer);
-	//		return removedLayer == null ? 0 : removedLayer.size();
-	//	}
 
 	private void renderSprites() {
 		for (int i = 0, len = numLayers; i < len; i++) {
-		    ArrayList<Sprite> layer = sprites.get(i);
-		    if (layer == null) continue;
+		  ArrayList<Sprite> layer = sprites.get(i);
+		  if (layer == null) continue;
 			for (Sprite spr : layer) {
 				spr.Render();
 			}
